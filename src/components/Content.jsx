@@ -64,7 +64,7 @@ export default function NewContent() {
         <Search />
         <button className="my-2 [transition:all_ease_0.2s] ">search</button>
       </div>
-      <div className=" grid grid-flow-row grid-cols-1  items-center justify-items-center gap-y-[8px] sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-6 xl:grid-cols-6 2xl:grid-cols-6">
+      <div className=" grid  grid-cols-1  items-center justify-items-center gap-y-[8px] sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-6 xl:grid-cols-6 2xl:grid-cols-6">
         {productList.map((product, i) => (
           <div
             key={i}
