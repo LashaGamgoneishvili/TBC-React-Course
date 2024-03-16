@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer>
-      <div className="mx-7 my-7 flex items-start justify-between">
+      <div className="mx-7 my-2 flex items-start justify-between">
         <FooterBox>
           <h1> Home</h1>
           <ul className="cursor-pointer">
@@ -39,24 +39,18 @@ export default function Footer() {
           </ul>
         </FooterBox>
         <FooterBox>
-          <div className="flex flex-col items-center gap-4">
+          <div className="flex flex-col items-center gap-2">
             <h2 className="mb-2">Sign Up</h2>
             <input
               type="email"
               placeholder="Email..."
-              className="rounde-[4px] border-[0.5px] bg-[#2222] p-2"
+              className="rounde-[4px] rounded-md border-[0.5px] bg-[#2222] p-2 [transition:all_0.3s] focus:bg-[#fff]"
             />
-            <button className="w-full rounded-[4px] bg-[#3b82f6] p-2">
+            <button className="w-full rounded-[4px] bg-[#3b82f6] p-2 hover:text-[#fff]">
               SEND
             </button>
           </div>
         </FooterBox>
-      </div>
-      <div className=" bg-[#2222] p-3">
-        <p className="text-center">
-          Copyright ©2024 All rights reserved | This template is made by Lasha
-          Gamgoneishvili
-        </p>
       </div>
     </footer>
   );
@@ -65,3 +59,14 @@ export default function Footer() {
 function FooterBox({ children }) {
   return <div className=" flex flex-col items-center gap-3">{children}</div>;
 }
+
+// function Copyright() {
+//   return (
+//     <div className=" bg-[#2222] p-3">
+//       <p className="text-center">
+//         Copyright ©2024 All rights reserved | This template is made by Lasha
+//         Gamgoneishvili
+//       </p>
+//     </div>
+//   );
+// }
