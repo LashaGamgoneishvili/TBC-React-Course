@@ -57,7 +57,11 @@ export default function Footer() {
 }
 
 function FooterBox({ children }) {
-  return <div className=" flex flex-col items-center gap-3">{children}</div>;
+  return (
+    <div className=" flex flex-col items-center gap-3 text-[14px]">
+      {children}
+    </div>
+  );
 }
 
 // function Copyright() {
