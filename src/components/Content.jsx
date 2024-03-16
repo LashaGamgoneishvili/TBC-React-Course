@@ -64,19 +64,21 @@ export default function NewContent() {
         <Search />
         <button className="my-2 [transition:all_ease_0.2s] ">search</button>
       </div>
-      <div className=" grid grid-flow-row grid-cols-1  items-center justify-items-center gap-y-[8px] sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-6 xl:grid-cols-6 2xl:grid-cols-6">
+      <div className=" grid  grid-cols-1  items-center justify-items-center gap-y-[8px] sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-6 xl:grid-cols-6 2xl:grid-cols-6">
         {productList.map((product, i) => (
           <div
             key={i}
-            className=" border-stale-800 relative flex h-[450px]  w-[250px] flex-col items-center overflow-hidden  rounded-lg border-2 text-[#333]"
+            className=" border-stale-800 relative flex h-[430px] w-[240px]  flex-col items-center overflow-hidden rounded-lg  border-2  text-[#333]"
           >
-            <h1 className="h-16 p-2 text-center">{product.Title}</h1>
+            <h1 className="h-16 p-2 text-center text-[14px]">
+              {product.Title}
+            </h1>
             <img
               src={product.img}
               alt="product"
               className="h-[225px] w-[80px]"
             />
-            <p className="mb-6 p-2">{product.description}</p>
+            <p className="mb-6 p-2 text-[12px]">{product.description}</p>
             <button
               className={` group absolute bottom-0 mb-2 rounded-md bg-[#0ea5e9] p-2 text-[#fff] transition-all duration-300 hover:bg-[#0369a1] focus:ring `}
             >
