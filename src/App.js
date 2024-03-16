@@ -5,7 +5,7 @@ import Footer from "./components/Footer";
 
 export default function App() {
   return (
-    <div className=" font-body ">
+    <div className="flex h-screen flex-col justify-between overflow-hidden font-body">
       <Header />
       <Content />
       <Footer />
