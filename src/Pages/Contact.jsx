@@ -66,13 +66,13 @@ export default function Contact() {
         <div className="flex flex-col justify-between gap-2">
           <h1 className=" text-lg font-medium">Follow us on: </h1>
           <p className="flex  gap-4">
-            <a href="">
+            <a href="/">
               <ion-icon name="logo-facebook" size="large"></ion-icon>
             </a>
-            <a href="">
+            <a href="/">
               <ion-icon name="logo-instagram" size="large"></ion-icon>
             </a>
-            <a href="">
+            <a href="/">
               <ion-icon name="logo-twitter" size="large"></ion-icon>
             </a>
           </p>
