@@ -1,6 +1,6 @@
 import logo from "../Assets/Pringles-logo.png";
 
-export default function Header() {
+export default function Header({ Link }) {
   return (
     <header>
       <div className="flex h-14 items-center justify-between p-4">
@@ -14,16 +14,18 @@ export default function Header() {
         <nav className="">
           <ul className="flex  items-start justify-start  gap-12 ">
             <li className=" cursor-pointer p-1 text-[#333]  [transition:all_ease_0.2s] 	hover:border-b  hover:border-[#333]">
-              Home
+              <a href="/">Home</a>
             </li>
             <li className=" cursor-pointer p-1 text-[#333]  [transition:all_ease_0.2s] 	hover:border-b  hover:border-[#333]">
-              About
+              <a href="/">About</a>
             </li>
+
             <li className=" cursor-pointer p-1 text-[#333]  [transition:all_ease_0.2s] 	hover:border-b  hover:border-[#333]">
-              Our Product
+              <a href="/">Our Product</a>
             </li>
+
             <li className=" cursor-pointer p-1 text-[#333]  [transition:all_ease_0.2s] 	hover:border-b  hover:border-[#333]">
-              contact
+              <a href="../Pages/Contact">Contact</a>
             </li>
           </ul>
         </nav>

@@ -1,14 +1,13 @@
 import React from "react";
-import Header from "./components/Header";
-import Content from "./components/Content";
-import Footer from "./components/Footer";
+import { Routes, Route } from "react-router-dom";
+import Contact from "./Pages/Contact";
+import MainPage from "./Pages/MainPage";
 
 export default function App() {
   return (
-    <div className="flex h-screen flex-col justify-between overflow-hidden font-body">
-      <Header />
-      <Content />
-      <Footer />
-    </div>
+    <Routes>
+      <Route index element={<MainPage />}></Route>
+      <Route path="/Pages/Contact" element={<Contact />}></Route>
+    </Routes>
   );
 }
