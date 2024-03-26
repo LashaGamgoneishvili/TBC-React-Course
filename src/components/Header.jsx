@@ -17,11 +17,11 @@ export default function Header({ Link }) {
               <a href="/">Home</a>
             </li>
             <li className=" cursor-pointer p-1 text-[#333]  [transition:all_ease_0.2s] 	hover:border-b  hover:border-[#333]">
-              <a href="/">About</a>
+              <a href="../Pages/Profile">Profile</a>
             </li>
 
             <li className=" cursor-pointer p-1 text-[#333]  [transition:all_ease_0.2s] 	hover:border-b  hover:border-[#333]">
-              <a href="/">Our Product</a>
+              <a href="../Pages/Blog">Blogs</a>
             </li>
 
             <li className=" cursor-pointer p-1 text-[#333]  [transition:all_ease_0.2s] 	hover:border-b  hover:border-[#333]">
