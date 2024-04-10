@@ -1,6 +1,6 @@
-"use client";
 import Image from "next/image";
 import logo from "@/public/Assets/maxresdefault.jpg";
+import Link from "next/link";
 
 const blogData = [
   {
@@ -283,15 +283,29 @@ const blogData = [
     buttonText: "Read More",
   },
 ];
+let data;
 
 export default function Blog() {
+  async function getServerSideProps() {
+    try {
+      const response = await fetch("https://dummyjson.com/products");
+      data = await response.json();
+      return { props: { data } };
+    } catch (error) {
+      console.error(error);
+      return { props: { data } };
+    }
+  }
+
+  getServerSideProps();
+
   return (
     <>
       <h1 className="self-center border-2 border-b-black p-5 text-center font-bold">
         BLOG POSTS
       </h1>
       <div className=" mx-2 my-8 grid justify-items-center gap-2 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 ">
-        {blogData.map((data) => {
+        {data.products.map((data) => {
           return (
             <div
               key={data.id}
@@ -300,14 +314,22 @@ export default function Blog() {
               <h2 className="font-bold">{data.title}</h2>
               <p className=" h-24">{data.description}</p>
               <Image
-                src={data.imageUrl}
+                src={data.thumbnail}
+                priority={true}
                 alt="Person-logo"
-                className="h-40 w-auto"
+                className="h-auto w-auto"
+                width={250}
+                height={250}
               />
-              <p>{data.date}</p>
-              <button className="rounded-lg border-2 border-[#fff] bg-[#dedede] px-6 py-1 transition-all duration-200 ease-in hover:border-[#333] hover:bg-white">
-                {data.buttonText}
-              </button>
+
+              <p>{data.price}</p>
+
+              <Link
+                href={`blogs/${data.id}`}
+                className="rounded-lg border-2 border-[#fff] bg-[#dedede] px-6 py-1 transition-all duration-200 ease-in hover:border-[#333] hover:bg-white"
+              >
+                Read More
+              </Link>
             </div>
           );
         })}

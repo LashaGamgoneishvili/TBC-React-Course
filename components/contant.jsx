@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import box1 from "../public/Assets/product-images/springl-1.png";
 import box2 from "../public/Assets/product-images/springl-2.png";
@@ -8,7 +9,7 @@ import box4 from "../public/Assets/product-images/springl-4.png";
 import box5 from "../public/Assets/product-images/springl-5.png";
 import box6 from "../public/Assets/product-images/springl-6.png";
 import DebounceSearchComponent from "./debounceSearchComponent";
-import { Ruthie } from "next/font/google";
+import Loading from "../app/contact/loading";
 
 export const productList = [
   {
@@ -61,31 +62,29 @@ export const productList = [
   },
 ];
 
-export default function Content() {
-  const [product, setProduct] = useState([]);
+export default function Content({ data }) {
+  const [product, setProduct] = useState(data.products);
   const [sorted, setSorted] = useState(false);
+
+  console.log(product);
 
   function handleSort() {
     if (!sorted) {
-      setProduct((product) =>
-        product.toSorted((a, b) => a.userRating - b.userRating)
-      );
+      setProduct((product) => product.toSorted((a, b) => a.rating - b.rating));
       setSorted((sort) => !sort);
-      console.log(product.toSorted((a, b) => a.userRating - b.userRating));
     }
     if (sorted) {
       setProduct(
-        (product) =>
-          (product = product.toSorted((a, b) => b.userRating - a.userRating))
+        (product) => (product = product.toSorted((a, b) => b.rating - a.rating))
       );
       setSorted((sort) => !sort);
     }
   }
 
   return (
-    <section className="flex flex-col justify-around gap-8">
+    <section className="flex flex-col justify-around gap-4 overflow-y-scroll overflow-x-hidden">
       <div className="flex w-full items-center justify-center gap-1 p-2">
-        <DebounceSearchComponent setProduct={setProduct} />
+        <DebounceSearchComponent setProduct={setProduct} data={data.products} />
         <button
           className="my-2 [transition:all_ease_0.2s] "
           onClick={handleSort}
@@ -94,27 +93,46 @@ export default function Content() {
           <span className="ml-1 text-lg font-semibold">&uarr;&darr;</span>
         </button>
       </div>
-      <div className=" grid  grid-cols-1  items-center justify-items-center gap-y-[8px] sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-6 xl:grid-cols-6 2xl:grid-cols-6">
-        {product.map((product, i) => (
+      <div className=" grid gap-2 px-4 mb-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  2xl:grid-cols-5">
+        {product.map((item) => (
           <div
-            key={i}
-            className=" border-stale-800 relative flex h-[430px] w-[240px]  flex-col items-center overflow-hidden rounded-lg  border-2  text-[#333]"
+            key={item.id}
+            className="flex border-stale-800 relative flex-col h-full shadow-md bg-white justify-between items-center rounded-lg border-2 text-[#333] "
           >
-            <h1 className="h-16 p-2 text-center text-[14px]">
-              {product.Title}
-            </h1>
-            <Image
-              alt="Picture of the Pringles"
-              src={product.img}
-              priority={true} // {false} | {true}
-              className="h-[225px] w-[80px]"
-            />
-            <p className="mb-6 p-2 text-[12px]">{product.description}</p>
-            <button
-              className={` group absolute bottom-0 mb-2 rounded-md bg-[#0ea5e9] p-2 text-[#fff] transition-all duration-300 hover:bg-[#0369a1] focus:ring `}
+            <h1 className=" p-2 text-center text-[14px]">{item.title}</h1>
+            <Link
+              href="details/produc-details"
+              className="flex justify-center  w-40 h-36 "
             >
-              Add to Chart
-            </button>
+              <Image
+                alt="Picture of the Pringles"
+                src={item.thumbnail}
+                priority={true}
+                className="h-auto w-auto"
+                width={150}
+                height={150}
+              />
+            </Link>
+            <p className="p-2 text-xs h-20">{item.description}</p>
+            <div className="grid grid-flow-row grid-cols-2 gap-2 place-items-stretch mb-2 border-s-violet-200 border-2">
+              <p className="p-2 text-xs bg-violet-400 rounded-sm">
+                Discount - {item.discountPercentage}%
+              </p>
+              <p className="p-2 text-xs bg-green-400 rounded-sm">
+                Price - {item.price}$
+              </p>
+            </div>
+            <div className="flex w-full justify-between items-center p-4 ">
+              <Link
+                href={`details/${item.id}`}
+                className="text-sm border-black border-b-2 active:border-b-0"
+              >
+                Details
+              </Link>
+              <button className="  text-sm text-[#333] border-black border-b-2 active:border-b-0">
+                Add to Chart
+              </button>
+            </div>
           </div>
         ))}
       </div>

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import logo from "../public/Assets/Pringles-logo.png";
+import logo from "../public/Assets/logo.jpg";
 import Link from "next/link";
 
 export default function Header() {
@@ -11,7 +11,7 @@ export default function Header() {
             src={logo}
             alt="Pringle's logo"
             priority={true}
-            className="  mt-10 h-16 w-auto rounded-[8px]"
+            className="  mt-10 h-24 w-auto rounded-[8px]"
           />
         </a>
         <nav className="">
