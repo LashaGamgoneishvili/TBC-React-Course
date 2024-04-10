@@ -1,37 +1,33 @@
 "use client";
 import { useState, useEffect } from "react";
-import { productList } from "./contant";
 
-export default function DebounceSearchComponent({ setProduct }) {
+export default function DebounceSearchComponent({ setProduct, data }) {
   const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
     const debounce = setTimeout(() => {
-      const searchedProduct = productList.filter((product) => {
-        return product.Title.toUpperCase().startsWith(inputValue);
+      const searchedProduct = data.filter((product) => {
+        return product.title.toUpperCase().startsWith(inputValue);
+        console.log(searchedProduct);
       });
 
       if (inputValue !== "") {
         setProduct(
           (product) =>
             (product = [
-              ...searchedProduct.toSorted(
-                (a, b) => b.userRating - a.userRating
-              ),
+              ...searchedProduct.toSorted((a, b) => b.rating - a.rating),
             ])
         );
       } else {
         setProduct(
           (product) =>
-            (product = [
-              ...productList.toSorted((a, b) => b.userRating - a.userRating),
-            ])
+            (product = [...data.toSorted((a, b) => b.rating - a.rating)])
         );
       }
     }, 500);
 
     return () => clearTimeout(debounce);
-  }, [inputValue, setProduct]);
+  }, [inputValue, setProduct, data]);
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value.toUpperCase());
