@@ -1,33 +1,45 @@
 "use client";
 import { useState, useEffect } from "react";
 
-export default function DebounceSearchComponent({ setProduct, data }) {
+export default function DebounceSearchComponent({ setProduct }) {
   const [inputValue, setInputValue] = useState("");
+  const [data, setData] = useState();
+
+  useEffect(function () {
+    async function getServerSideProps() {
+      try {
+        const respons = await fetch("https://dummyjson.com/products");
+
+        if (!respons.ok) throw new Error("Fetching is failed");
+        const data = await respons.json();
+        setData(data.products);
+        if (data.Response === "False") throw new Error("product not found");
+      } catch {
+        setError(err.message);
+      }
+    }
+    getServerSideProps();
+  }, []);
 
   useEffect(() => {
-    const debounce = setTimeout(() => {
-      const searchedProduct = data.filter((product) => {
-        return product.title.toUpperCase().startsWith(inputValue);
-        console.log(searchedProduct);
-      });
-
-      if (inputValue !== "") {
-        setProduct(
-          (product) =>
-            (product = [
-              ...searchedProduct.toSorted((a, b) => b.rating - a.rating),
-            ])
+    if (data) {
+      const debounce = setTimeout(() => {
+        const searchedProduct = data.filter((product) =>
+          product.title.toUpperCase().startsWith(inputValue.toUpperCase())
         );
-      } else {
-        setProduct(
-          (product) =>
-            (product = [...data.toSorted((a, b) => b.rating - a.rating)])
-        );
-      }
-    }, 500);
 
-    return () => clearTimeout(debounce);
-  }, [inputValue, setProduct, data]);
+        if (inputValue !== "") {
+          return setProduct(
+            searchedProduct.sort((a, b) => b.rating - a.rating)
+          );
+        } else {
+          return setProduct(data.sort((a, b) => b.rating - a.rating));
+        }
+      }, 500);
+
+      return () => clearTimeout(debounce);
+    }
+  }, [inputValue, data, setProduct]);
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value.toUpperCase());
