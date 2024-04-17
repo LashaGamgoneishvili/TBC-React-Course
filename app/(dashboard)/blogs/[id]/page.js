@@ -1,27 +1,15 @@
-"use client";
-import { useState, useEffect } from "react";
 import Image from "next/image";
 
-function Page({ params }) {
-  const [data, setData] = useState();
+export async function fetchBlogsPost(params) {
+  const response = await fetch(`https://dummyjson.com/products/${params.id}`, {
+    caches: "force-cache",
+  });
+  const post = await response.json();
+  return post;
+}
 
-  useEffect(
-    function () {
-      async function fetchBlogs() {
-        try {
-          const respons = await fetch(
-            `https://dummyjson.com/products/${params.id}`
-          );
-          const data = await respons.json();
-          setData(data);
-        } catch (err) {
-          console.log(err);
-        }
-      }
-      fetchBlogs();
-    },
-    [params.id]
-  );
+async function Page({ params }) {
+  const data = await fetchBlogsPost(params);
 
   return (
     <div className="flex p-10 mt-24 h-screen overflow-hidden">
