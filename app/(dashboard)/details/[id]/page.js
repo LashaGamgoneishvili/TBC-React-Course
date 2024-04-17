@@ -1,27 +1,15 @@
-"use client";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 
-export default function Page({ params }) {
-  const [data, setData] = useState();
+export async function fetchProductDetails(params) {
+  const response = await fetch(`https://dummyjson.com/products/${params.id}`, {
+    cache: "force-cache",
+  });
+  const datails = await response.json();
+  return datails;
+}
 
-  useEffect(
-    function () {
-      async function getSelectedProduct() {
-        try {
-          const respons = await fetch(
-            `https://dummyjson.com/products/${params.id}`
-          );
-          const data = await respons.json();
-          setData(data);
-        } catch (err) {
-          console.log(err);
-        }
-      }
-      getSelectedProduct();
-    },
-    [params.id]
-  );
+export default async function Page({ params }) {
+  const data = await fetchProductDetails(params);
 
   return (
     <div className="flex p-10 mt-24 h-screen overflow-hidden">

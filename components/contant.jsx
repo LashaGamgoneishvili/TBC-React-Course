@@ -61,8 +61,8 @@ export const productList = [
   },
 ];
 
-export default function Content() {
-  const [product, setProduct] = useState();
+export default function Content({ data }) {
+  const [product, setProduct] = useState(data.products);
   const [sorted, setSorted] = useState(false);
 
   function handleSort() {
@@ -77,21 +77,6 @@ export default function Content() {
       setSorted((sort) => !sort);
     }
   }
-
-  useEffect(function () {
-    async function getServerSideProps() {
-      try {
-        const respons = await fetch("https://dummyjson.com/products");
-        if (!respons.ok) throw new Error("Fetching is failed");
-        const data = await respons.json();
-        setProduct(data.products);
-        if (data.Response === "False") throw new Error("product not found");
-      } catch {
-        setError(err.message);
-      }
-    }
-    getServerSideProps();
-  }, []);
 
   return (
     <section className="flex flex-col justify-around gap-4 overflow-y-scroll overflow-x-hidden">

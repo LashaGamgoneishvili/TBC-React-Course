@@ -1,5 +1,3 @@
-"use client";
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import logo from "@/public/Assets/maxresdefault.jpg";
 import Link from "next/link";
@@ -287,23 +285,16 @@ const blogData = [
 ];
 let data;
 
-export default function Blog() {
-  const [data, setData] = useState();
+export async function fatchBlogs() {
+  const respons = await fetch("https://dummyjson.com/products", {
+    cache: "force-cache",
+  });
+  const blogs = respons.json();
+  return blogs;
+}
 
-  useEffect(function () {
-    async function fetchBlog() {
-      try {
-        const respons = await fetch("https://dummyjson.com/products");
-        const data = await respons.json();
-        setData(data);
-      } catch (err) {
-        console.log(err);
-      }
-    }
-    fetchBlog();
-  }, []);
-
-  console.log(data);
+export default async function Blog() {
+  const data = await fatchBlogs();
 
   return (
     <>
