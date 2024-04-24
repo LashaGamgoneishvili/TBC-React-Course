@@ -14,9 +14,7 @@ export default function DebounceSearchComponent({ setProduct }) {
         const data = await respons.json();
         setData(data.products);
         if (data.Response === "False") throw new Error("product not found");
-      } catch {
-        setError(err.message);
-      }
+      } catch {}
     }
     getServerSideProps();
   }, []);

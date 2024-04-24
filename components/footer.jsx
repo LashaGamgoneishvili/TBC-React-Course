@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer>
-      <div className="px-7 py-2 flex items-start justify-between bg-[#eae9e9]">
+      <div className="px-7 py-2 flex items-start justify-between ">
         <FooterBox>
           <h1> Home</h1>
           <ul className="cursor-pointer">

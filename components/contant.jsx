@@ -8,7 +8,7 @@ import box3 from "../public/Assets/product-images/springl-3.png";
 import box4 from "../public/Assets/product-images/springl-4.png";
 import box5 from "../public/Assets/product-images/springl-5.png";
 import box6 from "../public/Assets/product-images/springl-6.png";
-import DebounceSearchComponent from "./debounceSearchComponent";
+import DebounceSearchComponent from "./DebounceSearchComponent";
 
 export const productList = [
   {
@@ -62,6 +62,7 @@ export const productList = [
 ];
 
 export default function Content({ data }) {
+  // console.log(data.products);
   const [product, setProduct] = useState(data.products);
   const [sorted, setSorted] = useState(false);
 
@@ -90,12 +91,12 @@ export default function Content({ data }) {
           <span className="ml-1 text-lg font-semibold">&uarr;&darr;</span>
         </button>
       </div>
-      <div className=" grid gap-2 grid-cols-1 px-4 mb-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  2xl:grid-cols-5">
+      <div className=" grid gap-2 grid-cols-1 px-4 mb-4 sm:grid-cols-2 md:grid-cols-3  lg:grid-cols-4 xl:grid-cols-5  2xl:grid-cols-5">
         {product ? (
           product.map((item) => (
             <div
               key={item.id}
-              className="flex border-stale-800 relative flex-col h-full shadow-md bg-white justify-between items-center rounded-lg border-2 text-[#333] "
+              className="flex border-stale-800 relative flex-col h-full shadow-md dark:bg-black  justify-between items-center rounded-lg border-2  "
             >
               <h1 className=" p-2 text-center text-[14px]">{item.title}</h1>
               <Link
@@ -123,11 +124,11 @@ export default function Content({ data }) {
               <div className="flex w-full justify-between items-center p-4 ">
                 <Link
                   href={`details/${item.id}`}
-                  className="text-sm border-black border-b-2 active:border-b-0"
+                  className="text-sm  border-b-2 active:border-b-0"
                 >
                   Details
                 </Link>
-                <button className="  text-sm text-[#333] border-black border-b-2 active:border-b-0">
+                <button className="  text-sm  border-b-2 active:border-b-0">
                   Add to Chart
                 </button>
               </div>

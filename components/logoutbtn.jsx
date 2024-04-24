@@ -1,19 +1,14 @@
 "use client";
+import { useTranslation } from "react-i18next";
 
-import { useRouter } from "next/navigation";
-
-export default function LogautButton({ handleLoagut }) {
-  const router = useRouter();
+export default function LogoutButton() {
+  const { t } = useTranslation();
 
   return (
-    <li
-      onClick={() => {
-        handleLoagut();
-        router.push("/login");
-      }}
-      className=" cursor-pointer p-1 text-[#333] border-2 rounded-md hover:border-red-500  [transition:all_ease_0.2s]  border-[#333]"
-    >
-      Logout
-    </li>
+    <form action="/api/logout" method="GET">
+      <button className="cursor-pointer p-1 border-2 rounded-md hover:border-red-500 transition-all ease-in-out duration-200">
+        {t("header:header_logout")}
+      </button>
+    </form>
   );
 }

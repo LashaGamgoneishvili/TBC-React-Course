@@ -1,20 +1,34 @@
 import Image from "next/image";
 
-export async function fetchProductDetails(params) {
-  const response = await fetch(`https://dummyjson.com/products/${params.id}`, {
-    cache: "force-cache",
-  });
-  const datails = await response.json();
-  return datails;
+export async function generateStaticParams() {
+  const response = await fetch("https://dummyjson.com/products");
+  const data = await response.json();
+  const blogs = data.products;
+
+  // const paths = blogs.products.map((blogs) => ({
+  //   params: { id: `/blogs/${blogs.id}` },
+  // }));
+
+  return products.map((blogs) => ({
+    params: { id: `/blogs/${blogs.id}` },
+  }));
 }
 
-export default async function Page({ params }) {
-  const data = await fetchProductDetails(params);
+export async function fetchBlogsPost(params) {
+  const response = await fetch(`https://dummyjson.com/products/${params.id}`, {
+    caches: "force-cache",
+  });
+  const post = await response.json();
+  return post;
+}
+
+async function Page({ params }) {
+  const data = await fetchBlogsPost(params);
 
   return (
     <div className="flex p-10 mt-24 h-screen overflow-hidden">
       {data ? (
-        <div key={data?.id} className="grid grid-cols-2 items-start gap-8">
+        <div key={data.id} className="grid grid-cols-2 items-start gap-8">
           <Image
             src={data.thumbnail}
             width={150}
@@ -54,3 +68,5 @@ export default async function Page({ params }) {
     </div>
   );
 }
+
+export default Page;

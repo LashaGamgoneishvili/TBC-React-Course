@@ -1,5 +1,5 @@
 import Image from "next/image";
-import logo from "@/public/Assets/maxresdefault.jpg";
+import logo from "../../../../public/Assets/maxresdefault.jpg";
 import Link from "next/link";
 
 const blogData = [
@@ -283,7 +283,6 @@ const blogData = [
     buttonText: "Read More",
   },
 ];
-let data;
 
 export async function fatchBlogs() {
   const respons = await fetch("https://dummyjson.com/products", {
