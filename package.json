@@ -3,20 +3,30 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "i18nexus pull && next dev",
+    "build": "i18nexus pull && next build",
+    "start": "i18nexus pull && next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "next": "14.1.4",
+    "i18next": "^23.11.2",
+    "i18next-resources-to-backend": "^1.2.1",
+    "ionicons": "^7.3.1",
+    "next": "^14.2.2",
+    "next-i18n-router": "^5.4.0",
+    "next-themes": "^0.3.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-i18next": "^14.1.0"
   },
   "devDependencies": {
+    "@types/node": "20.12.7",
+    "@types/react": "18.2.79",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.1.4",
+    "i18nexus-cli": "^3.4.0",
+    "next-themes": "0.3.0",
     "postcss": "^8",
     "tailwindcss": "^3.3.0"
   }
