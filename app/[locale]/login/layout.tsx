@@ -9,7 +9,7 @@ const righteous = Righteous({
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode,
+  children: React.ReactNode;
 }) {
   return <div className={righteous.className}>{children}</div>;
 }

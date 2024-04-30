@@ -18,7 +18,7 @@ export async function fetchHomePageProducts() {
   return products;
 }
 
-const i18nNamespace = ["header"];
+const i18nNamespace = ["header", "login"];
 
 interface MainProps {
   params: {
@@ -26,15 +26,13 @@ interface MainProps {
   };
 }
 
-
-
 export default async function Main({ params: { locale } }: MainProps) {
   const { t, resources } = await initTranslations(locale, i18nNamespace);
   const data = await fetchHomePageProducts();
 
   return (
     <div
-      className={`flex h-screen flex-col overflow-hidden dark:text-[#abb2bf]  dark:bg-[#21252b] font-righteous ${righteous.className}`}
+      className={`flex h-screen  flex-col overflow-hidden dark:text-[#abb2bf]  dark:bg-[#21252b] font-righteous ${righteous.className}`}
     >
       <Header
         translator={t}
