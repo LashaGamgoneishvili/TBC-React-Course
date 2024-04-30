@@ -1,21 +1,26 @@
 import Image from "next/image";
 import { Product } from "../../../../../types/types";
+import { BlogObject } from "../../../../../types/types";
+const URL = "https://dummyjson.com/products";
 
 interface Params {
   id: string;
 }
 
-export async function generateProductObject() {
-  const response = await fetch("https://dummyjson.com/products");
-  const data = await response.json();
+export async function generateStaticParams() {
+  const response = await fetch(URL);
+  const products: BlogObject = await response.json();
 
-  const paths = data.products.map((product: Product) => ({
+  const paths = products.products.map((product) => ({
+    locale: "en",
     id: product.id.toString(),
   }));
-  const paths2 = data.products.map((product: Product) => ({
+  const paths2 = products.products.map((product) => ({
     locale: "ka",
     id: product.id.toString(),
   }));
+  console.log(paths);
+
   return paths.concat(paths2);
 }
 
