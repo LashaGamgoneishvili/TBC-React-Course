@@ -11,15 +11,14 @@ const righteous = Righteous({
   variable: "--font-righteous",
 });
 
-export async function fetchHomePageProducts() {
-  const response = await fetch("https://dummyjson.com/products");
-  const products: BlogObject = await response.json();
-  await new Promise((resolve) => setTimeout(resolve, 500));
-  return products;
-}
+// export async function fetchHomePageProducts() {
+//   const response = await fetch("https://dummyjson.com/products");
+//   const products: BlogObject = await response.json();
+//   await new Promise((resolve) => setTimeout(resolve, 500));
+//   return products;
+// }
 
 const i18nNamespace = ["header", "login"];
-
 interface MainProps {
   params: {
     locale: string | undefined;
@@ -28,7 +27,9 @@ interface MainProps {
 
 export default async function Main({ params: { locale } }: MainProps) {
   const { t, resources } = await initTranslations(locale, i18nNamespace);
-  const data = await fetchHomePageProducts();
+  // const products = await fetchHomePageProducts();
+  const response = await fetch("https://dummyjson.com/products");
+  const products: BlogObject = await response.json();
 
   return (
     <div
@@ -40,7 +41,7 @@ export default async function Main({ params: { locale } }: MainProps) {
         locale={locale}
         namespaces={i18nNamespace}
       />
-      <Content data={data} />
+      <Content data={products} />
       <Footer />
     </div>
   );
