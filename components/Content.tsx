@@ -44,7 +44,7 @@ export default function Content({ data }: { data: BlogObject }) {
             >
               <h1 className=" p-2 text-center text-[14px]">{item.title}</h1>
               <Link
-                href={`details/${item.id}`}
+                href={`product/${item.id}`}
                 className="flex justify-center  w-40 h-36 "
               >
                 <Image

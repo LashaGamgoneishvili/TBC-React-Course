@@ -29,19 +29,21 @@ export default function LanguageChanger() {
 
     console.log(
       currentLocale,
+      i18nConfig.defaultLocale,
       newLocale,
       currentPathname,
-      i18nConfig.defaultLocale
+      i18nConfig.prefixDefault
     );
     // redirect to the new locale path
     if (
       currentLocale === i18nConfig.defaultLocale &&
       !i18nConfig.prefixDefault
     ) {
+      console.log(currentPathname, "lasha");
       router.push("/" + newLocale + currentPathname);
     } else {
       // console.log(currentLocale, newLocale, currentPathname);
-      // console.log(currentLocale, i18nConfig.defaultLocale);
+      console.log(currentLocale, i18nConfig.defaultLocale, "else");
       router.push(
         currentPathname.replace(`/${currentLocale}`, `/${newLocale}`)
       );

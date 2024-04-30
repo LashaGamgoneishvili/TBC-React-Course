@@ -4,15 +4,15 @@ import ThemeSwitch from "../../../components/ThemeSwitch";
 import TranslationsProvider from "../../../components/TranslationsProvider";
 import initTranslations from "../../i18n";
 
-// interface MainProps {
-//   params: {
-//     locale: string;
-//   };
-// }
+interface MainProps {
+  params: {
+    locale: string;
+  };
+}
 
 const i18nNamespace = ["login"];
 
-export default async function LoginPage({ locale }) {
+export default async function LoginPage({ params: { locale } }: MainProps) {
   const { t, resources } = await initTranslations(locale, i18nNamespace);
 
   return (
@@ -22,7 +22,7 @@ export default async function LoginPage({ locale }) {
       namespaces={i18nNamespace}
     >
       <div className="grid grid-cols-2 items-center h-screen text-white bg-stale-400  ">
-        <div className="h-5/6 w-4/6 justify-self-end bg-[#6f526d] p-8">
+        <div className="h-5/6 w-4/6 justify-self-end bg-gradient-to-r from-[rgba(175,141,172,1)] to-[rgba(98,69,96,1)] dark:from-[rgba(98,69,96,1)] dark:to-[rgba(175,141,172,1)] dark:bg-gradient-to-tr p-8">
           <div className=" flex h-full flex-col gap-12 justify-center items-center">
             <h1 className="text-2xl ">{t("login:left-h1")}</h1>
             <p className="text-center">{t("login:left-p")}</p>

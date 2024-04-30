@@ -35,22 +35,22 @@ export default async function Header({
               <span className="text-2xl text-red-600">one</span>
             </a>
           </div>
-          <nav className="flex gap-4">
+          <nav className="flex gap-4 ">
             <ul className="flex  items-center justify-center  gap-12 ">
-              <li className=" cursor-pointer p-1   [transition:all_ease_0.2s] ">
+              <li className=" cursor-pointer p-1   [transition:all_ease_0.2s] hover:text-[#ff5c4b] hover:duration-300">
                 <Link href="/">{translator("header:header_home")}</Link>
               </li>
-              <li className=" cursor-pointer p-1   [transition:all_ease_0.2s] ">
+              <li className=" cursor-pointer p-1   [transition:all_ease_0.2s]   hover:duration-300  hover:text-[#ff5c4b]">
                 <Link href="/profile">
                   {translator("header:header_Profile")}
                 </Link>
               </li>
 
-              <li className=" cursor-pointer p-1   [transition:all_ease_0.2s] ">
+              <li className=" cursor-pointer p-1   [transition:all_ease_0.2s] hover:text-[#ff5c4b] hover:duration-300">
                 <Link href="/blogs">{translator("header:header_blog")}</Link>
               </li>
 
-              <li className=" cursor-pointer p-1   [transition:all_ease_0.2s] ">
+              <li className=" cursor-pointer p-1   [transition:all_ease_0.2s] hover:text-[#ff5c4b] hover:duration-300">
                 <Link href="/contact">
                   {translator("header:header_contact")}
                 </Link>
