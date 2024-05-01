@@ -7,14 +7,14 @@ import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
   let url = request.nextUrl.pathname;
-  let modifiedUrl = url.substring(3);
+  // let modifiedUrl = url.substring(3);
   const cookieStore = cookies();
   const cookie = cookieStore.get(AUTH_COOKIE_KEY);
 
-  if (!cookie && modifiedUrl !== "/login" && url !== "/login") {
+  if (!cookie && url !== "/login") {
     return NextResponse.redirect(new URL("/login", request.url));
   }
-  if (cookie && modifiedUrl === "/login") {
+  if (cookie && url === "/login") {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
