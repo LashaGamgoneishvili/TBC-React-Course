@@ -1,12 +1,12 @@
 import Image from "next/image";
 import { Product } from "../../../../../types/types";
 import { BlogObject } from "../../../../../types/types";
-const URL = "https://dummyjson.com/products";
 
 interface Params {
   id: string;
 }
 
+const URL = "https://dummyjson.com/products";
 export async function generateStaticParams() {
   const response = await fetch(URL);
   const products: BlogObject = await response.json();
@@ -19,7 +19,6 @@ export async function generateStaticParams() {
     locale: "ka",
     id: product.id.toString(),
   }));
-  console.log(paths);
 
   return paths.concat(paths2);
 }

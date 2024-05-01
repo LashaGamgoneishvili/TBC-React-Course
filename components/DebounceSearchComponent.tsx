@@ -25,7 +25,6 @@ export default function DebounceSearchComponent({
     getData();
   }, []);
 
-  console.log(data);
   useEffect(() => {
     if (!data) {
       // handle case where data is not available
