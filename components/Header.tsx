@@ -24,7 +24,7 @@ export default async function Header({
       <header className="flex w-full  items-center">
         <div className="flex h-24 items-center gap-7 justify-between p-4 w-full">
           <div className="ml-8">
-            <a href="/">
+            <Link href="/">
               <span className="text-[32px] text-black dark:text-blue-500">
                 T
               </span>
@@ -33,7 +33,7 @@ export default async function Header({
               </span>
               <span className="text-[32px] text-red-600"> Z</span>
               <span className="text-2xl text-red-600">one</span>
-            </a>
+            </Link>
           </div>
           <nav className="flex gap-4 ">
             <ul className="flex  items-center justify-center  gap-12 ">
