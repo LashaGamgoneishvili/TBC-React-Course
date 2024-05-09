@@ -29,3 +29,9 @@ export interface Person {
   surname: string;
   mail: string;
 }
+
+export interface User {
+  id: number;
+  name: string;
+  email: string;
+}
