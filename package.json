@@ -9,20 +9,22 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@vercel/postgres": "^0.8.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "i18next": "^23.11.2",
     "i18next-resources-to-backend": "^1.2.1",
     "ionicons": "^7.3.1",
     "lucide-react": "^0.376.0",
-    "next": "^14.2.2",
+    "next": "^14.2.3",
     "next-i18n-router": "^5.4.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^14.1.1",
     "react-icons": "^5.1.0",
     "tailwind-merge": "^2.3.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "vercel": "^34.1.8"
   },
   "devDependencies": {
     "@types/node": "20.12.7",
