@@ -10,11 +10,11 @@ export async function getUsers() {
   return users.rows;
 }
 
-export async function createUser(name: string, email: string) {
+export async function createUser(name: string, email: string, age: string) {
   revalidatePath(`${BASE_URL}/users`);
   return await fetch(BASE_URL + "/api/create-user", {
     method: "POST",
-    body: JSON.stringify({ name, email }),
+    body: JSON.stringify({ name, email, age }),
   });
 }
 

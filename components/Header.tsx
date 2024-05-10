@@ -55,6 +55,9 @@ export default async function Header({
                   {translator("header:header_contact")}
                 </Link>
               </li>
+              <li className=" cursor-pointer p-1   [transition:all_ease_0.2s] hover:text-[#ff5c4b] hover:duration-300">
+                <Link href="/admin">{translator("admin")}</Link>
+              </li>
             </ul>
           </nav>
           <div className="flex gap-4">
