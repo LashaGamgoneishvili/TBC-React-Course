@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer>
-      <div className="px-7 py-2 flex items-start justify-between ">
+      <div className="px-7 py-2  bottom-[0%] bg-white w-full flex items-start justify-between ">
         <FooterBox>
           <h1> Home</h1>
           <ul className="cursor-pointer">
@@ -38,7 +38,7 @@ export default function Footer() {
               name="user_email"
               className="rounde-[4px] rounded-md border-[0.5px] p-2  bg-[#fff]]"
             />
-            <button className="w-full rounded-[4px] bg-[#3b82f6] p-2  duration-500 hover:text-[#fff]">
+            <button className="w-full rounded-[4px] p-2 bg-[#3b82f6]  hover:bg-sky-700  duration-500 text-[#fff] ">
               SEND
             </button>
           </form>

@@ -25,7 +25,7 @@ export default function EditForm({ user }: { user: User }) {
       <div
         className={`${
           modal ? "block" : "hidden"
-        } flex absolute  left-[20%] top-1/3 h-52 z-20 px-16 rounded-md bg-green-600 opacity-65 justify-center items-center`}
+        } flex absolute  left-[20%] top-1/3 h-52 z-20 px-16 rounded-md bg-white  opacity-65 justify-center items-center`}
       >
         <form
           action={updateUserAction}
@@ -41,7 +41,7 @@ export default function EditForm({ user }: { user: User }) {
               name="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="rounded-md px-4 text-black outline-0"
+              className="rounded-md px-4 text-black py-1  border-black border"
             />
           </div>
           <div className="flex flex-col gap-1">
@@ -54,7 +54,7 @@ export default function EditForm({ user }: { user: User }) {
               name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="rounded-md px-4 text-black outline-0"
+              className="rounded-md px-4 text-black py-1  border-black border"
             />
           </div>
           <div className="flex flex-col gap-1">
@@ -67,7 +67,7 @@ export default function EditForm({ user }: { user: User }) {
               name="age"
               value={age}
               onChange={(e) => setAge(Number(e.target.value))}
-              className="rounded-md px-4 text-black outline-0"
+              className="rounded-md px-4 text-black py-1   border-black border"
             />
           </div>
           <input
@@ -80,7 +80,7 @@ export default function EditForm({ user }: { user: User }) {
           <button
             type="submit"
             onClick={() => setModal(false)}
-            className="px-4 rounded-md bg-violet-600 text-white"
+            className="px-4 rounded-md  text-white bg-[#3b82f6] py-1 text-base hover:bg-sky-700  duration-500"
           >
             Save
           </button>
