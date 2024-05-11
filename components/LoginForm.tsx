@@ -13,26 +13,24 @@ export default function LoginForm() {
         className="flex flex-col w-full relative rounded-md justify-center items-start  gap-8"
       >
         <div className="flex flex-col gap-2  ">
-          {/* <label className="">{t("username")}</label> */}
           <input
             type="username"
             id="username"
             name="username"
             placeholder={t("username")}
-            className="p-2  dark:rounded-md outline-0 bg-white	border-b border-black w-96"
+            className="p-2  dark:rounded-md outline-0 bg-white dark:text-black	border-b border-black w-96"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
 
-        <div className="flex flex-col gap-2">
-          {/* <label className="">{t("Password")}</label> */}
+        <div className="flex flex-col gap-2 dark:text-black">
           <input
             type="password"
             id="password"
             name="password"
             placeholder={t("Password")}
-            className="p-2   dark:rounded-md   border-b border-black w-96  bg-white outline-0"
+            className="p-2  border-b border-black w-96 dark:rounded-md  bg-white outline-0"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
