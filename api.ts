@@ -5,7 +5,7 @@ const VERCEL_ENV = process.env.VERCEL_ENV;
 export const BASE_URL =
   VERCEL_ENV === "development"
     ? "http://localhost:3000"
-    : "tbc-react-course-git-session-15-lashas-projects-cb23651f.vercel.app";
+    : "https://tbc-react-course-git-session-15-lashas-projects-cb23651f.vercel.app";
 
 export async function getUsers() {
   const response = await fetch(`${BASE_URL}/api/get-users`, {

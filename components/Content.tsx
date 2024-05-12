@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import DebounceSearchComponent from "./DebounceSearchComponent";
 import { BlogObject } from "../types/types";
+import AddChartButton from "../components/AddChartButton";
 
 export default function Content({ data }: { data: BlogObject }) {
   const [product, setProduct] = useState(data.products);
@@ -71,9 +72,7 @@ export default function Content({ data }: { data: BlogObject }) {
               >
                 Details
               </Link>
-              <button className="  text-sm  border-b-2 border-black dark:border-white active:border-b-0">
-                Add to Chart
-              </button>
+              <AddChartButton id={item.id} />
             </div>
           </div>
         ))}
