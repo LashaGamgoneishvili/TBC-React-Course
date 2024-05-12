@@ -6,8 +6,8 @@ import TranslationsProvider from "./TranslationsProvider";
 import LanguageChanger from "./LanguageChanger";
 import { CiSearch } from "react-icons/ci";
 import { GoPerson } from "react-icons/go";
-import { MdOutlineShoppingCart } from "react-icons/md";
 import { HeaderProps } from "../types/types";
+import Chart from "../components/chart";
 
 export default async function Header({
   translator,
@@ -61,10 +61,10 @@ export default async function Header({
             </ul>
           </nav>
           <div className="flex gap-4">
-            <div className="flex justify-center items-center gap-4 ">
+            <div className="flex justify-center items-center gap-4 text-xl">
               <CiSearch />
               <GoPerson />
-              <MdOutlineShoppingCart />
+              <Chart />
             </div>
             <LanguageChanger />
             <div className=" flex justify-start rounded-md border items-start border-gray-500 outline-none dark:bg-slate-700">

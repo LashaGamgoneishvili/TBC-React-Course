@@ -12,7 +12,7 @@ export default async function UsersPage() {
       <div className="px-5 ">
         {users.rows.map((user: User) => (
           <div
-            className="flex justify-between items-center border-b h-10  odd:bg-white even:bg-slate-50 "
+            className="flex justify-between items-center border-b h-10 odd:bg-slate-50   even:bg-white "
             key={user.id}
           >
             <div className="flex gap-4 ">

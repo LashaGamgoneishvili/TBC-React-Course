@@ -13,7 +13,7 @@ export default function EditForm({ user }: { user: User }) {
 
   return (
     <>
-      <div onClick={() => setModal(true)}>
+      <div onClick={() => setModal(true)} className="cursor-pointer">
         <CiEdit />
       </div>
       <div
