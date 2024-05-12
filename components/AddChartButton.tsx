@@ -1,8 +1,6 @@
 "use client";
-import { useState } from "react";
-
 export default function AddChartButton({ id }: { id: number }) {
-  const [item, setItem] = useState(0);
+  console.log(id);
 
   function handlecklick() {}
 
