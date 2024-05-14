@@ -1,4 +1,3 @@
-"use client";
 import { useEffect } from "react";
 import { useLocalStorageState } from "../hooks";
 import { BlogObject } from "../types/types";

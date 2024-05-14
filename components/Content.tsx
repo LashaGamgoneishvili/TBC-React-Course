@@ -1,14 +1,12 @@
 "use client";
 import { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
 import DebounceSearchComponent from "./DebounceSearchComponent";
 import { BlogObject } from "../types/types";
 import AddChartButton from "./ProductList";
 // import { useLocalStorageState } from "../hooks";
 
 export default function Content({ data }: { data: BlogObject }) {
-  const [product, setProduct] = useState(data.products);
+  const [_, setProduct] = useState(data.products);
   const [sorted, setSorted] = useState(false);
 
   function handleSort() {
