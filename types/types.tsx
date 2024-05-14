@@ -36,3 +36,9 @@ export interface User {
   email: string;
   age: number;
 }
+
+export interface SelectedProduct {
+  id: number;
+  // products: [];
+  count: number;
+}

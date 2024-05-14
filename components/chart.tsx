@@ -1,13 +1,18 @@
 "use client";
 
+import Link from "next/link";
 import { MdOutlineShoppingCart } from "react-icons/md";
 
 export default function Chart() {
   return (
     <>
       <div className="text-xl relative">
-        <span className="absolute text-xs -top-3 right-1">0</span>
-        <MdOutlineShoppingCart />
+        <Link href="/checkout">
+          <span className="absolute text-xs -top-3 right-[6px] text-red-700">
+            0
+          </span>
+          <MdOutlineShoppingCart />
+        </Link>
       </div>
     </>
   );
