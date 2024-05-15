@@ -39,6 +39,6 @@ export interface User {
 
 export interface SelectedProduct {
   id: number;
-  // products: [];
+  product: Product;
   count: number;
 }

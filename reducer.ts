@@ -1,22 +1,30 @@
 import { useReducer } from "react";
 import { SelectedProduct } from "./types/types";
+import { Product } from "./types/types";
 
 const initialState: SelectedProduct[] = [];
 
 type Action =
-  | { type: "INCREMENT"; payload: number }
-  | { type: "DECREMENT"; payload: number }
+  | { type: "INCREMENT"; payload: Product }
+  | { type: "DECREMENT"; payload: Product }
   | { type: "RESET" };
 
 function reducer(state: SelectedProduct[], action: Action) {
   switch (action.type) {
     case "INCREMENT": {
+      if (state === undefined) {
+        state = [];
+      }
+
       const selectedProductIdx = state.findIndex(
-        (product) => Number(product.id) === action.payload
+        (product) => Number(product.id) === action.payload.id
       );
 
       if (selectedProductIdx === -1) {
-        return [...state, { id: action.payload, count: 1 }];
+        return [
+          ...state,
+          { id: action.payload.id, product: action.payload, count: 1 },
+        ];
       }
 
       const clone = [...state];
@@ -34,8 +42,11 @@ function reducer(state: SelectedProduct[], action: Action) {
     }
 
     case "DECREMENT": {
+      if (state === undefined) {
+        state = [];
+      }
       const selectedProductIdx = state.findIndex(
-        (product) => product.id === action.payload
+        (product) => product.id === action.payload.id
       );
       if (selectedProductIdx === -1) return state;
 
@@ -55,7 +66,7 @@ function reducer(state: SelectedProduct[], action: Action) {
 }
 
 export function useReducerHook(
-  value: { id: number; count: number }[]
+  value: SelectedProduct[]
 ): [SelectedProduct[], React.Dispatch<Action>] {
   const [SelectedProducts, dispatch] = useReducer(reducer, value);
 
