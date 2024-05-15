@@ -17,20 +17,12 @@ export default function AddChartButton({ product }: { product: BlogObject }) {
   }, [selectedProducts, setValue]);
 
   function handleClick(id: number) {
-    dispatch({ type: "INCREMENT", payload: id });
+    const selectedProduct = product.products.find((item) => item.id === id);
+    if (selectedProduct) {
+      dispatch({ type: "INCREMENT", payload: selectedProduct });
+    }
   }
 
-  // const selectedProductsForChartNumber: { id: number; count: number }[] =
-  //   selectedProducts;
-
-  // if (!selectedProducts) {
-  //   const selectedNumber = selectedProductsForChartNumber.reduce(
-  //     (acc: number, curr: any) => {
-  //       return acc + curr.count;
-  //     },
-  //     0
-  //   );
-  // }
   return (
     <>
       <div className=" mx-10 grid gap-2 grid-cols-1 px-4 mb-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  2xl:grid-cols-5">

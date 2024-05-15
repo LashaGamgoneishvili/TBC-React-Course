@@ -33,7 +33,7 @@ export default async function Main({ params: { locale } }: MainProps) {
 
   return (
     <div
-      className={`flex h-screen flex-col  dark:text-[#abb2bf]  dark:bg-[#21252b] font-righteous ${righteous.className}`}
+      className={`flex h-screen flex-col overflow-hidden  dark:text-[#abb2bf]  dark:bg-[#21252b] font-righteous ${righteous.className}`}
     >
       <Header
         translator={t}
