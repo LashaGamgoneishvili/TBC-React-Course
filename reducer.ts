@@ -7,6 +7,7 @@ const initialState: SelectedProduct[] = [];
 type Action =
   | { type: "INCREMENT"; payload: Product }
   | { type: "DECREMENT"; payload: Product }
+  | { type: "REMOVEPRODUCT"; payload: Product }
   | { type: "RESET" };
 
 function reducer(state: SelectedProduct[], action: Action) {
@@ -52,6 +53,7 @@ function reducer(state: SelectedProduct[], action: Action) {
 
       const clone = [...state];
       const selectedProduct = clone[selectedProductIdx];
+      if (selectedProduct.count < 2) return clone;
       const updateSelectedProduct = {
         ...selectedProduct,
         count: selectedProduct.count - 1,
@@ -60,6 +62,23 @@ function reducer(state: SelectedProduct[], action: Action) {
 
       return clone;
     }
+    case "REMOVEPRODUCT": {
+      const indexToRemove = state.findIndex(
+        (product) => product.id === action.payload.id
+      );
+
+      if (indexToRemove === -1) {
+        return state;
+      }
+
+      const newState = [
+        ...state.slice(0, indexToRemove),
+        ...state.slice(indexToRemove + 1),
+      ];
+
+      return newState;
+    }
+
     case "RESET":
       return initialState;
   }
