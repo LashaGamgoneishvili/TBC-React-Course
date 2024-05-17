@@ -32,7 +32,6 @@ export function useProductCart(produdct: SelectedProduct[]) {
         }, 0)
       );
     } else {
-      console.log("else");
       setSelectedNumber(1);
     }
   }, [produdct]);

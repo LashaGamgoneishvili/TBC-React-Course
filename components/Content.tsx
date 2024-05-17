@@ -2,8 +2,7 @@
 import { useState } from "react";
 import DebounceSearchComponent from "./DebounceSearchComponent";
 import { BlogObject } from "../types/types";
-import AddChartButton from "./ProductList";
-// import { useLocalStorageState } from "../hooks";
+import ProductList from "./ProductList";
 
 export default function Content({ data }: { data: BlogObject }) {
   const [_, setProduct] = useState(data.products);
@@ -35,7 +34,7 @@ export default function Content({ data }: { data: BlogObject }) {
           <span className="ml-1 text-lg font-semibold">&uarr;&darr;</span>
         </button>
       </div>
-      <AddChartButton product={data} />
+      <ProductList product={data} />
     </section>
   );
 }
