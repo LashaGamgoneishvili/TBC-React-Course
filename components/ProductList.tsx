@@ -4,20 +4,29 @@ import { BlogObject } from "../types/types";
 import Link from "next/link";
 import Image from "next/image";
 import { useReducerHook } from "../reducer";
+import { useAppContext } from "../app/context/index";
 
 export default function AddChartButton({ product }: { product: BlogObject }) {
   const [value, setValue] = useLocalStorageState("chart");
   const [selectedProducts, dispatch] = useReducerHook(value);
+  const { setState } = useAppContext();
 
   useEffect(() => {
     if (selectedProducts && selectedProducts.length > 0) {
-      console.log(selectedProducts);
+      // console.log(selectedProducts);
+      setState(
+        selectedProducts.reduce((acc: number, curr: any) => {
+          return acc + curr.count;
+        }, 0)
+      );
+
       setValue(selectedProducts);
     }
-  }, [selectedProducts, setValue]);
+  }, [selectedProducts, setValue, setState]);
 
   function handleClick(id: number) {
     const selectedProduct = product.products.find((item) => item.id === id);
+
     if (selectedProduct) {
       dispatch({ type: "INCREMENT", payload: selectedProduct });
     }

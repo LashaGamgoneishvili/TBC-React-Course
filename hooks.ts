@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { SelectedProduct } from "./types/types";
 
 export function useLocalStorageState(key: string, initialState?: any) {
   const [value, setValue] = useState(() => {
@@ -20,19 +21,26 @@ export function useLocalStorageState(key: string, initialState?: any) {
   return [value, setValue];
 }
 
-// export function useLocalStorageState(key: string, initialState?: any) {
-//   const [value, setValue] = useState(function () {
-//     if (typeof window === "undefined") return;
-//     const storedValue = window.localStorage.getItem(key);
-//     return storedValue ? JSON.parse(storedValue) : initialState;
-//   });
+export function useProductCart(produdct: SelectedProduct[]) {
+  const [selectedNumber, setSelectedNumber] = useState<number>();
 
-//   useEffect(
-//     function () {
-//       localStorage.setItem("chart", JSON.stringify(value));
-//     },
-//     [value, key]
-//   );
+  useEffect(() => {
+    if (produdct) {
+      setSelectedNumber(
+        produdct.reduce((acc: number, curr: any) => {
+          return acc + curr.count;
+        }, 0)
+      );
+    } else {
+      console.log("else");
+      setSelectedNumber(1);
+    }
+  }, [produdct]);
 
-//   return [value, setValue];
-// }
+  const addProductsToCart = () => {};
+  addProductsToCart();
+  return {
+    addProductsToCart,
+    selectedNumber,
+  };
+}
