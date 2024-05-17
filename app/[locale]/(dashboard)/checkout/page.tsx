@@ -6,7 +6,6 @@ import { useLocalStorageState } from "../../../../hooks";
 import { SelectedProduct } from "../../../../types/types";
 import { useReducerHook } from "../../../../reducer";
 import { useAppContext } from "../../../context/index";
-
 import { useProductCart } from "../../../../hooks";
 
 export default function CheckoutPage() {
@@ -67,26 +66,28 @@ export default function CheckoutPage() {
   return (
     <>
       {isClient ? (
-        <div className=" mx-10 grid gap-2 grid-cols-1 px-4 mb-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  2xl:grid-cols-5">
+        <div className=" mx-10 grid gap-2 mt-12  grid-cols-1 px-4 mb-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  2xl:grid-cols-5">
           <button
             onClick={handleClickReset}
-            className="absolute top-20 right-8"
+            className="absolute top-24 right-16 bg-violet-500 px-4 py-2 rounded-md"
           >
-            Reset
+            Remove All
           </button>
 
           {selectedProducts.map((product: SelectedProduct) => (
             <div
               key={product.id}
-              className="flex border-stale-800  dark:border-none relative flex-col h-full shadow-md dark:bg-[#282c34] justify-between products-center rounded-lg border-2 "
+              className="flex border-stale-800 dark:border-none relative flex-col h-full shadow-md dark:bg-[#282c34] justify-between products-center rounded-lg border-2 "
             >
               <h1 className=" p-2 text-center text-[14px]">
                 {product.product.title}
               </h1>
-              <h1 className=" p-2 text-center text-[14px]">{product.count}</h1>
+              <h1 className="absolute right-3 p-2 text-center text-green-600  text-[14px]">
+                {product.count}
+              </h1>
               <Link
                 href={`product/${product.product.id}`}
-                className="flex justify-center  w-40 h-36 "
+                className="flex justify-center  h-36 "
               >
                 <Image
                   alt="Picture of the Product"
@@ -113,24 +114,24 @@ export default function CheckoutPage() {
                 >
                   Details
                 </Link>
-                <div>
+                <div className="flex gap-5 justify-between w-full pl-7">
                   <button
-                    className="  text-sm  border-b-2 border-black dark:border-white active:border-b-0"
+                    className="  text-md  border-b-2 border-black dark:border-white border-none"
                     onClick={() => handleClick(product.product.id)}
                   >
-                    +
+                    &#10010;
                   </button>
                   <button
-                    className="  text-sm  border-b-2 border-black dark:border-white active:border-b-0"
+                    className="  text-md   border-b-2 border-black dark:border-white border-none"
                     onClick={() => handleClickDecrement(product.product.id)}
                   >
-                    -
+                    &#9866;
                   </button>
                   <button
                     className="  text-sm  border-b-2 border-black dark:border-white active:border-b-0"
                     onClick={() => handleClickRemove(product.product.id)}
                   >
-                    Clear
+                    Remove
                   </button>
                 </div>
               </div>
