@@ -1,6 +1,6 @@
-import LoginForm from "../../../components/LoginForm";
+import LoginForm from "../../../components/auth/LoginForm";
 import LanguageChanger from "../../../components/LanguageChanger";
-import ThemeSwitch from "../../../components/ThemeSwitch";
+import ThemeSwitch from "../../../components/header/ThemeSwitch";
 import TranslationsProvider from "../../../components/TranslationsProvider";
 import initTranslations from "../../i18n";
 

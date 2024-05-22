@@ -1,146 +1,68 @@
-"use client";
-import Link from "next/link";
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import { useLocalStorageState } from "../../../../hooks";
-import { SelectedProduct } from "../../../../types/types";
-import { useReducerHook } from "../../../../reducer";
-import { useAppContext } from "../../../context/index";
-import { useProductCart } from "../../../../hooks";
+import RemoveAllCheckout from "../../../../components/checkout/RemoveAllCeckout";
+import { ProductQuantityMap } from "../../../../types/types";
+import { CartItem } from "../../../../types/types";
+import { Product } from "../../../../types/types";
+import { getAllCartProduct } from "../../../../actions";
+import CheckoutProductList from "../../../../components/checkout/CheckoutProductList";
 
-export default function CheckoutPage() {
-  const [value, setValue] = useLocalStorageState("chart");
-  const [selectedProducts, dispatch] = useReducerHook(value);
-  const [isClient, setisClient] = useState(false);
-  const { setState } = useAppContext();
+async function productFetch() {
+  const cartItems = await getAllCartProduct();
+  const productQuantityMap: ProductQuantityMap = [];
+  cartItems.rows.forEach((item: CartItem) => {
+    productQuantityMap[item.productid] = item.quantity;
+  });
+  const productPromises = cartItems.rows.map((item: CartItem) =>
+    fetch(`https://dummyjson.com/products/${item.productid}`, {
+      cache: "force-cache",
+    }).then((res) => res.json())
+  );
+  const products = (await Promise.all(productPromises)).sort(
+    (a, b) => a.id - b.id
+  );
+  return {
+    products,
+    productQuantityMap,
+  };
+}
 
-  const { addProductsToCart, selectedNumber } = useProductCart(value);
-
-  useEffect(() => {
-    if (selectedProducts && selectedProducts.length > 0) {
-      setisClient(true);
-      setValue(selectedProducts);
-      setState(selectedNumber);
-    }
-  }, [selectedProducts, setValue, setState, selectedNumber]);
-
-  function handleClick(id: number) {
-    const selectedProduct = value.find(
-      (item: SelectedProduct) => item.id === id
-    );
-    if (selectedProduct) {
-      addProductsToCart();
-      dispatch({ type: "INCREMENT", payload: selectedProduct });
-    }
-  }
-  function handleClickDecrement(id: number) {
-    const selectedProduct = value.find(
-      (item: SelectedProduct) => item.id === id
-    );
-    if (selectedProduct) {
-      addProductsToCart();
-      setState(selectedNumber);
-      dispatch({ type: "DECREMENT", payload: selectedProduct });
-    }
-  }
-  function handleClickReset() {
-    addProductsToCart();
-    setState(0);
-    setValue([]);
-    dispatch({ type: "RESET" });
-  }
-  function handleClickRemove(id: number) {
-    const selectedProduct = value.find(
-      (item: SelectedProduct) => item.id === id
-    );
-    const newPoduct = value.filter((item: SelectedProduct) => item.id !== id);
-    if (selectedProduct && selectedProduct.length > 0) {
-      setValue(newPoduct);
-      dispatch({ type: "REMOVEPRODUCT", payload: selectedProduct });
-    } else {
-      setValue(newPoduct);
-      dispatch({ type: "REMOVEPRODUCT", payload: selectedProduct });
-      setState(0);
-    }
-  }
+export default async function CheckOut() {
+  const { productQuantityMap, products } = await productFetch();
+  console.log(productQuantityMap);
   return (
-    <>
-      {isClient ? (
-        <div className=" mx-10 grid gap-2 mt-12  grid-cols-1 px-4 mb-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  2xl:grid-cols-5">
-          <button
-            onClick={handleClickReset}
-            className="absolute top-24 right-16 bg-violet-500 px-4 py-2 rounded-md"
-          >
-            Remove All
-          </button>
-
-          {selectedProducts.map((product: SelectedProduct) => (
-            <div
-              key={product.id}
-              className="flex border-stale-800 dark:border-none relative flex-col h-full shadow-md dark:bg-[#282c34] justify-between products-center rounded-lg border-2 "
-            >
-              <h1 className=" p-2 text-center text-[14px]">
-                {product.product.title}
-              </h1>
-              <h1 className="absolute right-3 p-2 text-center text-green-600  text-[14px]">
-                {product.count}
-              </h1>
-              <Link
-                href={`product/${product.product.id}`}
-                className="flex justify-center  h-36 "
-              >
-                <Image
-                  alt="Picture of the Product"
-                  src={product.product.thumbnail}
-                  priority={true}
-                  className="h-auto w-auto"
-                  width={150}
-                  height={150}
-                />
-              </Link>
-              <p className="p-2 text-xs h-20">{product.product.description}</p>
-              <div className="grid grid-flow-row grid-cols-2 gap-2 place-products-stretch mb-2 border-s-violet-200 border-2">
-                <p className="p-2 text-xs bg-violet-400 rounded-sm dark:text-black">
-                  Discount - {product.product.discountPercentage}%
-                </p>
-                <p className="p-2 text-xs bg-green-400 rounded-sm  dark:text-black">
-                  Price - {product.product.price}$
-                </p>
-              </div>
-              <div className="flex w-full justify-between products-center p-4 ">
-                <Link
-                  href={`product/${product.product.id}`}
-                  className="text-sm  border-b-2 active:border-b-0 border-black dark:border-white"
-                >
-                  Details
-                </Link>
-                <div className="flex gap-5 justify-between w-full pl-7">
-                  <button
-                    className="  text-md  border-b-2 border-black dark:border-white border-none"
-                    onClick={() => handleClick(product.product.id)}
-                  >
-                    &#10010;
-                  </button>
-                  <button
-                    className="  text-md   border-b-2 border-black dark:border-white border-none"
-                    onClick={() => handleClickDecrement(product.product.id)}
-                  >
-                    &#9866;
-                  </button>
-                  <button
-                    className="  text-sm  border-b-2 border-black dark:border-white active:border-b-0"
-                    onClick={() => handleClickRemove(product.product.id)}
-                  >
-                    Remove
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
+    <div className="w-full mx-auto flex flex-col items-center ">
+      <div className="w-full h-auto">
+        <div className=" w-full flex justify-center bg-[url('https://preview.colorlib.com/theme/timezone/assets/img/hero/about_hero.png')]">
+          <h1 className="mt-52 text-[52px] mb-52 font-black tracking-widest">
+            Cart List
+          </h1>
         </div>
+        <div className=" px-16 w-full mb-8">
+          <div className="flex justify-between mt-24 items-center relative">
+            <div className="absolute border-b w-full mt-8"></div>
+            <p className="mb-4 pl-8">Product</p>
+            <div className="flex gap-[150px] mb-4 pr-8">
+              <p>Price</p>
+              <p>Quantity</p>
+              <p className="ml-20">Total</p>
+            </div>
+          </div>
+        </div>
+        {products.map((product: Product, idx) => (
+          <CheckoutProductList
+            key={idx}
+            product={product}
+            initialQuantity={productQuantityMap[product.id]}
+            productId={product.id}
+          />
+        ))}
+      </div>
+      {products.length === 0 ? (
+        <p className="h-screen w-full text-[52px] tracking-widest font-black flex justify-center items-center">
+          No Products
+        </p>
       ) : (
-        ""
+        <RemoveAllCheckout />
       )}
-    </>
+    </div>
   );
 }

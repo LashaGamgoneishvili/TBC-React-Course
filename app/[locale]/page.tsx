@@ -1,5 +1,5 @@
-import Header from "../../components/Header";
-import Content from "../../components/Content";
+import Header from "../../components/header/Header";
+import Content from "../../components/mainPage/Content";
 import Footer from "../../components/Footer";
 import { Righteous } from "next/font/google";
 import initTranslations from "../i18n";
