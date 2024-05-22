@@ -42,3 +42,26 @@ export interface SelectedProduct {
   product: Product;
   count: number;
 }
+export interface SelectedProducts {
+  id: number;
+  products: Product;
+  quantity: number;
+}
+
+export type ProductQuantityMap = {
+  [productid: number]: number;
+};
+
+export interface CartItem {
+  id: number;
+  userid: number;
+  productid: number;
+  quantity: number;
+  createdat: string;
+}
+
+export interface Props {
+  product: Product;
+  productId: number;
+  initialQuantity: number;
+}

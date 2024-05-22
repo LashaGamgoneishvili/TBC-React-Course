@@ -1,8 +1,8 @@
-import { getUsers } from "../../../../api";
+import { getUsers } from "../../../api/api";
 import { User } from "../../../../types/types";
-import Button from "../../../../components/Button";
-import AddUser from "../../../../components/AddUser";
-import EditForm from "../../../../components/Edit";
+import Button from "../../../../components/user/Button";
+import AddUser from "../../../../components/user/AddUser";
+import EditForm from "../../../../components/user/Edit";
 
 export default async function UsersPage() {
   const users = await getUsers();
@@ -10,7 +10,7 @@ export default async function UsersPage() {
     <div className=" bg-white w-full flex flex-col">
       <AddUser />
       <div className="px-5 ">
-        {users.rows.map((user: User) => (
+        {users?.rows.map((user: User) => (
           <div
             className="flex justify-between items-center border-b h-10 odd:bg-slate-50   even:bg-white "
             key={user.id}

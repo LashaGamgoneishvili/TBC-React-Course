@@ -15,7 +15,7 @@ export function useLocalStorageState(key: string, initialState?: any) {
   });
 
   useEffect(() => {
-    localStorage.setItem("chart", JSON.stringify(value));
+    localStorage.setItem("cart", JSON.stringify(value));
   }, [value, key]);
 
   return [value, setValue];
