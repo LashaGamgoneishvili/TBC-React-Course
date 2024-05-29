@@ -1,7 +1,6 @@
-import Image from "next/image";
-import { FaUserEdit } from "react-icons/fa";
+// import { FaUserEdit } from "react-icons/fa";
 import AvatarUploadPage from "../../../../components/profile/ProfileUploadComponent";
-import ProfileForm from "../../../../components/profile/profileForm";
+// import ProfileForm from "../../../../components/profile/profileForm";
 import { getSession } from "@auth0/nextjs-auth0";
 import { getUserImage } from "../../../api/api";
 
