@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
-import { compare, genSalt, genSaltSync, hash } from "bcrypt";
-
+import { genSalt, hash } from "bcrypt";
+// compare
+// genSaltSync
 export async function GET() {
   try {
     const password1 = "test";
@@ -11,8 +12,8 @@ export async function GET() {
     // const salt = await genSaltSync(10);
 
     const hashedPassword1 = await hash(password1, salt1);
-    const hashedPassword2 = await hash(password2, salt1);
-
+    const hashedPassword2 = await hash(password2, salt2);
+    console.log(hashedPassword2);
     const salt = hashedPassword1.slice(0, 17);
 
     const NewPassword = "test";

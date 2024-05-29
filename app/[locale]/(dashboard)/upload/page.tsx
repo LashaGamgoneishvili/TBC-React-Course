@@ -35,6 +35,7 @@ export default function AvatarUploadPage() {
           });
 
           const updatedUser = await updateUser.json();
+          console.log(updatedUser);
 
           const newBlob = (await response.json()) as PutBlobResult;
 

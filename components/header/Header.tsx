@@ -1,6 +1,6 @@
 "use server";
 import Link from "next/link";
-import LogautButton from "../auth/logoutbtn";
+// import LogautButton from "../auth/logoutbtn";
 import ThemeSwitch from "./ThemeSwitch";
 import TranslationsProvider from "../TranslationsProvider";
 import LanguageChanger from "../languageChanger";
