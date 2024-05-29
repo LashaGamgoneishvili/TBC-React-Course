@@ -4,7 +4,7 @@ import ThemeSwitch from "../../../components/header/ThemeSwitch";
 import TranslationsProvider from "../../../components/TranslationsProvider";
 import initTranslations from "../../i18n";
 // import { getSession } from "@auth0/nextjs-auth0";
-import Test from "../../../components/test";
+// import Test from "../../../components/test";
 
 interface MainProps {
   params: {
@@ -34,7 +34,7 @@ export default async function LoginPage({ params: { locale } }: MainProps) {
             >
               {t("login:left-button")}
             </button>
-            <Test />
+            {/* <Test /> */}
           </div>
         </div>
         <div className="flex  flex-col h-5/6 gap-20 relative text-black w-4/6 justify-start pt-24 items-start pl-16  dark:text-white">
