@@ -11,7 +11,7 @@ export default function ProductList({ data }: { data: BlogObject }) {
 
   return (
     <>
-      <div className="flex w-full items-center justify-center gap-1 p-2">
+      <div className="flex w-full items-center justify-center  gap-1 p-2">
         <DebounceSearchComponent data={data} setProduct={setProduct} />
       </div>
 

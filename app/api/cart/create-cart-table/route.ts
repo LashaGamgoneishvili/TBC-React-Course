@@ -6,7 +6,7 @@ export const revalidate = 0;
 export async function POST() {
   try {
     const result =
-      await sql`CREATE TABLE cart (userId SERIAL, productId SERIAL, quantity INT);`;
+      await sql`CREATE TABLE cart (userId varchar(255), productId INT, quantity INT);`;
     return NextResponse.json({ result }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });

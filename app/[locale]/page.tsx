@@ -1,14 +1,13 @@
 import Header from "../../components/header/Header";
 import Content from "../../components/mainPage/Content";
 import Footer from "../../components/Footer";
-import { Righteous } from "next/font/google";
 import initTranslations from "../i18n";
 import { BlogObject } from "../../types/types";
+import { Righteous } from "next/font/google";
 
 const righteous = Righteous({
   subsets: ["latin"],
   weight: "400",
-  variable: "--font-righteous",
 });
 
 // export async function fetchHomePageProducts() {
@@ -33,7 +32,7 @@ export default async function Main({ params: { locale } }: MainProps) {
 
   return (
     <div
-      className={`flex h-screen flex-col overflow-hidden  dark:text-[#abb2bf]  dark:bg-[#21252b] font-righteous ${righteous.className}`}
+      className={`flex h-screen flex-col overflow-hidden   dark:text-[#abb2bf]  dark:bg-[#21252b] font-righteous `}
     >
       <Header
         translator={t}
@@ -41,7 +40,7 @@ export default async function Main({ params: { locale } }: MainProps) {
         locale={locale}
         namespaces={i18nNamespace}
       />
-      <Content data={products} />
+      <Content data={products} righteous={righteous} />
       <Footer />
     </div>
   );

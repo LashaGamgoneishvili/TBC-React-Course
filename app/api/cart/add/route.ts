@@ -10,18 +10,18 @@ export async function POST(request: Request) {
   try {
     const existingCartItem = await sql`
             SELECT * FROM cart
-            WHERE userId = ${userId} AND productId = ${productId};
+            WHERE userid = ${userId} AND productid = ${productId};
         `;
 
     if (existingCartItem?.rows.length > 0) {
       var res = await sql`
                 UPDATE cart
                 SET quantity = quantity + 1
-                WHERE userId = ${userId} AND productId = ${productId};
+                WHERE userid = ${userId} AND productid = ${productId};
             `;
     } else {
       var res = await sql`
-                INSERT INTO cart (userId, productId, quantity) 
+                INSERT INTO cart (userid, productid, quantity) 
                 VALUES (${userId}, ${productId}, ${1}) 
             `;
     }

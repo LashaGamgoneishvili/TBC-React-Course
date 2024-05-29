@@ -1,8 +1,10 @@
 import LoginForm from "../../../components/auth/LoginForm";
-import LanguageChanger from "../../../components/LanguageChanger";
+import LanguageChanger from "../../../components/languageChanger";
 import ThemeSwitch from "../../../components/header/ThemeSwitch";
 import TranslationsProvider from "../../../components/TranslationsProvider";
 import initTranslations from "../../i18n";
+// import { getSession } from "@auth0/nextjs-auth0";
+import Test from "../../../components/test";
 
 interface MainProps {
   params: {
@@ -14,7 +16,7 @@ const i18nNamespace = ["login"];
 
 export default async function LoginPage({ params: { locale } }: MainProps) {
   const { t, resources } = await initTranslations(locale, i18nNamespace);
-
+  // const user = await getSession();
   return (
     <TranslationsProvider
       resources={resources}
@@ -32,6 +34,7 @@ export default async function LoginPage({ params: { locale } }: MainProps) {
             >
               {t("login:left-button")}
             </button>
+            <Test />
           </div>
         </div>
         <div className="flex  flex-col h-5/6 gap-20 relative text-black w-4/6 justify-start pt-24 items-start pl-16  dark:text-white">

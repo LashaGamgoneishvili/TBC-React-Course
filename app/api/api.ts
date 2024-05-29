@@ -1,4 +1,5 @@
 import { revalidatePath } from "next/cache";
+import { getSession } from "@auth0/nextjs-auth0";
 
 const VERCEL_ENV = process.env.VERCEL_ENV;
 
@@ -9,10 +10,7 @@ export const BASE_URL =
 
 export async function getUsers() {
   try {
-    // If revalidatePath is a valid function, it should be used correctly
-    // Assuming it's from some framework context
     revalidatePath(`${BASE_URL}/admin`);
-    console.log(BASE_URL);
     const response = await fetch(`${BASE_URL}/api/user-api/get-users`, {
       cache: "no-store",
     });
@@ -29,11 +27,17 @@ export async function getUsers() {
   }
 }
 
-export async function createUser(name: string, email: string, age: string) {
+export async function createUser(
+  id: string,
+  name: string,
+  lastName: string,
+  email: string,
+  image: string
+) {
   revalidatePath(`${BASE_URL}/admin`);
   return await fetch(`${BASE_URL}/api/user-api/create-user`, {
     method: "POST",
-    body: JSON.stringify({ name, email, age }),
+    body: JSON.stringify({ id, name, lastName, email, image }),
   });
 }
 export async function updateUser(
@@ -95,12 +99,39 @@ export async function decrementCart(userId: number, productId: number) {
 }
 
 export async function getCart(userId: string) {
-  // console.log(`${BASE_URL}/api/cart/getAllcart/${userId}`);
   revalidatePath(`${BASE_URL}/checkout`);
-
+  console.log("getcartID-userId", userId);
   const response = await fetch(`${BASE_URL}/api/cart/getAllcart/${userId}`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });
   return response;
+}
+
+export async function getUserImage() {
+  const session = await getSession();
+  const user = session?.user;
+  const id = user?.sub;
+  const userImage = await fetch(
+    `${BASE_URL}/api/user-api/get-user-image/${id}`,
+    {
+      cache: "no-store",
+    }
+  );
+  const userImageInfo = await userImage.json();
+  const imageUrl = userImageInfo.userImage?.rows[0].image;
+
+  return imageUrl;
+}
+
+export async function getUserId() {
+  const session = await getSession();
+  const user = session?.user;
+  const id = user?.sub;
+  const userSubId = await fetch(`${BASE_URL}/api/user-api/getId/${id}`, {
+    cache: "no-store",
+  });
+  const userSerialId = await userSubId.json();
+  const userId = userSerialId.usersId;
+  return userId;
 }

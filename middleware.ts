@@ -11,12 +11,12 @@ export function middleware(request: NextRequest) {
   const cookieStore = cookies();
   const cookie = cookieStore.get(AUTH_COOKIE_KEY);
 
-  if (!cookie && url !== "/login") {
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
-  if (cookie && url === "/login") {
-    return NextResponse.redirect(new URL("/", request.url));
-  }
+  // if (!cookie && url !== "/login") {
+  //   return NextResponse.redirect(new URL("/login", request.url));
+  // }
+  // if (cookie && url === "/login") {
+  //   return NextResponse.redirect(new URL("/", request.url));
+  // }
 
   return i18nRouter(request, i18nConfig);
 }

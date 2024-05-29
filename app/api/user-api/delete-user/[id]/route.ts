@@ -6,10 +6,9 @@ export async function DELETE(request: NextRequest) {
   const id = request.nextUrl.pathname
     .replace("/api/user-api/delete-user/", "")
     .trim();
-  console.log(id);
   try {
     if (!id) throw new Error("ID is required");
-    await sql`DELETE FROM users WHERE id = ${Number(id)};`;
+    await sql`DELETE FROM users WHERE id = ${id};`;
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
   }

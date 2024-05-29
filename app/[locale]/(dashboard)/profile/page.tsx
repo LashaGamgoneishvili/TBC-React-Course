@@ -1,56 +1,117 @@
-"use client";
-import { useState } from "react";
-import logo from "../../../../public/Assets/2815428.png";
 import Image from "next/image";
-import { Person } from "../../../../types/types";
+import { FaUserEdit } from "react-icons/fa";
+import AvatarUploadPage from "../../../../components/profile/ProfileUploadComponent";
+import ProfileForm from "../../../../components/profile/profileForm";
+import { getSession } from "@auth0/nextjs-auth0";
+import { getUserImage } from "../../../api/api";
 
-const person: Person[] = [
-  {
-    name: "Lasha",
-    surname: "Gamgoneishvili",
-    mail: "Gamgoneishvili@gmail.com",
-  },
-];
+export default async function Profile() {
+  const session = await getSession();
+  const user = session?.user;
+  const userImage = await getUserImage();
 
-export default function Profile() {
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPass, setConfirmPass] = useState("");
+  // if (isLoading) return <div>Loading...</div>;
+  // if (error) return <div>{error.message}</div>;
 
-  return (
-    <>
-      <div className="mb-5 mt-10 flex items-center justify-center gap-6">
-        <div className="rounded-[50%] bg-[#f5f5dc] p-8">
-          <Image src={logo} alt="Person-logo" width={150} height={150} />
+  if (user?.email_verified && user) {
+    return (
+      <main className="bg-white dark:bg-slate-900">
+        <div className="flex items-center justify-center py-10">
+          <h1 className="inline-block border-b-2 pb-2 text-blue-500 font-bold dark:text-white text-3xl ">
+            Profile
+          </h1>
         </div>
-        {person.map((person, index) => {
-          return (
-            <ul key={index} className="p-5">
-              <li>{person.name}</li>
-              <li>{person.surname}</li>
-              <li>{person.mail}</li>
-            </ul>
-          );
-        })}
-        <form className="flex flex-col items-center justify-start gap-4 p-5">
-          <input
-            type="password"
-            placeholder="New Password"
-            className="rounded-lg border-2  px-5 py-2"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Confirm New Password"
-            className=" rounded-lg border-2 px-5 py-2 "
-            value={confirmPass}
-            onChange={(e) => setConfirmPass(e.target.value)}
-          />
-          <button className=" rounded-lg border-2  px-10 py-1  text-black transition-all duration-300 ease-in-out hover:border-black  ">
-            Save
-          </button>
-        </form>
-      </div>
-    </>
-  );
+        <div className="px-[4%] pb-24 flex justify-center sm:flex-col  items-center gap-20 md:gap-12">
+          <div className="flex flex-col gap-3 justify-center items-center">
+            <AvatarUploadPage userImage={userImage} />
+          </div>
+          <div className="flex flex-col justify-center gap-8">
+            <div className="flex border border-blue-500 p-4 xs:p-2 rounded-lg gap-8 xs:gap-3 shadow-lg bg-white items-baseline">
+              <div className="flex flex-1 justify-center items-center"></div>
+              <div className="font-bold text-blue-500">
+                {user?.nickname && (
+                  <h3 className="text-xl  leading-6 h-8">Username</h3>
+                )}
+                {user?.family_name && (
+                  <h3 className="text-xl  leading-6 h-8">Name</h3>
+                )}
+                {user?.given_name && (
+                  <h3 className="text-xl  leading-6 h-8">Surname</h3>
+                )}
+                {user?.email && (
+                  <h3 className="text-xl leading-6 h-8">Email</h3>
+                )}
+              </div>
+              <div className="text-gray-700">
+                {user?.nickname && (
+                  <p className="text-lg leading-6 h-8">{user?.nickname}</p>
+                )}
+                {user?.given_name && (
+                  <p className="text-lg leading-6 h-8">{user.given_name}</p>
+                )}
+                {user?.family_name && (
+                  <p className="text-lg leading-6 h-8">{user.family_name}</p>
+                )}
+                {user?.email && (
+                  <p className="text-lg leading-6 h-8">{user.email}</p>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
+  if (!user?.email_verified && user) {
+    return (
+      <main className="bg-white dark:bg-slate-900">
+        <div className="flex items-center justify-center py-10">
+          <h1 className="inline-block border-b-2 pb-2 text-blue-500 font-bold dark:text-white text-3xl ">
+            Profile
+          </h1>
+        </div>
+        <div className="px-[4%] pb-24 flex justify-center items-center sm:flex-col gap-20 md:gap-12">
+          <div className="flex flex-col gap-3 justify-center items-center">
+            <AvatarUploadPage userImage={userImage} />
+          </div>
+          <div className="flex flex-col justify-center gap-8">
+            <div className="flex border border-blue-500 p-4 xs:p-2 rounded-lg gap-8 xs:gap-3 shadow-lg bg-white items-baseline">
+              <div className="flex flex-1 justify-center items-center"></div>
+              <div className="font-bold text-blue-500">
+                {user?.nickname && (
+                  <h3 className="text-xl  leading-6 h-8">Username</h3>
+                )}
+                {user?.family_name && (
+                  <h3 className="text-xl  leading-6 h-8">Name</h3>
+                )}
+                {user?.given_name && (
+                  <h3 className="text-xl  leading-6 h-8">Surname</h3>
+                )}
+                {user?.email && (
+                  <h3 className="text-xl leading-6 h-8">Email</h3>
+                )}
+              </div>
+              <div className="text-gray-700">
+                {user?.nickname && (
+                  <p className="text-lg leading-6 h-8">{user?.nickname}</p>
+                )}
+                {user?.given_name && (
+                  <p className="text-lg leading-6 h-8">{user.given_name}</p>
+                )}
+                {user?.family_name && (
+                  <p className="text-lg leading-6 h-8">{user.family_name}</p>
+                )}
+                {user?.email && (
+                  <p className="text-lg leading-6 h-8">{user.email}</p>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
+  return <h1 className="text-3xl">No Profile Info</h1>;
 }
