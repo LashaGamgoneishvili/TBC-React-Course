@@ -20,11 +20,9 @@ export default function SortButton({
           (product = product?.toSorted((a, b) => b.rating - a.rating))
       );
       setSorted((sort) => !sort);
-      console.log(sorted);
     } else {
       setProduct(data.products);
       setSorted((sort) => !sort);
-      console.log("else:", sorted);
     }
   }
   return (

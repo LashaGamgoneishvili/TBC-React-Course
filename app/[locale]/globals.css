@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Madimi+One&family=Righteous&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Madimi+One&family=Righteous&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap"); */
 
 @tailwind base;
 @tailwind components;
@@ -10,5 +10,21 @@
   input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
+  }
+  :root {
+    --background: 102 65 169;
+    --foreground: 255 255 255;
+
+    --primary: 102 65 169;
+    --primary-foreground: 255 255 255;
+
+    --secondary: 196 26 105;
+    --primary-foreground: 255 255 255;
+
+    --muted: 59 7 100;
+    --mute-foreground: 255 255 255;
+
+    --accent: 88 202 155;
+    --accent-foreground: 255 255 255;
   }
 }

@@ -10,6 +10,21 @@ const nextConfig = {
         hostname: "cdn.dummyjson.com",
         pathname: "**",
       },
+      {
+        protocol: "https",
+        hostname: "ajy8khmx9vtvyckn.public.blob.vercel-storage.com",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "s.gravatar.com",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+        pathname: "**",
+      },
     ],
   },
 };
