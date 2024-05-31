@@ -20,7 +20,7 @@ export default function Chart() {
     <div className="text-xl relative">
       <Link href="/checkout">
         <span className="absolute text-xs -top-4 right-[5px] text-red-700">
-          {state ? state : ""}
+          {state ? state : 0}
         </span>
         <MdOutlineShoppingCart suppressHydrationWarning />
       </Link>

@@ -25,6 +25,16 @@ const nextConfig = {
         hostname: "lh3.googleusercontent.com",
         pathname: "**",
       },
+      {
+        protocol: "https",
+        hostname: "t3.ftcdn.net",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "mygemma.com",
+        pathname: "**",
+      },
     ],
   },
 };

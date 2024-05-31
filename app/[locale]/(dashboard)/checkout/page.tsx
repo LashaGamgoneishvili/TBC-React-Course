@@ -1,45 +1,49 @@
 import RemoveAllCheckout from "../../../../components/checkout/RemoveAllCeckout";
-import { ProductQuantityMap, CartItem, Product } from "../../../../types/types";
+import { CheckoutObject } from "../../../../types/types";
 import { getAllCartProduct } from "../../../../actions";
 import CheckoutProductList from "../../../../components/checkout/CheckoutProductList";
 
-async function productFetch() {
-  const cartItems = await getAllCartProduct();
+// async function productFetch() {
+//   const cartItems = await getAllCartProduct();
+//   console.log("cartItems", cartItems);
+//   // Initialize an empty object for productQuantityMap
+//   const productQuantityMap: ProductQuantityMap = {};
 
-  // Initialize an empty object for productQuantityMap
-  const productQuantityMap: ProductQuantityMap = {};
+//   // Ensure cartItems.rows is defined before proceeding
+//   if (cartItems?.rows) {
+//     cartItems.rows.forEach((item: CartItem) => {
+//       productQuantityMap[item.productid] = item.quantity;
+//     });
 
-  // Ensure cartItems.rows is defined before proceeding
-  if (cartItems?.rows) {
-    cartItems.rows.forEach((item: CartItem) => {
-      productQuantityMap[item.productid] = item.quantity;
-    });
+//     const productPromises = cartItems.rows.map((item: CartItem) =>
+//       fetch(`https://dummyjson.com/products/${item.productid}`, {
+//         cache: "force-cache",
+//       }).then((res) => res.json() as Promise<Product>)
+//     );
 
-    const productPromises = cartItems.rows.map((item: CartItem) =>
-      fetch(`https://dummyjson.com/products/${item.productid}`, {
-        cache: "force-cache",
-      }).then((res) => res.json() as Promise<Product>)
-    );
+//     const products: Product[] = (await Promise.all(productPromises)).sort(
+//       (a, b) => a.id - b.id
+//     );
 
-    const products: Product[] = (await Promise.all(productPromises)).sort(
-      (a, b) => a.id - b.id
-    );
+//     return {
+//       products,
+//       productQuantityMap,
+//     };
+//   }
 
-    return {
-      products,
-      productQuantityMap,
-    };
-  }
-
-  // Return empty values if cartItems.rows is undefined
-  return {
-    products: [],
-    productQuantityMap,
-  };
-}
+//   // Return empty values if cartItems.rows is undefined
+//   return {
+//     products: [],
+//     productQuantityMap,
+//   };
+// }
 
 export default async function CheckOut() {
-  const { productQuantityMap, products } = await productFetch();
+  // const { productQuantityMap, products } = await productFetch();
+  const cartItems = await getAllCartProduct();
+  const products = cartItems.rows;
+  console.log("products-CheckOutPage", products);
+
   return (
     <div className="w-full mx-auto flex flex-col items-center ">
       <div className="w-full h-auto">
@@ -54,11 +58,11 @@ export default async function CheckOut() {
             </div>
           </div>
         </div>
-        {products.map((product: Product, idx) => (
+        {products.map((product: CheckoutObject, idx: number) => (
           <CheckoutProductList
             key={idx}
             product={product}
-            initialQuantity={productQuantityMap[product.id]}
+            initialQuantity={product.quantity}
             productId={product.id}
           />
         ))}

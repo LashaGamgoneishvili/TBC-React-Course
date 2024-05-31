@@ -17,6 +17,20 @@ export default function SectionPage() {
     root.style.setProperty("--primary", color);
 
     animate(primary, color, { duration: 0.7 });
+
+    const id = "google-oauth2/10198811516535153500";
+    const startIndex = id.indexOf("/") + 1; // Find the position after the '/'
+    const extractedPart = id.substring(startIndex, startIndex + 6); // Extract the next 6 characters
+    const lastFiveCharacters = id.slice(-5);
+    console.log(lastFiveCharacters);
+    console.log(extractedPart); // Output: "101988"
+
+    const authId = "auth0166570248b1fb2d3be86cad47";
+    const prefix = "auth0";
+    const resultString = authId.startsWith(prefix)
+      ? authId.slice(prefix.length, prefix.length + 6)
+      : id;
+    console.log(resultString);
   }
   return (
     <motion.section className="min-h-screen py-24" style={{ background }}>

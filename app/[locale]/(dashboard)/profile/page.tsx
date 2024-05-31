@@ -78,6 +78,7 @@ export default async function Profile() {
             <div className="flex border border-blue-500 p-4 xs:p-2 rounded-lg gap-8 xs:gap-3 shadow-lg bg-white items-baseline">
               <div className="flex flex-1 justify-center items-center"></div>
               <div className="font-bold text-blue-500">
+                <div className=""></div>
                 {user?.nickname && (
                   <h3 className="text-xl  leading-6 h-8">Username</h3>
                 )}

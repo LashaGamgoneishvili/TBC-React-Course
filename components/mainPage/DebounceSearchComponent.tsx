@@ -24,7 +24,7 @@ export default function DebounceSearchComponent({ data, setProduct }: Types) {
     getData();
   }, []);
 
-  useEffect(() => {}, [inputValue, debounceData, data, setProduct]);
+  // useEffect(() => {}, [inputValue, debounceData, data, setProduct]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value.toUpperCase());

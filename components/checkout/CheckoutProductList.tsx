@@ -12,10 +12,10 @@ export default function CartItem({
   initialQuantity,
   productId,
 }: Props) {
+  const [quantity, setQuantity] = useState(0);
   useEffect(() => {
     setQuantity(initialQuantity);
   }, [initialQuantity]);
-  const [quantity, setQuantity] = useState(0);
   return (
     <>
       <div
@@ -29,7 +29,7 @@ export default function CartItem({
                 className=" rounded-md mb-[25px] cursor-pointer hover"
                 width={200}
                 height={200}
-                src={product.thumbnail}
+                src={product.image}
                 alt="prodcut"
               />
             </Link>

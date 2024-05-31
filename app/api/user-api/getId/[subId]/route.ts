@@ -9,7 +9,10 @@ export async function GET(
   { params: { subId } }: { params: { subId: string } }
 ) {
   try {
-    const users = await sql`SELECT id FROM users WHERE id = ${subId}`;
+    const lastFiveCharacters = subId.slice(-5);
+
+    const users =
+      await sql`SELECT id FROM users WHERE id = ${lastFiveCharacters}`;
     const usersId = users.rows[0].id;
     return NextResponse.json({ usersId }, { status: 200 });
   } catch (error) {

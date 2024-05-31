@@ -84,10 +84,6 @@ export async function getAllCartProduct() {
 
 export async function cartCount() {
   "use server";
-  // const Cookiestore = cookies();
-  // const cookie = Cookiestore.get("user")?.value;
-  // const userId = JSON.parse(cookie ?? "");
-  // const userId = user.responseUser.id;
   const session = await getSession();
   const user = session?.user;
   const id = user?.sub;

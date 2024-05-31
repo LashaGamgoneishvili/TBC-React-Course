@@ -36,11 +36,16 @@ export async function GET(_: NextRequest) {
       const email = sessionUser?.email;
       const image = sessionUser?.picture;
 
-      const user = await sql`SELECT * FROM users WHERE id = ${id}`;
+      // const startIndex = id.indexOf("/") + 1; // Find the position after the '/'
+      // const numberId = id.substring(startIndex, startIndex + 6); // Extract the next 6 characters
+      const lastFiveCharacters = id.slice(-5);
+
+      const user =
+        await sql`SELECT * FROM users WHERE id = ${lastFiveCharacters}`;
 
       console.log(user.rows);
-      if (!user.rows.length && user.rows[0].id !== id)
-        await sql`INSERT INTO users (id ,name, lastname, email, image) VALUES ( ${id},${name}, ${lastName}, ${email}, ${image});`;
+      if (!user.rows.length && user.rows[0].id !== lastFiveCharacters)
+        await sql`INSERT INTO users (id ,name, lastname, email, image) VALUES ( ${lastFiveCharacters},${name}, ${lastName}, ${email}, ${image});`;
 
       // const users = await sql`SELECT id FROM users ORDER BY id DESC LIMIT 1;`;
       // const userId = users.rows[0].id;
@@ -58,10 +63,18 @@ export async function GET(_: NextRequest) {
       const email = sessionUser?.email;
       const image = sessionUser?.picture;
 
-      const user = await sql`SELECT * FROM users WHERE id = ${id}`;
+      // const prefix = "auth0";
+      // const resultString = id.startsWith(prefix)
+      //   ? id.slice(prefix.length, prefix.length + 6)
+      //   : id;
+
+      const lastFiveCharacters = id.slice(-5);
+
+      const user =
+        await sql`SELECT * FROM users WHERE id = ${lastFiveCharacters}`;
 
       if (!user.rows.length)
-        await sql`INSERT INTO users (id ,name, lastname, email, image) VALUES ( ${id},${name}, ${lastName}, ${email}, ${image});`;
+        await sql`INSERT INTO users (id ,name, lastname, email, image) VALUES ( ${lastFiveCharacters},${name}, ${lastName}, ${email}, ${image});`;
 
       //   const users = await sql`SELECT id FROM users ORDER BY id DESC LIMIT 1;`;
       //   const userId = users.rows[0].id;

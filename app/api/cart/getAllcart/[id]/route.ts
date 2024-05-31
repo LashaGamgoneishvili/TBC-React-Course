@@ -8,12 +8,23 @@ export async function GET(
   { params: { id } }: { params: { id: string } }
 ) {
   try {
+    const lastFiveCharacters = id.slice(-5);
     console.log("GettAllCartID", id);
     const result = await sql`
-      SELECT * FROM cart WHERE userid = ${id}; 
+    SELECT cart.quantity ,  products.id AS id,
+    products.title ,
+    products.description,
+    products.price,
+    products.discount,
+    products.image
+    FROM cart 
+    JOIN products ON cart.product_id = products.id
+    WHERE cart.user_id = ${lastFiveCharacters};
     `;
 
     const rows = result.rows;
+
+    console.log("rows", rows);
     return NextResponse.json({ rows }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });

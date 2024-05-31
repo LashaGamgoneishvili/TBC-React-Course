@@ -8,8 +8,12 @@ export async function DELETE(
   { params }: { params: { userId: string } }
 ) {
   const userId = params.userId;
+  const lastFiveCharacters = userId.slice(-5);
+
   try {
-    const res = await sql`DELETE FROM cart WHERE userId = ${Number(userId)};`;
+    const res = await sql`DELETE FROM cart WHERE user_Id = ${Number(
+      lastFiveCharacters
+    )};`;
     return NextResponse.json({ res }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
