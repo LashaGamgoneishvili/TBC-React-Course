@@ -1,5 +1,6 @@
 //Products page
 export interface Product {
+  quantity?: number;
   id: number;
   title: string;
   description: string;
@@ -10,7 +11,36 @@ export interface Product {
   brand: string;
   category: string;
   thumbnail: string;
+  image?: string;
   images: string[];
+}
+export interface CeckoutPageProduct {
+  quantity: number;
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  discountPercentage: number;
+  rating: number;
+  stock: number;
+  brand: string;
+  category: string;
+  image: string;
+}
+
+export interface CheckoutObject {
+  product: CeckoutPageProduct[];
+  quantity: number;
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  discountPercentage: number;
+  rating: number;
+  stock: number;
+  brand: string;
+  category: string;
+  image: string;
 }
 
 export interface BlogObject {
@@ -61,7 +91,11 @@ export interface CartItem {
 }
 
 export interface Props {
-  product: Product;
+  product: CeckoutPageProduct;
   productId: number;
   initialQuantity: number;
+}
+
+export interface Righteous {
+  className: string;
 }

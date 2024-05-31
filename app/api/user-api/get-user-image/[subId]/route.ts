@@ -8,7 +8,10 @@ export async function GET(
   { params: { subId } }: { params: { subId: string } }
 ) {
   try {
-    const userImage = await sql`SELECT image FROM users WHERE id = ${subId}`;
+    const lastFiveCharacters = subId.slice(-5);
+
+    const userImage =
+      await sql`SELECT image FROM users WHERE id = ${lastFiveCharacters}`;
     return NextResponse.json({ userImage }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
