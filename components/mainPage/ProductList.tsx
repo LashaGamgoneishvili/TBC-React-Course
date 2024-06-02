@@ -4,11 +4,28 @@ import DebounceSearchComponent from "./DebounceSearchComponent";
 import Link from "next/link";
 import Image from "next/image";
 import AddChartButton from "./AddChartButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function ProductList({ data }: { data: BlogObject }) {
+export default function ProductList({
+  searchParams,
+  data,
+}: {
+  searchParams?: {
+    query: string;
+    page: string;
+  };
+  data: BlogObject;
+}) {
   const [product, setProduct] = useState(data.products);
 
+  const query = searchParams?.query || "";
+
+  useEffect(() => {
+    const searchedProduct = data.products.filter((product) =>
+      product.title.toUpperCase().startsWith(query.toUpperCase())
+    );
+    setProduct(searchedProduct);
+  }, [query, data.products]);
   return (
     <>
       <div className="flex w-full items-center justify-center  gap-1 p-2">

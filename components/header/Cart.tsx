@@ -9,11 +9,11 @@ export default function Chart() {
   const { state, setState } = useAppContext();
 
   useEffect(() => {
-    async function getcart() {
+    async function getCart() {
       const count = await cartCount();
       setState(count);
     }
-    getcart();
+    getCart();
   }, [setState]);
 
   return (

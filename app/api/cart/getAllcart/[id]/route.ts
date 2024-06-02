@@ -9,7 +9,6 @@ export async function GET(
 ) {
   try {
     const lastFiveCharacters = id.slice(-5);
-    console.log("GettAllCartID", id);
     const result = await sql`
     SELECT cart.quantity ,  products.id AS id,
     products.title ,
@@ -23,8 +22,10 @@ export async function GET(
     `;
 
     const rows = result.rows;
+    if (!rows) {
+      return NextResponse.json({}, { status: 200 });
+    }
 
-    console.log("rows", rows);
     return NextResponse.json({ rows }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });

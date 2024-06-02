@@ -26,7 +26,7 @@ export default function AvatarUploadPage() {
             method: "POST",
             body: file,
           });
-          const updateUser = await fetch(`/api/update-user-profile`, {
+          const updateUser = await fetch(`/api/user-api/update-user-profile`, {
             method: "POST",
             body: JSON.stringify({
               blobUrl: blob?.url,

@@ -6,13 +6,14 @@ export default function SortButton({
   setProduct,
   product,
   data,
+  query,
 }: {
   setProduct: React.Dispatch<React.SetStateAction<Product[] | undefined>>;
   product: Product[] | undefined;
   data: BlogObject;
+  query: string | undefined;
 }) {
   const [sorted, setSorted] = useState(true);
-
   function handleSort() {
     if (sorted && product) {
       setProduct(
@@ -21,7 +22,14 @@ export default function SortButton({
       );
       setSorted((sort) => !sort);
     } else {
-      setProduct(data.products);
+      {
+        query
+          ? setProduct(
+              (product) =>
+                (product = product?.toSorted((a, b) => a.rating - b.rating))
+            )
+          : setProduct(data.products);
+      }
       setSorted((sort) => !sort);
     }
   }
