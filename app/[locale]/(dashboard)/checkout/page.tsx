@@ -42,7 +42,6 @@ export default async function CheckOut() {
   // const { productQuantityMap, products } = await productFetch();
   const cartItems = await getAllCartProduct();
   const products = cartItems.rows;
-  console.log("products-CheckOutPage", products);
 
   return (
     <div className="w-full mx-auto flex flex-col items-center ">

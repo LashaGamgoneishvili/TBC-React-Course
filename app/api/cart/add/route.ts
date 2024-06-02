@@ -7,8 +7,6 @@ export async function POST(request: Request) {
   const body: { userId: number; productId: number } = await request.json();
   const { userId, productId } = body;
   const lastFiveCharacters = `${userId}`.slice(-5);
-  console.log("lastFiveCharacters", lastFiveCharacters);
-  console.log("productId", productId);
 
   try {
     const existingCartItem = await sql`
@@ -25,10 +23,10 @@ export async function POST(request: Request) {
     } else {
       var res = await sql`
                 INSERT INTO cart (user_id, product_id, quantity) 
-                VALUES (${lastFiveCharacters}, ${productId}, ${1}) 
+                VALUES (${lastFiveCharacters}, ${productId},  ${1})
             `;
     }
-    return NextResponse.json(res, { status: 201 });
+    return NextResponse.json(res, { status: 200 });
   } catch (error) {
     console.log(error);
     return NextResponse.json(

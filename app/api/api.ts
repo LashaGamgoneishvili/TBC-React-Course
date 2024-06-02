@@ -100,7 +100,6 @@ export async function decrementCart(userId: number, productId: number) {
 
 export async function getCart(userId: string) {
   revalidatePath(`${BASE_URL}/checkout`);
-  console.log("getcartID-userId", userId);
   const response = await fetch(`${BASE_URL}/api/cart/getAllcart/${userId}`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },

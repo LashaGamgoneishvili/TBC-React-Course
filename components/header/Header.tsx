@@ -3,7 +3,7 @@ import Link from "next/link";
 // import LogautButton from "../auth/logoutbtn";
 import ThemeSwitch from "./ThemeSwitch";
 import TranslationsProvider from "../TranslationsProvider";
-import LanguageChanger from "../languageChanger";
+import LanguageChanger from "../LanguageChanger";
 import { CiSearch } from "react-icons/ci";
 import { GoPerson } from "react-icons/go";
 import { HeaderProps } from "../../types/types";

@@ -22,9 +22,16 @@ interface MainProps {
   params: {
     locale: string | undefined;
   };
+  searchParams?: {
+    query: string;
+    page: string;
+  };
 }
 
-export default async function Main({ params: { locale } }: MainProps) {
+export default async function Main({
+  params: { locale },
+  searchParams,
+}: MainProps) {
   const { t, resources } = await initTranslations(locale, i18nNamespace);
   // const products = await fetchHomePageProducts();
   const response = await fetch("https://dummyjson.com/products");
@@ -40,7 +47,11 @@ export default async function Main({ params: { locale } }: MainProps) {
         locale={locale}
         namespaces={i18nNamespace}
       />
-      <Content data={products} righteous={righteous} />
+      <Content
+        data={products}
+        righteous={righteous}
+        searchParams={searchParams}
+      />
       <Footer />
     </div>
   );
