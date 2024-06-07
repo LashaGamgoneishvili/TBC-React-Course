@@ -1,0 +1,56 @@
+window.chatwootSettings = {
+    useBrowserLanguage: true,
+    launcherTitle: "Chat with us",
+    darkMode: "light",
+    type: "standard",
+    bubbleStyle: "1",
+    widgetCss: ".woot--bubble-holder .woot-widget-bubble svg{width:32px;height:32px;margin:15px;}.woot-widget-bubble.woot-elements--right{right:10px;}",
+    disablePortal:"1",
+};
+(function (d, t) {
+    var BASE_URL = "https://livechat.aoscdn.com";
+    var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+    g.src = BASE_URL + "/packs/js/sdk.js";
+    g.defer = true;
+    g.async = true;
+    s.parentNode.insertBefore(g, s);
+    g.onload = function () {
+        window.chatwootSDK.run({
+            websiteToken: '68WvoDvxrzFJ5e6QB5JexZgj',
+            baseUrl: BASE_URL
+        })
+    }
+})(document, "script");
+
+window.addEventListener("chatwoot:on-start-conversation", function () {
+    let passport = localStorage.getItem("passport_user_info");
+    if (passport) {
+        passport = JSON.parse(passport);
+        if (!passport || passport.user_id === 0) {
+            return
+        }
+        let domain = window.location.host;
+
+        let identities = [passport.user_id];
+        if (passport.telephone) {
+            identities.push(passport.telephone);
+        }
+        if (passport.email) {
+            identities.push(passport.email);
+        }
+        let identity = identities.join("-");
+
+        window.$chatwoot.setUser(identity, {
+            name: passport.nickname,
+            phone_number: passport.telephone,
+            email: passport.email,
+            identifier: passport.user_id,
+            avatar_url: passport.avatar,
+            custom_attributes: {
+                userId: passport.user_id,
+                licenseType: passport.license_type,
+                source: domain,
+            }
+        });
+    }
+});

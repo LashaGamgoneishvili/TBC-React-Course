@@ -35,6 +35,11 @@ const nextConfig = {
         hostname: "mygemma.com",
         pathname: "**",
       },
+      {
+        protocol: "https",
+        hostname: "preview.colorlib.com",
+        pathname: "**",
+      },
     ],
   },
 };

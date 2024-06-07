@@ -3,8 +3,13 @@ import { User } from "../../../../types/types";
 import Button from "../../../../components/user/Button";
 import AddUser from "../../../../components/user/AddUser";
 import EditForm from "../../../../components/user/Edit";
+import { getSession } from "@auth0/nextjs-auth0";
 
 export default async function UsersPage() {
+  const session = await getSession();
+  const user = session?.user;
+  const userId = user?.sub;
+  const id = userId.slice(-5);
   const users = await getUsers();
   return (
     <div className=" bg-white w-full flex flex-col">
@@ -22,7 +27,7 @@ export default async function UsersPage() {
             </div>
             <div className="flex items-center gap-8 ">
               <EditForm user={user} />
-              <Button id={user.id} />
+              <Button id={id} />
             </div>
           </div>
         ))}

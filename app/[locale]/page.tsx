@@ -38,9 +38,7 @@ export default async function Main({
   const products: BlogObject = await response.json();
 
   return (
-    <div
-      className={`flex h-screen flex-col overflow-hidden   dark:text-[#abb2bf]  dark:bg-[#21252b] font-righteous `}
-    >
+    <div className="flex flex-col  dark:text-[#abb2bf]  dark:bg-[#21252b] font-righteous">
       <Header
         translator={t}
         resources={resources}
