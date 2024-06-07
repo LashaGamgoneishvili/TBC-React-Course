@@ -1,5 +1,11 @@
 "use server";
-import { BASE_URL, createUser, deleteUser, updateUser } from "./app/api/api";
+import {
+  BASE_URL,
+  createUser,
+  deleteUser,
+  getUser,
+  updateUser,
+} from "./app/api/api";
 // import { cookies } from "next/headers";
 import { addCart } from "./app/api/api";
 import { getCart } from "./app/api/api";
@@ -20,44 +26,25 @@ export async function createUserAction() {
   const session = await getSession();
   const user = session?.user;
   if (user?.email_verified) {
-    const id = user?.sub;
-    const name = user?.given_name;
-    const lastName = user?.family_name;
-    const email = user?.email;
-    const image = user?.picture;
-    createUser(
-      id as string,
-      name as string,
-      lastName as string,
-      email as string,
-      image as string
-    );
+    createUser();
   } else {
-    const id = user?.sub;
-    const name = "There is no Name";
-    const lastName = "There is no lastName";
-    const email = user?.email;
-    const image = user?.picture;
-    createUser(
-      id as string,
-      name as string,
-      lastName as string,
-      email as string,
-      image as string
-    );
+    createUser();
   }
 }
 
 export async function updateUserAction(formData: FormData) {
   const name = formData.get("name");
   const email = formData.get("email");
-  const age = formData.get("age");
-  const id = formData.get("id");
+  const lastName = formData.get("lastName");
+  const session = await getSession();
+  const user = session?.user;
+  const userId = user?.sub;
+  const id = userId.slice(-5);
 
-  updateUser(name as string, email as string, age as string, id as string);
+  updateUser(name as string, lastName as string, email as string, id as string);
 }
 
-export async function deleteUserAction(id: number) {
+export async function deleteUserAction(id: string) {
   await deleteUser(id);
 }
 
@@ -163,4 +150,13 @@ export async function deleteSingleCartItem(productId: number) {
   const userId = await getUserId();
   await singleDelete(userId, productId);
   revalidatePath(`${BASE_URL}/checkout`);
+}
+
+export async function getUserAction() {
+  const session = await getSession();
+  const user = session?.user;
+  const userId = user?.sub;
+  const id = userId.slice(-5);
+  const userData = await getUser(id);
+  return userData;
 }

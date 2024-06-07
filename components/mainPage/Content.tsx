@@ -1,5 +1,6 @@
 import { BlogObject, Righteous } from "../../types/types";
 import ProductList from "../mainPage/ProductList";
+import Landing from "./Landing";
 
 export default function Content({
   data,
@@ -15,8 +16,9 @@ export default function Content({
 }) {
   return (
     <section
-      className={`flex flex-col justify-around gap-4 bg-[#f0f0f2] dark:bg-[#21252b] overflow-x-hidden overflow-y-auto ${righteous.className}`}
+      className={`flex flex-col justify-around gap-8 bg-[#f0f0f2] dark:bg-[#21252b] overflow-x-hidden  ${righteous.className}`}
     >
+      <Landing />
       <ProductList data={data} searchParams={searchParams} />
     </section>
   );

@@ -1,7 +1,7 @@
 "use client";
 import { deleteUserAction } from "../../actions";
 
-export default function Button({ id }: { id: number }) {
+export default function Button({ id }: { id: string }) {
   return (
     <button
       onClick={() => {

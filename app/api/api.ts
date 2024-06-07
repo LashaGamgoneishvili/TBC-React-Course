@@ -27,33 +27,24 @@ export async function getUsers() {
   }
 }
 
-export async function createUser(
-  id: string,
-  name: string,
-  lastName: string,
-  email: string,
-  image: string
-) {
+export async function createUser() {
   revalidatePath(`${BASE_URL}/admin`);
-  return await fetch(`${BASE_URL}/api/user-api/create-user`, {
-    method: "POST",
-    body: JSON.stringify({ id, name, lastName, email, image }),
-  });
+  return await fetch(`${BASE_URL}/api/user-api/create-user`);
 }
 export async function updateUser(
   name: string,
+  lastName: string,
   email: string,
-  age: string,
   id: string
 ) {
   revalidatePath(`${BASE_URL}/admin`);
   return await fetch(`${BASE_URL}/api/user-api/update-user`, {
     method: "POST",
-    body: JSON.stringify({ name, email, age, id }),
+    body: JSON.stringify({ name, lastName, email, id }),
   });
 }
 
-export async function deleteUser(id: number) {
+export async function deleteUser(id: string) {
   revalidatePath(`${BASE_URL}/admin`);
   return await fetch(`${BASE_URL}/api/user-api/delete-user/${id}`, {
     method: "DELETE",
@@ -133,4 +124,14 @@ export async function getUserId() {
   const userSerialId = await userSubId.json();
   const userId = userSerialId.usersId;
   return userId;
+}
+
+export async function getUser(id: string) {
+  revalidatePath(`${BASE_URL}/profile`);
+  const response = await fetch(`${BASE_URL}/api/user-api/get-user/${id}`, {
+    cache: "no-store",
+  });
+  const userResult = await response.json();
+  const user = userResult.result[0];
+  return user;
 }
