@@ -57,7 +57,7 @@ export default function ThemeSwitch() {
         onClick={() => {
           setTheme("light");
         }}
-        className=" flex justify-center items-center px-5 py-3 "
+        className=" flex justify-center items-center"
       >
         <FiSun />
       </div>
@@ -70,7 +70,7 @@ export default function ThemeSwitch() {
         onClick={() => {
           setTheme("dark");
         }}
-        className=" flex justify-center items-center px-5 py-3 "
+        className=" flex justify-center items-center"
       >
         <FiMoon />
       </div>

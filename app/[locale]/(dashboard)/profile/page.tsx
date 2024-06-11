@@ -8,7 +8,6 @@ export default async function Profile() {
   const session = await getSession();
   const user = session?.user;
   const userImage = await getUserImage();
-  console.log(user);
 
   if (user) {
     return (

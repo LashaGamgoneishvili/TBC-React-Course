@@ -9,11 +9,10 @@ export async function DELETE(
 ) {
   const userId = params.userId;
   const lastFiveCharacters = userId.slice(-5);
-
+  console.log("lastFiveCharacters", lastFiveCharacters);
   try {
-    const res = await sql`DELETE FROM cart WHERE user_Id = ${Number(
-      lastFiveCharacters
-    )};`;
+    const res =
+      await sql`DELETE FROM cart WHERE user_Id = ${lastFiveCharacters};`;
     return NextResponse.json({ res }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });

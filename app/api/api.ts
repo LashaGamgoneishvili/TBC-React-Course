@@ -6,7 +6,7 @@ const VERCEL_ENV = process.env.VERCEL_ENV;
 export const BASE_URL =
   VERCEL_ENV === "development"
     ? "http://localhost:3000"
-    : "https://tbc-react-course-git-session-15-lashas-projects-cb23651f.vercel.app";
+    : "https://tbc-react-course.vercel.app";
 
 export async function getUsers() {
   try {
@@ -31,6 +31,7 @@ export async function createUser() {
   revalidatePath(`${BASE_URL}/admin`);
   return await fetch(`${BASE_URL}/api/user-api/create-user`);
 }
+
 export async function updateUser(
   name: string,
   lastName: string,
@@ -90,12 +91,19 @@ export async function decrementCart(userId: number, productId: number) {
 }
 
 export async function getCart(userId: string) {
-  revalidatePath(`${BASE_URL}/checkout`);
+  revalidatePath(`${BASE_URL}/`);
   const response = await fetch(`${BASE_URL}/api/cart/getAllcart/${userId}`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });
-  return response;
+
+  if (!response.ok) {
+    throw new Error(`Error fetching cart: ${response.statusText}`);
+  }
+
+  const data = await response.json();
+  console.log("data", data);
+  return data;
 }
 
 export async function getUserImage() {
@@ -131,7 +139,45 @@ export async function getUser(id: string) {
   const response = await fetch(`${BASE_URL}/api/user-api/get-user/${id}`, {
     cache: "no-store",
   });
+
+  if (!response.ok) {
+    throw new Error(`Error fetching user: ${response.statusText}`);
+  }
+
   const userResult = await response.json();
+
+  if (!userResult || !userResult.result || userResult.result.length === 0) {
+    throw new Error("No user found in the response");
+  }
+
   const user = userResult.result[0];
   return user;
+}
+
+export async function getAllProduct() {
+  try {
+    revalidatePath(`${BASE_URL}/`);
+    const response = await fetch(`${BASE_URL}/api/getAllProduct`, {
+      cache: "no-store",
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const products = await response.json();
+    return products;
+  } catch (error) {
+    console.error("Failed to fetch products:", error);
+    return {
+      error: true,
+      message: error,
+    };
+  }
+}
+
+export async function getProduct(id: string) {
+  const response = await fetch(`${BASE_URL}/api/get-product/${id}`);
+  const product = await response.json();
+  return product;
 }

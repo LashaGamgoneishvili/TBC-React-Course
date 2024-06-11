@@ -2,7 +2,7 @@
 import Image from "next/image";
 import IncrementProductButton from "./IncrementButton";
 import DecrementProductButton from "./DecrementButton";
-import RemoveAllCheckout from "./RemoveItemButton";
+import RemoveItemButton from "./RemoveItemButton";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Props } from "../../types/types";
@@ -35,7 +35,7 @@ export default function CartItem({
             </Link>
           </div>
           <h2 className=" dark:text-[#ffffff] w-52">{product.title}</h2>
-          <RemoveAllCheckout productId={productId} quantity={quantity} />
+          <RemoveItemButton productId={productId} quantity={quantity} />
         </div>
         <div className="flex justify-around ">
           <div className="flex items-center w-auto justify-end gap-44">
@@ -61,7 +61,7 @@ export default function CartItem({
               </div>
             </div>
             <p className="text-center mr-4 w-24 dark:text-[#ffffff]">
-              ${(product.price * quantity).toFixed(2)}
+              ${(Number(product.price) * quantity).toFixed(2)}
             </p>
           </div>
         </div>

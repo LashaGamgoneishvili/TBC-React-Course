@@ -18,10 +18,10 @@ export async function GET(_: NextRequest) {
 
       const lastFiveCharacters = id.slice(-5);
       const user =
-        await sql`SELECT * FROM users WHERE id = ${lastFiveCharacters}`;
+        await sql`SELECT * FROM users WHERE user_id = ${lastFiveCharacters}`;
 
       if (!user.rows.length) {
-        await sql`INSERT INTO users (id, name, lastname, email, image) VALUES (${lastFiveCharacters}, ${name}, ${lastName}, ${email}, ${image});`;
+        await sql`INSERT INTO users (user_id, name, lastname, email, image) VALUES (${lastFiveCharacters}, ${name}, ${lastName}, ${email}, ${image});`;
       }
     } else {
       const sessionUser = session?.user;
@@ -33,10 +33,10 @@ export async function GET(_: NextRequest) {
 
       const lastFiveCharacters = id.slice(-5);
       const user =
-        await sql`SELECT * FROM users WHERE id = ${lastFiveCharacters}`;
+        await sql`SELECT * FROM users WHERE user_id = ${lastFiveCharacters}`;
 
       if (!user.rows.length) {
-        await sql`INSERT INTO users (id, name, lastname, email, image) VALUES (${lastFiveCharacters}, ${name}, ${lastName}, ${email}, ${image});`;
+        await sql`INSERT INTO users (user_id, name, lastname, email, image) VALUES (${lastFiveCharacters}, ${name}, ${lastName}, ${email}, ${image});`;
       }
     }
   } catch (error) {

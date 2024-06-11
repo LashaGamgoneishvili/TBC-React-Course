@@ -26,7 +26,6 @@ export default function ProfileInfo({ user }: { user: any }) {
     async function fetchUserInfo() {
       try {
         const userInfo = await getUserAction();
-        console.log(userInfo);
         setName(userInfo.name || "There is no name");
         setLastName(userInfo.lastname || "There is no lastName");
         setEmail(userInfo.email || "There is no email");

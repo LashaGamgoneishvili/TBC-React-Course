@@ -1,63 +1,31 @@
 //Products page
-export interface Product {
-  quantity?: number;
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  brand: string;
-  category: string;
-  thumbnail: string;
-  image?: string;
-  images: string[];
-}
-export interface CeckoutPageProduct {
-  quantity: number;
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  brand: string;
-  category: string;
-  image: string;
-}
 
-export interface CheckoutObject {
-  product: CeckoutPageProduct[];
+export interface Product {
+  quantity: number;
+  product_id: number;
+  title: string;
+  description: string;
+  price: string;
+  discount: string;
+  image: string;
+  created_at?: string;
+}
+export interface CheckoutProduct {
   quantity: number;
   id: number;
   title: string;
   description: string;
-  price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  brand: string;
-  category: string;
+  price: string;
+  discount: string;
   image: string;
 }
 
 export interface BlogObject {
-  products: Product[];
+  result: Product[];
 }
 
 export interface HeaderProps {
-  translator: any; // Adjust the type based on your translator type
-  resources: any; // Adjust the type based on your resources type
   locale?: string;
-  namespaces: string[];
-}
-
-export interface Person {
-  name: string;
-  surname: string;
-  mail: string;
 }
 
 export interface User {
@@ -91,11 +59,15 @@ export interface CartItem {
 }
 
 export interface Props {
-  product: CeckoutPageProduct;
-  productId: number;
+  product: CheckoutProduct;
   initialQuantity: number;
+  productId: number;
 }
 
 export interface Righteous {
   className: string;
+}
+
+export interface Params {
+  id: string;
 }

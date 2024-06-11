@@ -12,7 +12,9 @@ import { getCart } from "./app/api/api";
 import { emptyCart } from "./app/api/api";
 import { revalidatePath } from "next/cache";
 import { getSession } from "@auth0/nextjs-auth0";
-import { getUserId } from "./app/api/api";
+import { getAllProduct } from "./app/api/api";
+import { getProduct } from "./app/api/api";
+import { Product } from "./types/types";
 
 // export async function createUserAction(formData: FormData) {
 //   const name = formData.get("name");
@@ -58,40 +60,58 @@ export async function addChartFunction(productId: number) {
 
 export async function getAllCartProduct() {
   const session = await getSession();
-  const user = session?.user;
-  const id = user?.sub;
-  // const Cookiestore = cookies();
-  // const cookie = Cookiestore.get("user")?.value;
-  // const userId = JSON.parse(cookie ?? "");
-  const productArr = await getCart(id);
-  const product = await productArr.json();
+  if (!session) {
+    throw new Error("No active session found.");
+  }
 
-  return product;
+  const user = session.user;
+  if (!user || !user.sub) {
+    throw new Error("User not found or user ID is missing.");
+  }
+
+  const id = user.sub;
+
+  try {
+    const product = await getCart(id);
+    return product;
+  } catch (error) {
+    console.error("Error fetching cart products:", error);
+    throw error;
+  }
 }
 
 export async function cartCount() {
   "use server";
   const session = await getSession();
-  const user = session?.user;
-  const id = user?.sub;
-  const productArr = await getCart(id);
-  const product = await productArr.json();
-  const count = product?.rows?.reduce((acc: number, curr: any) => {
-    return acc + curr.quantity;
-  }, 0);
-  return count;
+  if (!session) {
+    throw new Error("No active session found.");
+  }
+
+  const user = session.user;
+  if (!user || !user.sub) {
+    throw new Error("User not found or user ID is missing.");
+  }
+
+  const id = user.sub;
+
+  try {
+    const products = await getCart(id);
+    console.log("product-getcart:", products);
+    const count = products?.rows?.reduce((acc: number, curr: Product) => {
+      return acc + curr.quantity;
+    }, 0);
+    console.log("count-count", count);
+    return count;
+  } catch (error) {
+    console.error("Error fetching cart count:", error);
+    throw error;
+  }
 }
 
-// async function getUserId() {
-//   const Cookiestore = cookies();
-//   const cookie = Cookiestore.get("user")?.value;
-//   const userId = JSON.parse(cookie ?? "");
-//   // const userId = user.responseUser.id;
-//   return userId;
-// }
-
 export async function incrementItemAmount(productId: number) {
-  const userId = await getUserId();
+  const session = await getSession();
+  const user = session?.user;
+  const userId = user?.sub;
   const response = await fetch(`${BASE_URL}/api/cart/add`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -104,7 +124,9 @@ export async function incrementItemAmount(productId: number) {
 }
 
 export async function decrementCart(productId: number) {
-  const userId = await getUserId();
+  const session = await getSession();
+  const user = session?.user;
+  const userId = user?.sub;
   try {
     const response = await fetch(`${BASE_URL}/api/cart/decrement`, {
       method: "POST",
@@ -140,14 +162,14 @@ export async function deleteAllItem() {
   const user = session?.user;
   const userId = user?.sub;
 
-  // const Cookiestore = cookies();
-  // const cookie = Cookiestore.get("user")?.value;
-  // const userId = JSON.parse(cookie ?? "");
   emptyCart(userId);
 }
 
 export async function deleteSingleCartItem(productId: number) {
-  const userId = await getUserId();
+  // const userId = await getUserId();
+  const session = await getSession();
+  const user = session?.user;
+  const userId = user?.sub;
   await singleDelete(userId, productId);
   revalidatePath(`${BASE_URL}/checkout`);
 }
@@ -159,4 +181,19 @@ export async function getUserAction() {
   const id = userId.slice(-5);
   const userData = await getUser(id);
   return userData;
+}
+
+export async function getAllProductAction() {
+  try {
+    const product = await getAllProduct();
+    return product;
+  } catch (err) {
+    console.error("Error in getAllProductAction:", err);
+    throw err;
+  }
+}
+
+export async function getProductAction(id: string) {
+  const product = await getProduct(id);
+  return product;
 }

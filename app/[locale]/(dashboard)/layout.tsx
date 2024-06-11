@@ -1,8 +1,6 @@
 import Header from "../../../components/header/Header";
 import Footer from "../../../components/Footer";
-import initTranslations from "../../i18n";
 
-const i18nNamespace = ["header", "login"];
 
 export default async function RootLayout({
   children,
@@ -13,16 +11,9 @@ export default async function RootLayout({
     locale: string;
   };
 }) {
-  const { t, resources } = await initTranslations(locale, i18nNamespace);
-
   return (
-    <div className="flex h-screen flex-col justify-between">
-      <Header
-        translator={t}
-        resources={resources}
-        locale={locale}
-        namespaces={i18nNamespace}
-      />
+    <div className="flex flex-col gap-8 ">
+      <Header locale={locale} />
       {children}
       <Footer />
     </div>

@@ -1,33 +1,24 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BlogObject } from "../../../../types/types";
-
-async function fatchBlogs() {
-  const respons = await fetch("https://dummyjson.com/products");
-  const blogs: BlogObject = await respons.json();
-  return blogs;
-}
+import { getAllProductAction } from "../../../../actions";
 
 export default async function Blog() {
-  const data = await fatchBlogs();
-
+  const data: BlogObject = await getAllProductAction();
   return (
     <>
-      <h1 className="self-center border-2 border-b-black p-5 text-center font-bold">
-        BLOG POSTS
-      </h1>
       {data ? (
         <div className=" mx-2 my-8 grid justify-items-center gap-2 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 ">
-          {data.products.map((data) => {
+          {data.result.map((data) => {
             return (
               <div
-                key={data.id}
+                key={data.product_id}
                 className="w-70 grid grid-rows-[auto]  items-center justify-items-center gap-1 border-2 border-black p-4"
               >
                 <h2 className="font-bold">{data.title}</h2>
                 <p className=" h-24">{data.description}</p>
                 <Image
-                  src={data.thumbnail}
+                  src={data.image}
                   priority={true}
                   alt="Person-logo"
                   className="h-auto w-auto"
@@ -38,7 +29,7 @@ export default async function Blog() {
                 <p>{data.price} $</p>
 
                 <Link
-                  href={`blogs/${data.id}`}
+                  href={`blogs/${data.product_id}`}
                   className="rounded-lg border-2 border-[#fff] bg-[#dedede] px-6 py-1 transition-all duration-200 ease-in hover:border-[#333] hover:bg-white"
                 >
                   Read More
