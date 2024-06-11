@@ -1,37 +1,60 @@
-import { getUsers } from "../../../api/api";
-import { User } from "../../../../types/types";
-import Button from "../../../../components/user/Button";
-import AddUser from "../../../../components/user/AddUser";
-import EditForm from "../../../../components/user/Edit";
-import { getSession } from "@auth0/nextjs-auth0";
+"use client";
 
-export default async function UsersPage() {
-  const session = await getSession();
-  const user = session?.user;
-  const userId = user?.sub;
-  const id = userId.slice(-5);
-  const users = await getUsers();
+import Link from "next/link";
+import Image from "next/image";
+import userImage from "../../../../public/Assets/2815428.png";
+import productImage from "../../../../public/Assets/images.png";
+import { useRouter } from "next/navigation";
+
+export default function UsersPage() {
+  const router = useRouter();
+
+  function handleClickUser() {
+    router.push("/user");
+  }
+  function handleClickPage() {
+    router.push("/AdminProduct");
+  }
   return (
-    <div className=" bg-white w-full flex flex-col">
-      <AddUser />
-      <div className="px-5 ">
-        {users?.rows.map((user: User) => (
-          <div
-            className="flex justify-between items-center border-b h-10 odd:bg-slate-50   even:bg-white "
-            key={user.id}
+    <>
+      <div className="flex justify-center items-center w-full min-h-fit gap-8">
+        <div
+          className="flex flex-col  gap-8 justify-center items-center p-16 hover:scale-105 transition-all ease-out duration-500 bg-gray-100 shadow-md rounded-md cursor-pointer"
+          onClick={handleClickUser}
+        >
+          <Image
+            src={userImage}
+            width={150}
+            height={150}
+            priority
+            alt="Person-logo"
+          />
+          <Link
+            href="/user"
+            className=" rounded-md bg-[#0ea5e9] p-2 text-[#fff] transition-all duration-300 hover:bg-[#0369a1] focus:ring"
           >
-            <div className="flex gap-4 ">
-              <h1>{user.name}</h1>
-              <p>{user.email}</p>
-              <p>{user.age}</p>
-            </div>
-            <div className="flex items-center gap-8 ">
-              <EditForm user={user} />
-              <Button id={id} />
-            </div>
-          </div>
-        ))}
+            User Page
+          </Link>
+        </div>
+        <div
+          className="flex flex-col gap-8 h-85% justify-center items-center p-16 hover:scale-[1.05] transition-all ease-out duration-500 bg-gray-100 shadow-md rounded-md cursor-pointer"
+          onClick={handleClickPage}
+        >
+          <Image
+            src={productImage}
+            width={150}
+            height={150}
+            priority
+            alt="Person-logo"
+          />
+          <Link
+            href="/AdminProduct"
+            className=" rounded-md bg-[#0ea5e9] p-2 text-[#fff] transition-all duration-300 hover:bg-[#0369a1] focus:ring"
+          >
+            Product Page
+          </Link>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

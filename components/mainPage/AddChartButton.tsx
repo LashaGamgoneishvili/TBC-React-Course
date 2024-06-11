@@ -1,18 +1,19 @@
 "use client";
 import { addChartFunction } from "../../actions";
-import { useAppContext } from "../../app/context/index";
+import { useAppContext } from "../../app/context";
 
 export default function AddChartButton({ productId }: { productId: number }) {
-  const { setState } = useAppContext();
+  const { state, setState } = useAppContext();
 
   function handleAddButton() {
+    console.log(state);
     addChartFunction(productId);
-    setState((perv: number) => Number(perv) + 1);
+    setState((prev: number) => Number(prev) + 1);
   }
 
   return (
     <button
-      className="text-sm  border-b-2 border-black dark:border-white active:border-b-0"
+      className="text-xl text-white dark:text-black "
       onClick={handleAddButton}
     >
       Add to cart

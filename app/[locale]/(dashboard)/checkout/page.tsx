@@ -1,52 +1,22 @@
 import RemoveAllCheckout from "../../../../components/checkout/RemoveAllCeckout";
-import { CheckoutObject } from "../../../../types/types";
+import { CheckoutProduct } from "../../../../types/types";
 import { getAllCartProduct } from "../../../../actions";
 import CheckoutProductList from "../../../../components/checkout/CheckoutProductList";
 
-// async function productFetch() {
-//   const cartItems = await getAllCartProduct();
-//   console.log("cartItems", cartItems);
-//   // Initialize an empty object for productQuantityMap
-//   const productQuantityMap: ProductQuantityMap = {};
-
-//   // Ensure cartItems.rows is defined before proceeding
-//   if (cartItems?.rows) {
-//     cartItems.rows.forEach((item: CartItem) => {
-//       productQuantityMap[item.productid] = item.quantity;
-//     });
-
-//     const productPromises = cartItems.rows.map((item: CartItem) =>
-//       fetch(`https://dummyjson.com/products/${item.productid}`, {
-//         cache: "force-cache",
-//       }).then((res) => res.json() as Promise<Product>)
-//     );
-
-//     const products: Product[] = (await Promise.all(productPromises)).sort(
-//       (a, b) => a.id - b.id
-//     );
-
-//     return {
-//       products,
-//       productQuantityMap,
-//     };
-//   }
-
-//   // Return empty values if cartItems.rows is undefined
-//   return {
-//     products: [],
-//     productQuantityMap,
-//   };
-// }
-
 export default async function CheckOut() {
-  // const { productQuantityMap, products } = await productFetch();
-  const cartItems = await getAllCartProduct();
-  const products = cartItems.rows;
+  let products: CheckoutProduct[] = [];
+
+  try {
+    const product = await getAllCartProduct();
+    products = product.rows;
+  } catch (error) {
+    console.error("Error fetching cart products:", error);
+  }
 
   return (
-    <div className="w-full mx-auto flex flex-col items-center ">
+    <div className="w-full mx-auto text-[#8e8bb2] flex flex-col items-center">
       <div className="w-full h-auto">
-        <div className=" px-16 w-full mb-8">
+        <div className="px-16 w-full mb-8">
           <div className="flex justify-between mt-24 items-center relative">
             <div className="absolute border-b w-full mt-8"></div>
             <p className="mb-4 pl-8">Product</p>
@@ -57,22 +27,22 @@ export default async function CheckOut() {
             </div>
           </div>
         </div>
-        {products.map((product: CheckoutObject, idx: number) => (
-          <CheckoutProductList
-            key={idx}
-            product={product}
-            initialQuantity={product.quantity}
-            productId={product.id}
-          />
-        ))}
+        {products && products.length > 0 ? (
+          products.map((product: CheckoutProduct, idx: number) => (
+            <CheckoutProductList
+              key={idx}
+              product={product}
+              initialQuantity={product.quantity}
+              productId={product.id}
+            />
+          ))
+        ) : (
+          <p className="h-screen w-full text-[52px] tracking-widest font-black flex justify-center items-center">
+            No Products
+          </p>
+        )}
       </div>
-      {products.length === 0 ? (
-        <p className="h-screen w-full text-[52px] tracking-widest font-black flex justify-center items-center">
-          No Products
-        </p>
-      ) : (
-        <RemoveAllCheckout />
-      )}
+      {products?.length > 0 && <RemoveAllCheckout />}
     </div>
   );
 }

@@ -33,10 +33,7 @@ export default function LanguageChanger() {
   }, [language, router]);
 
   return (
-    <div
-      className="bg-white dark:bg-slate-700 py-2 rounded-md outline-none "
-      onClick={handleClick}
-    >
+    <div className="flex  items-center" onClick={handleClick}>
       {language === "ka" ? (
         <div className="flex justify-center items-center">
           <Image

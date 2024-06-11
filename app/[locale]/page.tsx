@@ -1,23 +1,13 @@
 import Header from "../../components/header/Header";
 import Content from "../../components/mainPage/Content";
 import Footer from "../../components/Footer";
-import initTranslations from "../i18n";
-import { BlogObject } from "../../types/types";
 import { Righteous } from "next/font/google";
-
+import { getAllProductAction } from "../../actions";
 const righteous = Righteous({
   subsets: ["latin"],
   weight: "400",
 });
 
-// export async function fetchHomePageProducts() {
-//   const response = await fetch("https://dummyjson.com/products");
-//   const products: BlogObject = await response.json();
-//   await new Promise((resolve) => setTimeout(resolve, 500));
-//   return products;
-// }
-
-const i18nNamespace = ["header", "login"];
 interface MainProps {
   params: {
     locale: string | undefined;
@@ -32,19 +22,11 @@ export default async function Main({
   params: { locale },
   searchParams,
 }: MainProps) {
-  const { t, resources } = await initTranslations(locale, i18nNamespace);
-  // const products = await fetchHomePageProducts();
-  const response = await fetch("https://dummyjson.com/products");
-  const products: BlogObject = await response.json();
+  const products = await getAllProductAction();
 
   return (
     <div className="flex flex-col  dark:text-[#abb2bf]  dark:bg-[#21252b] font-righteous">
-      <Header
-        translator={t}
-        resources={resources}
-        locale={locale}
-        namespaces={i18nNamespace}
-      />
+      <Header locale={locale} />
       <Content
         data={products}
         righteous={righteous}

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Contact() {
   return (
-    <div className="flex h-screen w-full flex-col items-center justify-around text-black dark:text-white dark:bg-[#21252b] bg-[#efefef]">
+    <div className="flex h-screen w-full flex-col items-center justify-around text-black dark:text-white dark:bg-[#21252b] bg-gray-100">
       <div className="flex h-auto  w-full flex-col items-center justify-center gap-12 pt-4">
         <h1>SEND US A MESSAGE</h1>
         <form className="flex h-auto flex-col items-center justify-center gap-4 text-[#333]">

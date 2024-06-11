@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { MdOutlineShoppingCart } from "react-icons/md";
+import { LiaOpencart } from "react-icons/lia";
 import { useAppContext } from "../../app/context/index";
 import { useEffect } from "react";
 import { cartCount } from "../../actions";
@@ -10,8 +10,12 @@ export default function Chart() {
 
   useEffect(() => {
     async function getCart() {
-      const count = await cartCount();
-      setState(count);
+      try {
+        const count = await cartCount();
+        setState(count);
+      } catch (error) {
+        console.error("Failed to fetch user info:", error);
+      }
     }
     getCart();
   }, [setState]);
@@ -19,10 +23,10 @@ export default function Chart() {
   return (
     <div className="text-xl relative">
       <Link href="/checkout">
-        <span className="absolute text-xs -top-4 right-[5px] text-red-700">
+        <span className="absolute text-xs -top-4 right-[5px] text-red-700 dark:text-blue-500">
           {state ? state : 0}
         </span>
-        <MdOutlineShoppingCart suppressHydrationWarning />
+        <LiaOpencart suppressHydrationWarning />
       </Link>
     </div>
   );

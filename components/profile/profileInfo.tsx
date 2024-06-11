@@ -3,20 +3,7 @@ import { useEffect, useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { getUserAction, updateUserAction } from "../../actions";
 
-// interface User {
-//   nickname: string;
-//   name: string;
-//   picture: string;
-//   updated_at: string;
-//   email: string;
-//   email_verified: boolean;
-//   sub: string;
-//   sid: string;
-// }
 
-// interface ProfileInfoProps {
-//   user: User;
-// }
 
 export default function ProfileInfo({ user }: { user: any }) {
   const [modal, setModal] = useState(false);
@@ -28,7 +15,6 @@ export default function ProfileInfo({ user }: { user: any }) {
     async function fetchUserInfo() {
       try {
         const userInfo = await getUserAction();
-        console.log(userInfo);
         setName(userInfo.name || "There is no name");
         setLastName(userInfo.lastname || "There is no lastName");
         setEmail(userInfo.email || "There is no email");

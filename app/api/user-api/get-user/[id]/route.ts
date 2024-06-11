@@ -10,7 +10,7 @@ export async function GET(
       throw new Error("ID is required");
     }
 
-    const user = await sql`SELECT * FROM users WHERE id=${id}`;
+    const user = await sql`SELECT * FROM users WHERE user_id=${id}`;
     if (user.rows.length === 0) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }

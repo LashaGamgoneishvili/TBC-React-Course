@@ -18,7 +18,7 @@ export default function SortButton({
     if (sorted && product) {
       setProduct(
         (product) =>
-          (product = product?.toSorted((a, b) => b.rating - a.rating))
+          (product = product?.toSorted((a, b) => b.product_id - a.product_id))
       );
       setSorted((sort) => !sort);
     } else {
@@ -26,9 +26,11 @@ export default function SortButton({
         query
           ? setProduct(
               (product) =>
-                (product = product?.toSorted((a, b) => a.rating - b.rating))
+                (product = product?.toSorted(
+                  (a, b) => a.product_id - b.product_id
+                ))
             )
-          : setProduct(data.products);
+          : setProduct(data.result);
       }
       setSorted((sort) => !sort);
     }

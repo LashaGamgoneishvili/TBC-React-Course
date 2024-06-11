@@ -10,24 +10,32 @@ export async function GET(
   try {
     const lastFiveCharacters = id.slice(-5);
     const result = await sql`
-    SELECT cart.quantity ,  products.id AS id,
-    products.title ,
+    SELECT cart.quantity, products.product_id AS id,
+    products.title,
     products.description,
     products.price,
     products.discount,
     products.image
-    FROM cart 
-    JOIN products ON cart.product_id = products.id
-    WHERE cart.user_id = ${lastFiveCharacters};
-    `;
+    FROM cart
+    JOIN products ON cart.product_id = products.product_id
+    WHERE cart.user_id = ${lastFiveCharacters}
+    ORDER BY products.product_id ASC;
+`;
 
     const rows = result.rows;
-    if (!rows) {
-      return NextResponse.json({}, { status: 200 });
+    if (rows.length === 0) {
+      return NextResponse.json(
+        { message: "No products found for this user" },
+        { status: 200 }
+      );
     }
 
     return NextResponse.json({ rows }, { status: 200 });
   } catch (error) {
-    return NextResponse.json({ error }, { status: 500 });
+    console.error("Database query error:", error);
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
   }
 }
