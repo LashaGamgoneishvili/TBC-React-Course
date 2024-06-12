@@ -27,28 +27,77 @@ export async function getUsers() {
   }
 }
 
-export async function createUser() {
-  revalidatePath(`${BASE_URL}/admin`);
-  return await fetch(`${BASE_URL}/api/user-api/create-user`);
+export async function createUserLogin() {
+  return await fetch(`${BASE_URL}/api/user-api/create-user-login`);
+}
+export async function createUserAdmin(
+  name: string,
+  lastName: string,
+  email: string,
+  image: string,
+  id: string
+) {
+  revalidatePath(`${BASE_URL}/user`);
+  return await fetch(`${BASE_URL}/api/user-api/create-user-from-admin`, {
+    method: "POST",
+    body: JSON.stringify({ name, lastName, email, image, id }),
+  });
+}
+export async function createProductAdmin(
+  title: string,
+  description: string,
+  price: string,
+  discount: string,
+  image: string
+  // id: string
+) {
+  revalidatePath(`${BASE_URL}/user`);
+  return await fetch(`${BASE_URL}/api/product-api/create-new-product`, {
+    method: "POST",
+    body: JSON.stringify({ title, description, price, discount, image }),
+  });
 }
 
 export async function updateUser(
   name: string,
   lastName: string,
   email: string,
-  id: string
+  id: string,
+  image: string
 ) {
   revalidatePath(`${BASE_URL}/admin`);
   return await fetch(`${BASE_URL}/api/user-api/update-user`, {
     method: "POST",
-    body: JSON.stringify({ name, lastName, email, id }),
+    body: JSON.stringify({ name, lastName, email, id, image }),
+  });
+}
+
+export async function updateProduct(
+  title: string,
+  price: string,
+  description: string,
+  discount: string,
+  productId: string
+) {
+  return await fetch(`${BASE_URL}/api/admin/update-product`, {
+    method: "POST",
+    body: JSON.stringify({ title, price, description, discount, productId }),
   });
 }
 
 export async function deleteUser(id: string) {
-  revalidatePath(`${BASE_URL}/admin`);
-  return await fetch(`${BASE_URL}/api/user-api/delete-user/${id}`, {
+  revalidatePath(`${BASE_URL}/user`);
+  return await fetch(`${BASE_URL}/api/user-api/delete-user`, {
+    cache: "no-store",
     method: "DELETE",
+    body: JSON.stringify({ id }),
+  });
+}
+export async function deleteProduct(id: number) {
+  revalidatePath(`${BASE_URL}/user`);
+  return await fetch(`${BASE_URL}/api/product-api/delete-product`, {
+    method: "DELETE",
+    body: JSON.stringify({ id }),
   });
 }
 

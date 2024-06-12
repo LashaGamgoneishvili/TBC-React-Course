@@ -1,9 +1,12 @@
 "use server";
 import {
   BASE_URL,
-  createUser,
+  createUserAdmin,
+  createUserLogin,
+  deleteProduct,
   deleteUser,
   getUser,
+  updateProduct,
   updateUser,
 } from "./app/api/api";
 // import { cookies } from "next/headers";
@@ -15,42 +18,99 @@ import { getSession } from "@auth0/nextjs-auth0";
 import { getAllProduct } from "./app/api/api";
 import { getProduct } from "./app/api/api";
 import { Product } from "./types/types";
+import { createProductAdmin } from "./app/api/api";
 
-// export async function createUserAction(formData: FormData) {
-//   const name = formData.get("name");
-//   const email = formData.get("email");
-//   const age = formData.get("age");
+export async function createUserActionAdmin(formData: FormData) {
+  revalidatePath(`${BASE_URL}/user`);
 
-//   createUser(name as string, email as string, age as string);
-// }
+  const name = formData.get("name");
+  const lastName = formData.get("lastName");
+  const email = formData.get("email");
+  const image = formData.get("image");
+  const id = formData.get("id");
+
+  createUserAdmin(
+    name as string,
+    lastName as string,
+    email as string,
+    image as string,
+    id as string
+  );
+}
+export async function createProductActionAdmin(formData: FormData) {
+  revalidatePath(`${BASE_URL}/user`);
+  const title = formData.get("title");
+  const description = formData.get("description");
+  const price = formData.get("price");
+  const discount = formData.get("discount");
+  const image = formData.get("image");
+  // const id = formData.get("id");
+
+  createProductAdmin(
+    title as string,
+    description as string,
+    price as string,
+    discount as string,
+    image as string
+    // id as string
+  );
+}
 
 export async function createUserAction() {
   const session = await getSession();
   const user = session?.user;
-  if (user?.email_verified) {
-    createUser();
-  } else {
-    createUser();
+  if (user) {
+    createUserLogin();
   }
 }
 
 export async function updateUserAction(formData: FormData) {
   const name = formData.get("name");
-  const email = formData.get("email");
   const lastName = formData.get("lastName");
-  const session = await getSession();
-  const user = session?.user;
-  const userId = user?.sub;
-  const id = userId.slice(-5);
+  const email = formData.get("email");
+  const id = formData.get("id");
+  const image = formData.get("image");
 
-  updateUser(name as string, lastName as string, email as string, id as string);
+  updateUser(
+    name as string,
+    lastName as string,
+    email as string,
+    id as string,
+    image as string
+  );
+}
+
+export async function updateProductAction(formData: FormData) {
+  const description = formData.get("description");
+  const title = formData.get("title");
+  const price = formData.get("price");
+  const discount = formData.get("discount");
+  const productId = formData.get("ProductId");
+  console.log(
+    "actions-productId",
+    price,
+    title,
+    description,
+    discount,
+    productId
+  );
+  updateProduct(
+    title as string,
+    price as string,
+    description as string,
+    discount as string,
+    productId as string
+  );
 }
 
 export async function deleteUserAction(id: string) {
-  await deleteUser(id);
+  deleteUser(id);
+}
+export async function deleteProductAction(id: number) {
+  deleteProduct(id);
 }
 
-export async function addChartFunction(productId: number) {
+export async function addCartFunction(productId: number) {
   "use server";
   const session = await getSession();
   const user = session?.user;

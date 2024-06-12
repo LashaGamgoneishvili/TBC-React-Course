@@ -10,7 +10,7 @@ export async function GET(
   }
 
   try {
-    const product = await sql`SELECT * FROM products WHERE id = ${id}`;
+    const product = await sql`SELECT * FROM products WHERE product_id = ${id}`;
 
     return NextResponse.json({ result: product.rows[0] }, { status: 200 });
   } catch (err) {

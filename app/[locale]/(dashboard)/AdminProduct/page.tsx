@@ -1,6 +1,7 @@
 import { getAllProductAction } from "../../../../actions";
-import AdminProductList from "../../../../components/admin/ProductList";
+import AdminProductList from "../../../../components/admin/product/ProductList";
 import { Product } from "../../../../types/types";
+import AddProduct from "../../../../components/admin/product/addProduct";
 
 export default async function AdminProduct() {
   const response = await getAllProductAction();
@@ -8,13 +9,9 @@ export default async function AdminProduct() {
 
   return (
     <div>
+      <AddProduct />
       {products.map((product: Product, idx: number) => (
-        <AdminProductList
-          key={idx}
-          product={product}
-          initialQuantity={product.quantity}
-          productId={product.product_id}
-        />
+        <AdminProductList key={idx} product={product} />
       ))}
     </div>
   );

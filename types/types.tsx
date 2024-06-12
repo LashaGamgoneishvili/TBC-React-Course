@@ -29,10 +29,20 @@ export interface HeaderProps {
 }
 
 export interface User {
-  id: number;
+  sub: number;
   name: string;
   email: string;
   age: number;
+  picture?: string;
+}
+
+export interface DatabaseUser {
+  user_id: string;
+  name: string;
+  lastname: string;
+  email: string;
+  image: string;
+  created_at: string;
 }
 
 export interface SelectedProduct {
