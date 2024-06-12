@@ -1,30 +1,17 @@
 "use client";
-import { createUserActionAdmin } from "../../actions";
+import { createProductActionAdmin } from "../../../actions";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-interface User {
-  given_name?: string;
-  family_name?: string;
-  nickname?: string;
-  name?: string;
-  picture?: string;
-  updated_at?: string;
-  email?: string;
-  email_verified?: boolean;
-  sub?: string;
-  sid?: string;
-}
-
-function AddUser({ user }: { user: undefined | User }) {
+export default function AddProduct() {
   const [modal, setModal] = useState(false);
-  const [name, setName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
+  const [title, setTiTle] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [discount, setDiscount] = useState("");
   const [image, setImage] = useState("");
-  const [id, setId] = useState("");
+  // const [id, setId] = useState("");
 
-  console.log(user);
   function handleClick() {
     setModal(true);
   }
@@ -37,9 +24,9 @@ function AddUser({ user }: { user: undefined | User }) {
     <>
       <button
         onClick={handleClick}
-        className={`bg-[#3b82f6]  hover:bg-sky-700  duration-500 text-[#fff] p-2 rounded-md w-32 mx-5  mb-3 px-4 `}
+        className={`bg-[#3b82f6]  hover:bg-sky-700  duration-500 text-[#fff] p-2 rounded-md  mx-5  mb-3 px-4 `}
       >
-        Add User
+        Create New Product
       </button>
 
       <div
@@ -66,41 +53,53 @@ function AddUser({ user }: { user: undefined | User }) {
             </button>
             <h1 className="text-xl">Add User</h1>
             <form
-              action={createUserActionAdmin}
+              action={createProductActionAdmin}
               className="flex flex-col gap-4 items-center  text-black"
             >
               <div className="flex flex-col gap-2 ">
-                <label htmlFor="name">Name</label>
+                <label htmlFor="title">title</label>
                 <input
-                  id="name"
+                  id="title"
                   type="text"
-                  name="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  name="title"
+                  value={title}
+                  onChange={(e) => setTiTle(e.target.value)}
                   required
                   className="rounded-sm  py-1 px-4 border  border-gray w-64"
                 />
               </div>
               <div className="flex flex-col gap-2 ">
-                <label htmlFor="lastName">lastName</label>
+                <label htmlFor="description">description</label>
                 <input
-                  id="lastName"
+                  id="description"
                   type="text"
-                  name="lastName"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
+                  name="description"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
                   required
                   className="rounded-sm  py-1 px-4 border border-gray w-64"
                 />
               </div>
               <div className="flex flex-col gap-2 ">
-                <label htmlFor="email">Email</label>
+                <label htmlFor="price">price</label>
                 <input
-                  id="email"
+                  id="price"
                   type="text"
-                  name="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  name="price"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                  required
+                  className="rounded-sm  py-1 px-4 border border-gray w-64"
+                />
+              </div>
+              <div className="flex flex-col gap-2 ">
+                <label htmlFor="discount">Discount</label>
+                <input
+                  id="discount"
+                  type="text"
+                  name="discount"
+                  value={discount}
+                  onChange={(e) => setDiscount(e.target.value)}
                   required
                   className="rounded-sm  py-1 px-4 border border-gray w-64"
                 />
@@ -117,8 +116,8 @@ function AddUser({ user }: { user: undefined | User }) {
                   className="rounded-sm  py-1 px-4 border border-gray w-64"
                 />
               </div>
-              <div className="flex flex-col gap-2 ">
-                <label htmlFor="id">User-Id</label>
+              {/* <div className="flex flex-col gap-2 ">
+                <label htmlFor="id">Product-Id</label>
                 <input
                   id="id"
                   type="text"
@@ -128,14 +127,14 @@ function AddUser({ user }: { user: undefined | User }) {
                   required
                   className="rounded-sm  py-1 px-4 border border-gray w-64"
                 />
-              </div>
+              </div> */}
 
               <button
                 type="submit"
                 onClick={handleSubmit}
                 className="bg-[#3b82f6]  hover:bg-sky-700  duration-500 text-[#fff]  px-4 rounded-md leading-loose"
               >
-                Create User
+                Create New Product
               </button>
             </form>
           </motion.div>
@@ -144,5 +143,3 @@ function AddUser({ user }: { user: undefined | User }) {
     </>
   );
 }
-
-export default AddUser;

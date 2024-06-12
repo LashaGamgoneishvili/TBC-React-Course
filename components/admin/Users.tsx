@@ -1,6 +1,6 @@
 import { getUsers } from "../../app/api/api";
-import { User } from "../../types/types";
-import Button from "../../components/user/Button";
+import { DatabaseUser } from "../../types/types";
+import DeleteUserButton from "../user/DeleteUserButton";
 import AddUser from "../../components/user/AddUser";
 import EditForm from "../../components/user/Edit";
 import { getSession } from "@auth0/nextjs-auth0";
@@ -11,23 +11,24 @@ export default async function Users() {
   const userId = user?.sub;
   const id = userId.slice(-5);
   const users = await getUsers();
+
   return (
     <div className=" bg-white w-full flex flex-col">
-      <AddUser />
+      <AddUser user={user} />
       <div className="px-5 ">
-        {users?.rows.map((user: User) => (
+        {users?.rows.map((user: DatabaseUser) => (
           <div
             className="flex justify-between items-center border-b h-10 odd:bg-slate-50   even:bg-white "
-            key={user.id}
+            key={user.user_id}
           >
             <div className="flex gap-4 ">
               <h1>{user.name}</h1>
               <p>{user.email}</p>
-              <p>{user.age}</p>
             </div>
             <div className="flex items-center gap-8 ">
-              <EditForm user={user} />
-              <Button id={id} />
+              <p>{user.user_id}</p>
+              <EditForm user={user} userid={id} />
+              <DeleteUserButton id={user.user_id} />
             </div>
           </div>
         ))}

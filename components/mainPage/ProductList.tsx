@@ -3,8 +3,21 @@ import { BlogObject } from "../../types/types";
 import DebounceSearchComponent from "./DebounceSearchComponent";
 import Link from "next/link";
 import Image from "next/image";
-import AddChartButton from "./AddChartButton";
+import AddCartButton from "./AddChartButton";
 import { useEffect, useState } from "react";
+import { useUser } from "@auth0/nextjs-auth0/client";
+
+// interface UserProfile {
+//   email: string;
+//   email_verified: boolean;
+//   name: string;
+//   nickname: string;
+//   picture: string;
+//   role: string[];
+//   sid: string;
+//   sub: string;
+//   updated_at: string;
+// }
 
 export default function ProductList({
   searchParams,
@@ -18,6 +31,10 @@ export default function ProductList({
 }) {
   const [product, setProduct] = useState(data.result);
   const query = searchParams?.query || "";
+  const { user } = useUser();
+
+  const role = user?.role;
+  console.log("Rolle", role);
 
   useEffect(() => {
     const searchedProduct = data.result.filter((product) =>
@@ -54,15 +71,16 @@ export default function ProductList({
               >
                 <Image
                   alt="watch-images"
-                  src={item.image}
+                  src={`${item.image}`}
                   priority={true}
                   width={350}
                   height={100}
                 />
               </Link>
               <div className="bg-[#f81f1f] h-[2px] w-full absolute bottom-0"></div>
+
               <div className="absolute  flex items-center  justify-center h-[60px] group-hover:bg-[#f81f1f] -bottom-[58px] bg-transparent group-hover:bottom-0  w-full duration-500">
-                <AddChartButton productId={item.product_id} />
+                <AddCartButton productId={item.product_id} role={role} />
               </div>
             </div>
             <p className=" text-xl   z-10 w-full text-center ">

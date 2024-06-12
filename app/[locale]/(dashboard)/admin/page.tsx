@@ -1,5 +1,4 @@
 "use client";
-
 import Link from "next/link";
 import Image from "next/image";
 import userImage from "../../../../public/Assets/2815428.png";
@@ -17,9 +16,9 @@ export default function UsersPage() {
   }
   return (
     <>
-      <div className="flex justify-center items-center w-full min-h-fit gap-8">
+      <div className="flex justify-center items-center mt-5 w-full min-h-fit gap-8">
         <div
-          className="flex flex-col  gap-8 justify-center items-center p-16 hover:scale-105 transition-all ease-out duration-500 bg-gray-100 shadow-md rounded-md cursor-pointer"
+          className="flex flex-col  gap-8 justify-center items-center p-16 hover:scale-[1.02] transition-all ease-out duration-500  shadow-md  cursor-pointer"
           onClick={handleClickUser}
         >
           <Image
@@ -37,7 +36,7 @@ export default function UsersPage() {
           </Link>
         </div>
         <div
-          className="flex flex-col gap-8 h-85% justify-center items-center p-16 hover:scale-[1.05] transition-all ease-out duration-500 bg-gray-100 shadow-md rounded-md cursor-pointer"
+          className="flex flex-col gap-8 h-85% justify-center items-center p-16 hover:scale-[1.02] transition-all ease-out duration-500 shadow-md  cursor-pointer"
           onClick={handleClickPage}
         >
           <Image

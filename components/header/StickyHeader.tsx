@@ -86,7 +86,7 @@ function StickyHeader({ translations }: StickyHeaderProps) {
         }`}
         key={header ? "fixed-header" : "regular-header"}
       >
-        <div className=" flex h-fit items-center flex-wrap justify-between w-full mx-[5%]">
+        <div className=" flex h-fit items-center flex-wrap justify-between w-full lg:mx[2%] mx-[5%]">
           <div className=" righteous">
             <Link href="/">
               <span className="text-[32px] text-black dark:text-blue-500">
@@ -99,8 +99,8 @@ function StickyHeader({ translations }: StickyHeaderProps) {
               <span className="text-2xl text-red-600">one</span>
             </Link>
           </div>
-          <nav className="hidden lg:flex">
-            <ul className="flex  items-center justify-center  2xl:gap-6 xl:gap-6 md:gap-4 sm:gap-2">
+          <nav className="hidden lg:flex ">
+            <ul className="flex  items-center justify-center  2xl:gap-6 xl:gap-6 lg:gap-0">
               <li className=" cursor-pointer p-1   [transition:all_ease_0.2s] hover:text-[#ff2020] hover:duration-300">
                 <Link href="/">{translations.home}</Link>
               </li>
@@ -145,7 +145,7 @@ function StickyHeader({ translations }: StickyHeaderProps) {
               <div className="relative">
                 <AuthDropdown user={user} />
               </div>
-              {user && (
+              {user && typedUser?.role[0] !== "admin" && (
                 <div className="hover:text-red-500">
                   <Cart />
                 </div>

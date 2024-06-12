@@ -4,17 +4,15 @@ export const revalidate = 0;
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const { name, lastName, email, id } = body;
-
+  const { name, lastName, email, id, image } = body;
   try {
     if (!name || !email || !lastName || !id) {
       throw new Error("id, name, lastName, and email are required");
     }
 
-    await sql`UPDATE users SET name = ${name}, lastName = ${lastName}, email = ${email} WHERE user_id = ${id};`;
+    await sql`UPDATE users SET name = ${name}, lastName = ${lastName}, email = ${email}, image=${image} WHERE user_id = ${id};`;
   } catch (error) {
     console.error("Error updating user:", error);
-
     return NextResponse.json({ error: error }, { status: 500 });
   }
 
