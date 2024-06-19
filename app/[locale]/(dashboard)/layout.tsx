@@ -1,7 +1,6 @@
 import Header from "../../../components/header/Header";
 import Footer from "../../../components/Footer";
 
-
 export default async function RootLayout({
   children,
   params: { locale },
@@ -12,7 +11,7 @@ export default async function RootLayout({
   };
 }) {
   return (
-    <div className="flex flex-col gap-8 ">
+    <div className="flex flex-col">
       <Header locale={locale} />
       {children}
       <Footer />

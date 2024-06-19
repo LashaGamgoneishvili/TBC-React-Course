@@ -1,13 +1,19 @@
 "use server";
 import {
   BASE_URL,
+  deleteAllBlogs,
+  deleteBlog,
   createUserAdmin,
   createUserLogin,
   deleteProduct,
   deleteUser,
+  getAllBlog,
   getUser,
+  updateBlog,
+  updateComment,
   updateProduct,
   updateUser,
+  uploadNewBlog,
 } from "./app/api/api";
 // import { cookies } from "next/headers";
 import { addCart } from "./app/api/api";
@@ -17,7 +23,6 @@ import { revalidatePath } from "next/cache";
 import { getSession } from "@auth0/nextjs-auth0";
 import { getAllProduct } from "./app/api/api";
 import { getProduct } from "./app/api/api";
-import { Product } from "./types/types";
 import { createProductAdmin } from "./app/api/api";
 
 export async function createUserActionAdmin(formData: FormData) {
@@ -86,14 +91,7 @@ export async function updateProductAction(formData: FormData) {
   const price = formData.get("price");
   const discount = formData.get("discount");
   const productId = formData.get("ProductId");
-  console.log(
-    "actions-productId",
-    price,
-    title,
-    description,
-    discount,
-    productId
-  );
+
   updateProduct(
     title as string,
     price as string,
@@ -102,6 +100,64 @@ export async function updateProductAction(formData: FormData) {
     productId as string
   );
 }
+
+export async function uploadNewBlogAction(formdata: FormData) {
+  const title = formdata.get("title");
+  const description = formdata.get("description");
+  const detaildDescription = formdata.get("detaildDescription");
+  const image = formdata.get("image");
+  const time = formdata.get("time");
+  const userId = formdata.get("userId");
+
+  console.log(
+    "title, description, detaildDescription, lastFiveCharacters, blogId",
+    title,
+    description,
+    detaildDescription,
+    image,
+    time
+  );
+
+  uploadNewBlog(
+    title as string,
+    description as string,
+    detaildDescription as string,
+    image as string,
+    time as string,
+    userId as string
+  );
+}
+
+export async function updateBlogAction(formData: FormData) {
+  const title = formData.get("title");
+  const description = formData.get("description");
+  const detaildDescription = formData.get("detaildDescription");
+  // const comment = formData.get("comment");
+  const time = formData.get("time");
+  const blogId = formData.get("blogId");
+
+  updateBlog(
+    title as string,
+    detaildDescription as string,
+    description as string,
+    // comment as string,
+    time as string,
+    blogId as string
+  );
+}
+export async function updateBlogComment(formData: FormData) {
+  const comment = formData.get("comment");
+  const userId = formData.get("userId");
+  const blogId = formData.get("blogId");
+
+  return await updateComment(
+    comment as string,
+    userId as string,
+    blogId as string
+  );
+}
+
+export async function createOrder() {}
 
 export async function deleteUserAction(id: string) {
   deleteUser(id);
@@ -156,11 +212,9 @@ export async function cartCount() {
 
   try {
     const products = await getCart(id);
-    console.log("product-getcart:", products);
     const count = products?.rows?.reduce((acc: number, curr: Product) => {
       return acc + curr.quantity;
     }, 0);
-    console.log("count-count", count);
     return count;
   } catch (error) {
     console.error("Error fetching cart count:", error);
@@ -251,6 +305,27 @@ export async function getAllProductAction() {
     console.error("Error in getAllProductAction:", err);
     throw err;
   }
+}
+export async function getAllBlogAction() {
+  try {
+    const blogs = await getAllBlog();
+    return blogs;
+  } catch (err) {
+    console.error("Error in getAllProductAction:", err);
+    throw err;
+  }
+}
+
+export async function deleteBlogAction(blogId: number) {
+  revalidatePath(`${BASE_URL}/blogs`);
+
+  deleteBlog(blogId);
+}
+
+export async function deleteAllBlogsAction() {
+  revalidatePath(`${BASE_URL}/blogs`);
+
+  deleteAllBlogs();
 }
 
 export async function getProductAction(id: string) {

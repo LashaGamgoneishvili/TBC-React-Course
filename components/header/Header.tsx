@@ -1,6 +1,5 @@
 "use server";
 import TranslationsProvider from "../TranslationsProvider";
-import { HeaderProps } from "../../types/types";
 import initTranslations from "../../app/i18n";
 import StickyHeader from "./StickyHeader";
 

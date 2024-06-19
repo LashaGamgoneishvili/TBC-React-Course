@@ -1,6 +1,4 @@
 // import { useReducer } from "react";
-// import { SelectedProduct } from "./types/types";
-// import { Product } from "./types/types";
 
 // const initialState: SelectedProduct[] = [];
 

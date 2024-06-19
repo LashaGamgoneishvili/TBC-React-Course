@@ -1,9 +1,7 @@
-import { BlogObject, Righteous } from "../../types/types";
 import ProductList from "../mainPage/ProductList";
 import Landing from "./Landing";
 import NewArrivals from "./NewArrivals";
 import GridContainer from "./GridContainer";
-import AnimatedButton from "./AnimatedButton";
 import ProductPresentation from "./ProductPresentation";
 import SecondProductPresentation from "./SecondProductPresentation";
 import ExtraDetails from "./ExtraDetails";
@@ -28,9 +26,7 @@ export default function Content({
       <NewArrivals />
       <GridContainer />
       <ProductList data={data} searchParams={searchParams} />
-      <AnimatedButton mainColor="#ff2020" hoverColor="#4a4a4b">
-        View More Product
-      </AnimatedButton>
+
       <ProductPresentation />
       <SecondProductPresentation />
       <ExtraDetails />

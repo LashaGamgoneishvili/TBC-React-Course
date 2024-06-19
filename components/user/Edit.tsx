@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { updateUserAction } from "../../actions";
-import { DatabaseUser } from "../../types/types";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function EditForm({

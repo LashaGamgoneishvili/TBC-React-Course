@@ -1,5 +1,4 @@
 import { getUsers } from "../../app/api/api";
-import { DatabaseUser } from "../../types/types";
 import DeleteUserButton from "../user/DeleteUserButton";
 import AddUser from "../../components/user/AddUser";
 import EditForm from "../../components/user/Edit";

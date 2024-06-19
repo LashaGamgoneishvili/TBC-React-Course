@@ -1,8 +1,6 @@
 import Image from "next/image";
-// import { Params } from "../../../../../types/types";
 import { getAllProductAction } from "../../../../../actions";
 import { getProduct } from "../../../../api/api";
-import { BlogObject } from "../../../../../types/types";
 
 export async function generateStaticParams() {
   try {

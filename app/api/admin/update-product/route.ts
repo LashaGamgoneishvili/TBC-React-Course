@@ -4,14 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(request: NextRequest) {
   const body = await request.json();
   const { title, price, description, discount, productId } = body;
-  console.log(
-    "title, price, description, discount, productId",
-    title,
-    price,
-    description,
-    discount,
-    productId
-  );
+
   try {
     if (!title || !price || !description || !discount || !productId) {
       throw new Error(

@@ -7,7 +7,6 @@ export async function DELETE(request: NextRequest) {
   const body = await request.json();
   const { id } = body;
 
-  console.log("Delete-product-id", id);
 
   try {
     if (!id) throw new Error("ID is required");

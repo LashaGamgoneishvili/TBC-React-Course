@@ -1,11 +1,11 @@
 "use client";
-import { BlogObject } from "../../types/types";
 import DebounceSearchComponent from "./DebounceSearchComponent";
 import Link from "next/link";
 import Image from "next/image";
 import AddCartButton from "./AddChartButton";
 import { useEffect, useState } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
+import LoadMore from "./LoadeMore";
 
 // interface UserProfile {
 //   email: string;
@@ -29,12 +29,15 @@ export default function ProductList({
   };
   data: BlogObject;
 }) {
-  const [product, setProduct] = useState(data.result);
+  const [product, setProduct] = useState(() => data.result.slice(0));
+  const [moreContent, setMoreContent] = useState(false);
+  const [count, setCount] = useState(1);
   const query = searchParams?.query || "";
   const { user } = useUser();
 
   const role = user?.role;
-  console.log("Rolle", role);
+
+  const firstSixProduct = product.slice(0, 5);
 
   useEffect(() => {
     const searchedProduct = data.result.filter((product) =>
@@ -42,24 +45,29 @@ export default function ProductList({
     );
     setProduct(searchedProduct);
   }, [query, data.result]);
+
+  function handleMoreContant() {
+    setMoreContent(true);
+    setCount((count) => count + 1);
+  }
+
   return (
     <>
-      <div className="flex w-full items-center justify-center  gap-1 p-2">
-        <DebounceSearchComponent data={data} setProduct={setProduct} />
-      </div>
-
       <div className="flex flex-col w-full gap-6 items-center">
-        <h1 className="text-[52px]">Popular Items</h1>
+        <h1 className="text-[52px] -z-10">Popular Items</h1>
         <p className="text-center leading-8">
           Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
           labore et dolore magna aliqua. <br /> Quis ipsum suspendisse ultrices
           gravida.
         </p>
       </div>
+      <div className="flex w-full items-center justify-center  gap-1 p-2">
+        <DebounceSearchComponent data={data} setProduct={setProduct} />
+      </div>
       {/* dark:bg-[#282c34] */}
       {/* bg-[url('https://preview.colorlib.com/theme/timezone/assets/img/hero/about_hero.png')] */}
       <div className=" mx-[12%]  grid gap-12  grid-cols-1 px-4 mb-4  lg:grid-cols-1 xl:grid-cols-2  2xl:grid-cols-3">
-        {product?.map((item) => (
+        {firstSixProduct?.map((item) => (
           <div
             key={item.product_id}
             className="flex flex-col h-full gap-2 justify-center  w-full relative overflow-hidden items-center "
@@ -83,12 +91,24 @@ export default function ProductList({
                 <AddCartButton productId={item.product_id} role={role} />
               </div>
             </div>
-            <p className=" text-xl   z-10 w-full text-center ">
-              {item.description}
-            </p>
+            <p className=" text-xl w-full text-center ">{item.description}</p>
             <p className="text-center ">Price - {item.price}$</p>
           </div>
         ))}
+
+        <LoadMore data={data} moreContent={moreContent} page={count} />
+      </div>
+      <div className=" flex justify-center relative">
+        <div
+          className={`translate-x-0 bg-[#ff2020]  w-auto before:duration-300 before:w-0 before:left-0 before:absolute before:h-[100%] before:bg-[#4a4a4b] before:transition-all before:ease-in hover:before:w-full  before:-z-10 `}
+        >
+          <button
+            className="text-white  py-4  px-7 text-xl"
+            onClick={handleMoreContant}
+          >
+            View More Product
+          </button>
+        </div>
       </div>
     </>
   );

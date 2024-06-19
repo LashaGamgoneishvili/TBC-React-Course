@@ -1,12 +1,11 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { Product } from "../../../types/types";
 import { useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import ProductImageUpload from "../../ProductImageUpload";
 import { updateProductAction } from "../../../actions";
-import DeleteProductButton from "./DeteleProductButton";
+import DeleteProductButton from "./DeleteProductButton";
 
 export default function AdminProductList({ product }: { product: Product }) {
   const [edit, setEdit] = useState(false);
@@ -20,10 +19,7 @@ export default function AdminProductList({ product }: { product: Product }) {
   return (
     <>
       {!edit && (
-        <div
-          key={product.product_id}
-          className=" px-16 w-full h-auto border-light flex flex-col justify-between gap-24 items-center dark:border-[#ffffff] sm:flex-row "
-        >
+        <div className=" px-16 w-full h-auto border-light flex flex-col justify-between gap-24 items-center dark:border-[#ffffff] sm:flex-row ">
           <div className="flex gap-20 items-center ">
             <div className="overflow-hidden">
               <Link href={`product/${product.product_id}`}>
