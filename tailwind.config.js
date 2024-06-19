@@ -35,13 +35,27 @@ module.exports = {
         //   "0%": { transform: "translateY(-5%)" },
         //   "100%": { transform: "translateX(0)" },
         // },
-        slideInY: {
+        slideInX: {
           "0%": {
-            transform: "translateY(-5%)",
+            // transform: "translateY(-5%)",
+            transform: "translateX(-15%)",
+
             opacity: "0",
           },
           "100%": {
-            transform: "translateY(0)",
+            // transform: "translateY(0)",
+            transform: "translateX(-15)",
+            opacity: "1",
+          },
+        },
+        slideInY: {
+          "0%": {
+            transform: "translateY(-5%), translateX(0)",
+
+            opacity: "0.5",
+          },
+          "100%": {
+            transform: "translateY(10), translateX(0)",
             opacity: "1",
           },
         },
@@ -68,7 +82,9 @@ module.exports = {
 
       animation: {
         fadeOut: "fadeOut 2s ease-out forwards",
-        appear: "slideInY  0.5s ease-out ",
+        appear: "slideInX  0.5s ease-out ",
+        appearHeader: "slideInY  0.5s ease-out ",
+        appearFromTop: "slideInY 0.5s ease-out ",
         disAppear: "slideOutY  0.5s ease-out ",
         blinkingBg: "blinkingBg 2s ease-out infinite",
         fadeIn: "fadeIn 2s ease-in forwards",

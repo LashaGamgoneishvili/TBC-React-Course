@@ -1,6 +1,5 @@
 import { getAllProductAction } from "../../../../actions";
 import AdminProductList from "../../../../components/admin/product/ProductList";
-import { Product } from "../../../../types/types";
 import AddProduct from "../../../../components/admin/product/addProduct";
 
 export default async function AdminProduct() {

@@ -5,7 +5,7 @@ import { createContext, useContext, useState } from "react";
 const AppContext = createContext<any>(undefined);
 
 export function AppWrapper({ children }: { children: React.ReactNode }) {
-  let [state, setState] = useState("");
+  let [state, setState] = useState(0);
 
   return (
     <AppContext.Provider value={{ state, setState }}>

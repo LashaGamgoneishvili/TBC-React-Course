@@ -13,7 +13,6 @@ const Latest = ({ children }: { children: React.ReactNode }) => {
 
 const FlyoutLink = ({ children, FlyoutContent }: any) => {
   const [open, setOpen] = useState(false);
-  console.log("Pages");
   const showFlyout = open && FlyoutContent;
   return (
     <div

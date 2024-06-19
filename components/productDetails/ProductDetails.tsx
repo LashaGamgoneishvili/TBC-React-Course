@@ -1,5 +1,4 @@
 "use client";
-import { Product } from "../../types/types";
 import Image from "next/image";
 import SocialLinks from "../SocialLinks";
 

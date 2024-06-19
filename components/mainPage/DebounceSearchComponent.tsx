@@ -1,4 +1,3 @@
-import { BlogObject } from "../../types/types";
 import SortButton from "./sortButton";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";

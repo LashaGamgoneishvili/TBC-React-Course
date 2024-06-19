@@ -7,7 +7,6 @@ export async function DELETE(request: NextRequest) {
   const body = await request.json();
   const { id } = body;
   try {
-    console.log("DELETED-user-", id);
     if (!id) throw new Error("ID is required");
     await sql`DELETE FROM users WHERE user_id = ${id};`;
   } catch (error) {

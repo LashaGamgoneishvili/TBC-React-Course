@@ -1,6 +1,5 @@
 // "use client";
 // import { useState, useEffect } from "react";
-// import { SelectedProduct } from "./types/types";
 
 // export function useLocalStorageState(key: string, initialState?: any) {
 //   const [value, setValue] = useState(() => {

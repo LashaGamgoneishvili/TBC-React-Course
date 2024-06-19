@@ -12,7 +12,11 @@ export default function Chart() {
     async function getCart() {
       try {
         const count = await cartCount();
-        setState(count);
+        if (count) {
+          setState(count);
+        } else {
+          setState(0);
+        }
       } catch (error) {
         console.error("Failed to fetch user info:", error);
       }

@@ -2,14 +2,11 @@ import React from "react";
 
 function AnimatedButton({
   children,
-  mainColor,
-  hoverColor,
 }: {
   children: string;
   mainColor: string;
   hoverColor: string;
 }) {
-  console.log(mainColor, hoverColor);
   return (
     <div className=" flex justify-center relative">
       <div

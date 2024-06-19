@@ -12,7 +12,7 @@ export default function RemoveAllCheckout() {
   return (
     <button
       onClick={handleClickReset}
-      className=" top-24 right-16 bg-[#3b82f6] text-white px-4 py-2 rounded-md mb-5"
+      className="  bg-[#3b82f6] text-white px-14 py-4 hover:bg-white hover:text-[#ff2020] border duration-500 border-white hover:border-[#3b82f6] rounded-md "
     >
       Remove All
     </button>
