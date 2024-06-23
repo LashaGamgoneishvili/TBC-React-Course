@@ -100,7 +100,7 @@ function BurgerManue({ translations }: StickyHeaderProps) {
                   className=" cursor-pointer p-1    hover:text-[#ff2020] hover:duration-300"
                   onClick={() => setActive(false)}
                 >
-                  <Link href="/shop">{translations.shop}</Link>
+                  <Link href="/shoppingPage">{translations.shop}</Link>
                 </div>
 
                 <div
@@ -220,7 +220,7 @@ function BurgerManue({ translations }: StickyHeaderProps) {
                         }
                       >
                         <Link
-                          href="/shop"
+                          href="/shoppingPage"
                           className="hover:text-[#ff2020] duration-300 cursor-pointer border-b pb-[2px] hover:scale-[1.02]   border-[#ff2020]"
                           onClick={() => setActive(false)}
                         >

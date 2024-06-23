@@ -176,6 +176,22 @@ export async function addCart(id: number, productId: number) {
   });
   return await response.json();
 }
+export async function addShipping(
+  productId: number,
+  quantity: number,
+  userId: string
+) {
+  const response = await fetch(`${BASE_URL}/api/shipping/add`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      productId: productId,
+      quantity: quantity,
+      userId: userId,
+    }),
+  });
+  return await response.json();
+}
 
 export async function emptyCart(userId: number) {
   revalidatePath(`${BASE_URL}/checkout`);

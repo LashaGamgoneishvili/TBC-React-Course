@@ -1,7 +1,4 @@
 import Image from "next/image";
-import image1 from "../../public/Assets/new_product1.png.webp";
-import image2 from "../../public/Assets/new_product2.png.webp";
-import image3 from "../../public/Assets/new_product3.png";
 
 function NewArrivals() {
   return (
@@ -11,7 +8,7 @@ function NewArrivals() {
         <div className="flex flex-col gap-2 items-center  overflow-hidden ">
           <div className="overflow-hidden">
             <Image
-              src={image1}
+              src="https://ajy8khmx9vtvyckn.public.blob.vercel-storage.com/New_Arrivals-1-VhkHZcBq4nMtWSjInDTjowrLpBxDjb.webp"
               width={150}
               height={150}
               className="h-[500px] w-96 hover:scale-105 duration-500"
@@ -25,7 +22,7 @@ function NewArrivals() {
         <div className="flex flex-col gap-2 items-center overflow-hidden ">
           <div className="overflow-hidden">
             <Image
-              src={image2}
+              src="https://ajy8khmx9vtvyckn.public.blob.vercel-storage.com/New_Arrivals-2-LETnb20IDkh7Al3JJEQcqUy19kPYzr.webp"
               width={150}
               height={150}
               className=" h-[500px] w-96 hover:scale-105 duration-500"
@@ -39,7 +36,7 @@ function NewArrivals() {
         <div className="flex flex-col gap-2 items-center overflow-hidden ">
           <div className="overflow-hidden">
             <Image
-              src={image3}
+              src="https://ajy8khmx9vtvyckn.public.blob.vercel-storage.com/New_Arrivals-3-wOGzYZYntH4GvfiBiFcmVD5I3rTlp4.png"
               width={150}
               height={150}
               className=" h-[500px] w-96 hover:scale-105 duration-500"

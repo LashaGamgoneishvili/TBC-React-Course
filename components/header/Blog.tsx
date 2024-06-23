@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function Blog({ children }: { children: string }) {
   return (
     <div className="flex justify-center items-center  px-3 py-12">
-      <FlyoutLink href={`/shop`} FlyoutContent={List}>
+      <FlyoutLink href={`/shoppingPage`} FlyoutContent={List}>
         {children}
       </FlyoutLink>
     </div>

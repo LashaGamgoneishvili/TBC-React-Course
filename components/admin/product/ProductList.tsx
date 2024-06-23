@@ -19,8 +19,8 @@ export default function AdminProductList({ product }: { product: Product }) {
   return (
     <>
       {!edit && (
-        <div className=" px-16 w-full h-auto border-light flex flex-col justify-between gap-24 items-center dark:border-[#ffffff] sm:flex-row ">
-          <div className="flex gap-20 items-center ">
+        <div className=" px-16 w-full  gap-5 border-b md:border-none mb-8 md:mb-0 py-5 md:py-0  h-auto border-light flex flex-col justify-between md:gap-10 lg:gap-24 items-center dark:border-[#ffffff] md:flex-row ">
+          <div className="flex flex-col md:flex-row md:gap-5 lg:gap-20 items-center ">
             <div className="overflow-hidden">
               <Link href={`product/${product.product_id}`}>
                 <Image
@@ -32,16 +32,16 @@ export default function AdminProductList({ product }: { product: Product }) {
                 />
               </Link>
             </div>
-            <h2 className=" dark:text-[#ffffff] w-52">{product.title}</h2>
+            <h2 className=" dark:text-[#ffffff] text-center w-52">
+              {product.title}
+            </h2>
           </div>
-          <div className="flex justify-around ">
-            <div className="flex items-center w-auto justify-end gap-44">
-              <div className="flex gap-28 items-center">
-                <p>{description}</p>
-                <p className=" dark:text-[#ffffff] w-16 flex justify-start ">
-                  {price}$
-                </p>
-              </div>
+          <div className="flex items-center w-full justify-center ">
+            <div className="flex justify-center flex-col sm:flex-row gap-8 md:gap-0 w-full md:justify-between items-center text-sm xl:text-base">
+              <p>{description}</p>
+              <p className=" dark:text-[#ffffff] w-16 flex justify-start ">
+                {price}$
+              </p>
             </div>
           </div>
           <div onClick={() => setEdit(true)} className="cursor-pointer">

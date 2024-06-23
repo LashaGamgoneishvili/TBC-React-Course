@@ -2,10 +2,11 @@ import { getAllCartProduct } from "../../../../actions";
 import ProductListContainer from "../../../../components/checkout/ProductListContainer";
 
 export default async function CheckOut() {
-  let products: CheckoutProduct[] = [];
+  // let products: CheckoutProduct[] = [];
 
   const product = await getAllCartProduct();
-  products = product.rows;
+  console.log("product-checkout", product);
+  const products = product.rows;
 
   // const totalPrice = products.reduce(
   //   (acc: number, curr: CheckoutProduct) => acc + Number(curr.price),
@@ -16,15 +17,15 @@ export default async function CheckOut() {
     <div
       className={`${
         products
-          ? "w-full px-40 items-end text-[#8e8bb2] flex flex-col"
-          : "w-full px-40 items-center justify-center text-[#8e8bb2] flex flex-col"
+          ? "w-full xl:px-40 md:items-end items-center text-[#8e8bb2] flex flex-col"
+          : "w-full sm:px-40 items-center justify-center text-[#8e8bb2] flex flex-col"
       } `}
     >
-      <div className="w-full mb-8">
+      <div className="w-full  mb-8">
         <div className="flex justify-between mt-24 items-center relative">
           <div className="absolute border-b w-full mt-8"></div>
           <p className="mb-4 pl-8">Product</p>
-          <div className="flex gap-[150px] mb-4 pr-8">
+          <div className="hidden sm:flex gap-8 sm:gap-16 md:gap-24 lg:gap-[150px] mb-4 pr-8">
             <p>Price</p>
             <p>Quantity</p>
             <p className="ml-20">Total</p>

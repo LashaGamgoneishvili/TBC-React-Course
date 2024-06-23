@@ -4,7 +4,6 @@ import { NextResponse } from "next/server";
 import { i18nRouter } from "next-i18n-router";
 import i18nConfig from "./i18nConfig";
 import type { NextRequest } from "next/server";
-// import { getSession } from "@auth0/nextjs-auth0";
 
 export async function middleware(request: NextRequest) {
   // let url = request.nextUrl.pathname;
@@ -16,22 +15,31 @@ export async function middleware(request: NextRequest) {
   // const user = session?.user as GetSessionUser | undefined;
 
   const cookieStore = request.cookies;
+  // const cookie = cookieStore.get(AUTH_COOKIE_KEY);
+  // console.log("cookie-1", cookie);
   const appSessionCookie = cookieStore.get("appSession");
   const { pathname } = request.nextUrl;
+
+  // console.log("appSessionCookie", user);
   if (
     !appSessionCookie &&
     (pathname.startsWith("/profile") ||
       pathname.startsWith("/admin") ||
       pathname.startsWith("/checkout") ||
       pathname.startsWith("/AdminProduct") ||
-      pathname.startsWith("/user") ||
-      pathname.startsWith("/login"))
+      pathname.startsWith("/user"))
   ) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
   if (appSessionCookie && pathname.startsWith("/login")) {
     return NextResponse.redirect(new URL("/", request.url));
+  }
+
+  if (!appSessionCookie && pathname.startsWith("/login")) {
+    return NextResponse.redirect(
+      new URL("/api/user-api/create-user-login", request.url)
+    );
   }
 
   // if (appSessionCookie && pathname.startsWith("/login")) {

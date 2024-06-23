@@ -79,7 +79,7 @@ function StickyHeader({ translations }: StickyHeaderProps) {
                   <Link href="/">{translations.home}</Link>
                 </li>
                 <li className=" cursor-pointer p-1    hover:text-[#ff2020] hover:duration-300">
-                  <Link href="/shop">{translations.shop}</Link>
+                  <Link href="/shoppingPage">{translations.shop}</Link>
                 </li>
                 <li className="hover:text-[#ff2020] hover:duration-300 cursor-pointer">
                   <Link href="/about">{translations.about}</Link>
@@ -160,7 +160,7 @@ function StickyHeader({ translations }: StickyHeaderProps) {
                   <Link href="/">{translations.home}</Link>
                 </li>
                 <li className=" cursor-pointer p-1    hover:text-[#ff2020] hover:duration-300">
-                  <Link href="/shop">{translations.shop}</Link>
+                  <Link href="/shoppingPage">{translations.shop}</Link>
                 </li>
                 <li className="hover:text-[#ff2020] hover:duration-300 cursor-pointer">
                   <Link href="/about">{translations.about}</Link>

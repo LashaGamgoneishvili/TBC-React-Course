@@ -31,7 +31,7 @@ export async function POST(request: any) {
             currency: "usd",
           },
         });
-        console.log(prod);
+        console.log("prod-123", prod);
       }
     }
   } catch (error) {

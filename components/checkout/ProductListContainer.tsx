@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import CheckoutProductList from "./CheckoutProductList";
 import ShippingForm from "./ShippingForm";
@@ -14,6 +14,27 @@ export default function ProductListContainer({
 }) {
   const [total, setTotal] = useState(0);
   const { setState } = useAppContext();
+  const [url, setUrl] = useState("");
+
+  /*eslint-disable*/
+  useEffect(() => {
+    async function shipping() {
+      if (!url) return;
+      for (const product of products) {
+        const promise = await createOrder(product.id, product.quantity);
+        const result = await Promise.all(promise);
+        // Assuming createOrder is an async function
+        if (result) {
+          deleteAllItem();
+          setState(0);
+          console.log(url);
+          window.location.href = url;
+        }
+      }
+    }
+
+    shipping();
+  }, [url, setState]);
 
   console.log("products, products", products);
   const checkout = async () => {
@@ -29,12 +50,17 @@ export default function ProductListContainer({
       })
       .then((response: any) => {
         console.log("response-456", response);
+
         if (response.url) {
-          window.location.href = response.url;
-          // console.log(response.url);
-          deleteAllItem();
-          setState(0);
-          createOrder();
+          console.log("response.url", response.url);
+          // Make sure to delete all items and set the state before redirecting
+          setUrl(response.url);
+          // Create orders for all products
+          // Redirect to the new URL after all orders are created
+          // setTimeout(() => {
+          //   window.location.href = response.url;
+          //   // console.log("response.url", response.url);
+          // }, 1000);
         }
       });
   };
@@ -48,7 +74,7 @@ export default function ProductListContainer({
         {products?.length > 0 && <RemoveAllCheckout />}
         <button
           onClick={checkout}
-          className="  bg-[#3b82f6] text-white px-14 py-4 hover:bg-white hover:text-[#ff2020] border duration-500 border-white hover:border-[#3b82f6] rounded-md "
+          className="  bg-[#3b82f6] text-white px-10 md:px-14 py-2 md:py-4 hover:bg-white hover:text-[#ff2020] border duration-500 border-white hover:border-[#3b82f6] rounded-md "
         >
           Buy Now
         </button>
@@ -64,8 +90,8 @@ export default function ProductListContainer({
         <hr className="w-full mb-8" />
         <div className="flex justify-end w-full gap-4 ">
           <Link
-            href={"/shop"}
-            className="  bg-[#3b82f6] text-white px-14 py-4 hover:bg-white hover:text-[#ff2020] border duration-500 border-white hover:border-[#3b82f6] rounded-md "
+            href={"/shoppingPage"}
+            className="  bg-[#3b82f6] text-white px-8 md:px-14 py-2 md:py-4 hover:bg-white hover:text-[#ff2020] border duration-500 border-white hover:border-[#3b82f6] rounded-md "
           >
             continue shopping
           </Link>

@@ -49,7 +49,7 @@ export default function ProductList({
 
   function handleMoreContant() {
     if (count > 2) {
-      return router.push("/shop");
+      return router.push("/shoppingPage");
     }
     setMoreContent(true);
     setCount((count) => count + 1);

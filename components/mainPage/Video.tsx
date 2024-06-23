@@ -3,9 +3,9 @@ import { useState } from "react";
 import { CiVolumeHigh } from "react-icons/ci";
 import { CiVolumeMute } from "react-icons/ci";
 
-// const myVideo =
-//   "https://ajy8khmx9vtvyckn.public.blob.vercel-storage.com/Rolex%20Air-King-VxzJ3a43GdiUk8fxgyiP8vmUwGTtL2.mp4";
-const myVideo = "https://www.youtube.com/watch?v=nyaBARDPqGQ";
+const myVideo =
+  "https://ajy8khmx9vtvyckn.public.blob.vercel-storage.com/Rolex%20Air-King-VxzJ3a43GdiUk8fxgyiP8vmUwGTtL2.mp4";
+// const myVideo = "https://www.youtube.com/watch?v=nyaBARDPqGQ";
 
 export default function Video() {
   const [muted, setMuted] = useState(true);
