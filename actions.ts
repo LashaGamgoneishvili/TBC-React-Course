@@ -15,6 +15,7 @@ import {
   updateUser,
   uploadNewBlog,
   getBlog,
+  addShipping,
 } from "./app/api/api";
 // import { cookies } from "next/headers";
 import { addCart } from "./app/api/api";
@@ -166,7 +167,15 @@ export async function updateBlogComment(formData: FormData) {
   );
 }
 
-export async function createOrder() {}
+export async function createOrder(productId: number, quantity: number) {
+  const session = await getSession();
+  const user = session?.user;
+  const userId = user?.sub;
+  const response = await addShipping(productId, quantity, userId);
+  const shippingProduct = await response.json();
+  console.log("shippingProduct", shippingProduct);
+  return shippingProduct;
+}
 
 export async function deleteUserAction(id: string) {
   deleteUser(id);
@@ -356,4 +365,26 @@ export async function deleteAllBlogsAction() {
 export async function getProductAction(id: string) {
   const product = await getProduct(id);
   return product;
+}
+
+export async function getAllShippingProduct() {
+  const session = await getSession();
+  if (!session) {
+    throw new Error("No active session found.");
+  }
+
+  const user = session.user;
+  if (!user || !user.sub) {
+    throw new Error("User not found or user ID is missing.");
+  }
+
+  const id = user.sub;
+
+  try {
+    const product = await getCart(id);
+    return product;
+  } catch (error) {
+    console.error("Error fetching cart products:", error);
+    throw error;
+  }
 }

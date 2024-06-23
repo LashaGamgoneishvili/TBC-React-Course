@@ -3,6 +3,7 @@ import DeleteUserButton from "../user/DeleteUserButton";
 import AddUser from "../../components/user/AddUser";
 import EditForm from "../../components/user/Edit";
 import { getSession } from "@auth0/nextjs-auth0";
+import { redirect } from "next/navigation";
 
 export default async function Users() {
   const session = await getSession();
@@ -10,6 +11,10 @@ export default async function Users() {
   const userId = user?.sub;
   const id = userId.slice(-5);
   const users = await getUsers();
+
+  if (user && user?.role.length < 1) {
+    redirect("/");
+  }
 
   return (
     <div className=" bg-white w-full h-full flex flex-col py-8 ">

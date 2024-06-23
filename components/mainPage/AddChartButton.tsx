@@ -27,8 +27,6 @@ export default function AddCartButton({
 
   const handleClick = () => {
     setIsDisabled(true);
-
-    console.log("productId", productId);
     // Your click handling logic here
     if (user && roleArr[0] !== "admin" && productId) {
       console.log("useAppContext-state", state);

@@ -29,7 +29,7 @@ export default async function Profile() {
             <AvatarUploadPage userImage={userImage} />
           </div>
           <div className="flex border lg:border-none lg:shadow-none lg:h-64 lg:items-center  border-blue-500 p-2 sm:p-4 xs:p-2 rounded-lg  xs:gap-3 shadow-lg bg-white ">
-            {user.email_verified ? (
+            {user && user.email_verified ? (
               <ProfileInfoWithEmail
                 user={user}
                 lastFiveCharacters={lastFiveCharacters}

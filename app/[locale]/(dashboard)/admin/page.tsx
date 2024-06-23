@@ -2,9 +2,22 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useUser } from "@auth0/nextjs-auth0/client";
+import { useEffect } from "react";
 
 export default function UsersPage() {
+  const { user } = useUser();
   const router = useRouter();
+  const role = user?.role;
+  const typedUser = user as User | undefined;
+
+  useEffect(() => {
+    // Your click handling logic here
+    if (typedUser && typedUser.role[0] !== "admin") {
+      router.push("/");
+      console.log("role", role);
+    }
+  }, [router, user, role, typedUser]);
 
   function handleClickUser() {
     router.push("/user");
@@ -17,7 +30,7 @@ export default function UsersPage() {
   }
   return (
     <>
-      <div className="flex justify-center mt-20 items-center flex-col lg:flex-row w-full min-h-fit gap-8">
+      <div className="flex justify-center my-20 items-center flex-col lg:flex-row w-full min-h-fit gap-8">
         <div
           className="flex flex-col  gap-8 justify-center h-96 items-center p-16 hover:scale-[1.02] transition-all ease-out duration-500  shadow-md  cursor-pointer"
           onClick={handleClickUser}
