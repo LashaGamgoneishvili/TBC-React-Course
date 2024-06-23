@@ -5,9 +5,9 @@ import image3 from "../../public/Assets/new_product3.png";
 
 function NewArrivals() {
   return (
-    <div className="w-full flex flex-col gap-16 ">
+    <div className="w-full flex flex-col gap-16">
       <h1 className="text-[52px] ml-[9%]">New Arrivals</h1>
-      <div className="flex justify-center items-center text-xl gap-12">
+      <div className="flex flex-wrap justify-center items-center  px-8 text-xl gap-6 xl:gap-12 w-full ">
         <div className="flex flex-col gap-2 items-center  overflow-hidden ">
           <div className="overflow-hidden">
             <Image

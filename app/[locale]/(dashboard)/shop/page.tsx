@@ -1,9 +1,6 @@
-import Link from "next/link";
 import { getAllProductAction } from "../../../../actions";
-
-import Image from "next/image";
-import AddCartButton from "../../../../components/mainPage/AddChartButton";
 import { getSession } from "@auth0/nextjs-auth0";
+import ShopProductList from "../../../../components/shop/ShopProductList";
 
 export async function generateStaticParams() {
   try {
@@ -31,14 +28,24 @@ export async function generateStaticParams() {
   }
 }
 
-export default async function Shop() {
+export default async function Shop({
+  searchParams,
+}: {
+  searchParams?: {
+    query: string;
+    page: string;
+  };
+}) {
   const product: BlogObject = await getAllProductAction();
   const session = await getSession();
   const user = session?.user;
-
   const role = user?.role;
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-4 2xl:grid-cols-3 sm:grid-cols-2 mx-[12%] gap-6">
+    <>
+      <ShopProductList data={product} searchParams={searchParams} role={role} />
+      {/* <div className="flex w-full items-center justify-center  gap-1 p-2">
+        <DebounceSearchComponent data={product} setProduct={setProduct} />
+      </div>
       {product.result.map((item) => (
         <div
           key={item.product_id}
@@ -66,20 +73,7 @@ export default async function Shop() {
           <p className=" text-xl w-full text-center ">{item.description}</p>
           <p className="text-center ">Price - {item.price}$</p>
         </div>
-        // <div
-        //   key={product.product_id}
-        //   className="flex flex-col gap-3 justify-center items-center"
-        // >
-        //   <Image
-        //     src={product.image}
-        //     alt="Product-image"
-        //     width={150}
-        //     height={150}
-        //     priority
-        //   />
-        //   <h1>{product.description}</h1>
-        // </div>
-      ))}
-    </div>
+      ))} */}
+    </>
   );
 }

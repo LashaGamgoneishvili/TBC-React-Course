@@ -23,8 +23,10 @@
     "lucide-react": "^0.376.0",
     "next": "^14.2.3",
     "next-i18n-router": "^5.4.2",
+    "next-video": "^1.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.4.1",
     "react-i18next": "^14.1.1",
     "react-icons": "^5.1.0",
     "react-intersection-observer": "^9.10.3",
@@ -32,8 +34,10 @@
     "stripe": "^15.11.0",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
+    "typescript": "^5.5.2",
     "use-debounce": "^10.0.1",
-    "vercel": "^34.1.8"
+    "vercel": "^34.1.8",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "20.12.7",

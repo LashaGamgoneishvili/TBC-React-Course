@@ -1,4 +1,3 @@
-"use client";
 import Image from "next/image";
 import { IoMdPerson } from "react-icons/io";
 import { FaComment } from "react-icons/fa";
@@ -37,16 +36,17 @@ export default function BlogList({
   const [image, setImage] = useState(blog.image);
   const [readMore, setReadMore] = useState(false);
 
-  console.log("blog", blog);
   const userCount = Object.keys(blog.comment).length;
   // const blogTime = blog.time;
   const stateTime = time;
   // const [months, days] = blogTime?.split(" ");
   const [months, days] = stateTime?.split(" ");
 
+  /*eslint-disable*/
   useEffect(() => {
-    setComment(blog.comment[lastFiveCharacters]); // Set the comment based on the userId, default to an empty string if not found
-  }, [blog.comment, lastFiveCharacters]);
+    setComment(blog.comment[lastFiveCharacters]);
+  }, [blog.comment]);
+
   useEffect(() => {
     setMonth(months);
     setDay(days);
@@ -62,28 +62,6 @@ export default function BlogList({
       SetCommentOpend(false);
     }, 100);
   }
-
-  // useEffect(() => {
-  //   const handleDelete = async () => {
-  //     if (!blog.blog_id) return;
-
-  //     try {
-  //       return await fetch(`${BASE_URL}/api/admin/delete-blog`, {
-  //         method: "DELETE",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({
-  //           blogId: blog.blog_id,
-  //         }),
-  //       });
-  //     } catch (error) {
-  //       alert("Error deleting blog");
-  //       throw error;
-  //     }
-  //   };
-  //   handleDelete();
-  // }, []);
 
   function handleDelete() {
     deleteBlogAction(blog.blog_id);
@@ -106,7 +84,7 @@ export default function BlogList({
               alt="blog-post"
               className="w-full"
             />
-            <div className="absolute flex flex-col items-center justify-center gap-1 text-white py-3 px-6 -bottom-8 left-16 rounded-md bg-[#ff2020] text-2xl">
+            <div className="absolute flex flex-col items-center justify-center gap-1 text-white py-3 px-6 -bottom-8 left-4 sm:left-16 rounded-md bg-[#ff2020] sm:text-2xl text-base">
               <span>{day}</span> <span>{month}</span>
             </div>
           </div>
@@ -126,18 +104,21 @@ export default function BlogList({
               </button>
             </>
           )}
-          <div className="flex flex-col gap-6 px-12 ">
-            <Link href={`/blog`} className="text-2xl">
+          <div className="flex flex-col gap-6 sm:px-12 px-4">
+            <Link
+              href={`/blogs/${blog.blog_id}`}
+              className="md:text-2xl sm:text-xl text-lg"
+            >
               {title}
               {/* Google inks pact for new 35-storey office */}
             </Link>
-            <p className="space-y-10">
+            <p className="space-y-10 md:text-lg sm:text-base text-xs">
               {description}
               {/* That dominion stars lights dominion divide years for fourth have
               don&#39;t stars is that he earth it first without heaven in place
               seed it second morning saying. */}
             </p>
-            <div className="flex gap-4 text-[#999999]">
+            <div className="flex gap-4 md:text-lg sm:text-base text-xs text-[#999999]">
               <div className="flex gap-2">
                 <IoMdPerson />
                 <p>Travel, Lifestyle</p>
@@ -196,7 +177,7 @@ export default function BlogList({
                   transition={{ duration: 0.3, ease: "easeOut" }}
                   className="px-5 "
                 >
-                  <div className="flex flex-col gap-1 w-full">
+                  <div className="flex flex-col gap-1 w-full ">
                     <label htmlFor="comment" className="text-xs font-semibold ">
                       comment
                     </label>
@@ -234,8 +215,8 @@ export default function BlogList({
             )}
           </AnimatePresence>
           {!commentOpened && comment && (
-            <div className="flex flex-col gap-2 border-t border-black w-full  mb-5 px-5">
-              <div className="flex text-xs  mt-5 relative  gap-4">
+            <div className="flex flex-col gap-2 border-t border-black w-full   mb-5 px-5">
+              <div className="flex text-xs  mt-5 relative gap-1  sm:gap-4">
                 <Image
                   src={image}
                   width={25}
@@ -244,9 +225,11 @@ export default function BlogList({
                   className="rounded-full"
                 />
                 <p>{user?.nickname || user?.name}</p>
-                <p className="absolute top-0 right-3">Your comment</p>
+                <p className="absolute top-0 sm:right-3 right-0 sm:text-sm text-xs ">
+                  Your comment
+                </p>
               </div>
-              <p>
+              <p className="md:text-lg sm:text-base text-sm">
                 &bull; <span> </span> {comment}
               </p>
             </div>
@@ -313,19 +296,7 @@ export default function BlogList({
                     className="rounded-md px-4 text-black w-full py-1 h-64  border-black border"
                   />
                 </div>
-                {/* <div className="flex flex-col gap-1 w-full">
-                  <label htmlFor="comment" className="text-xs font-semibold">
-                    comment
-                  </label>
-                  <input
-                    id="comment"
-                    type="string"
-                    name="comment"
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
-                    className="rounded-md px-4 text-black py-1 w-full border-black border"
-                  />
-                </div> */}
+
                 <div className="flex flex-col gap-1 w-32">
                   <label htmlFor="time" className="text-xs font-semibold">
                     time

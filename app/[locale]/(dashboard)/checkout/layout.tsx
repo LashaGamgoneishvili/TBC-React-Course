@@ -1,3 +1,9 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: { absolute: "Checkout" },
+};
+
 function GoogleFontLayout({ children }: { children: React.ReactNode }) {
   return (
     <div>

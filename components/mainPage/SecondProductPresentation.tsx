@@ -1,9 +1,10 @@
 import Image from "next/image";
-import image from "../../public/Assets/watches/popular6.png.webp";
 import AnimatedButton from "./AnimatedButton";
+import image from "../../public/Assets/watches/popular4.png.webp";
+
 function SecondProductPresentation() {
   return (
-    <div className="mx-[12%] grid grid-flow-col gap-24 items-center overflow-hidden">
+    <div className="mx-1 md:mx-6 lg:mx-[12%] md:grid hidden md:grid-flow-col gap-24 items-center overflow-hidden">
       <div className="flex justify-start items-center">
         <Image
           src={image}
@@ -14,8 +15,8 @@ function SecondProductPresentation() {
         />
       </div>
       <div className="flex flex-col w-full gap-12">
-        <h1 className="text-[52px]">Watch of Choice</h1>
-        <p className=" text-xl w-full">
+        <h1 className="md:text-[52px] text-3xl">Watch of Choice</h1>
+        <p className=" text-lg md:text-xl w-full text-[#919aa0]">
           Enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
           ut aliquip ex ea commodo consequat. Duis aute irure dolor in
           reprehenderit in voluptate velit esse.

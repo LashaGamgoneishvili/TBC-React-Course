@@ -1,9 +1,6 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import userImage from "../../../../public/Assets/2815428.png";
-import productImage from "../../../../public/Assets/images.png";
-import blogImage from "../../../../public/Assets/blog/111-tRWJKdFbEksGhmgQCY43vJjiFYN3D5.jpg";
 import { useRouter } from "next/navigation";
 
 export default function UsersPage() {
@@ -20,13 +17,13 @@ export default function UsersPage() {
   }
   return (
     <>
-      <div className="flex justify-center items-center mt-5 w-full min-h-fit gap-8">
+      <div className="flex justify-center mt-20 items-center flex-col lg:flex-row w-full min-h-fit gap-8">
         <div
-          className="flex flex-col  gap-8 justify-center items-center p-16 hover:scale-[1.02] transition-all ease-out duration-500  shadow-md  cursor-pointer"
+          className="flex flex-col  gap-8 justify-center h-96 items-center p-16 hover:scale-[1.02] transition-all ease-out duration-500  shadow-md  cursor-pointer"
           onClick={handleClickUser}
         >
           <Image
-            src={userImage}
+            src="https://ajy8khmx9vtvyckn.public.blob.vercel-storage.com/user-25mvgDzIwNAL0xGnKHHKmieCnYqIVq.png"
             width={150}
             height={150}
             priority
@@ -40,11 +37,11 @@ export default function UsersPage() {
           </Link>
         </div>
         <div
-          className="flex flex-col gap-8 h-85% justify-center items-center p-16 hover:scale-[1.02] transition-all ease-out duration-500 shadow-md  cursor-pointer"
+          className="flex flex-col gap-8 h-96 justify-center items-center p-16 hover:scale-[1.02] transition-all ease-out duration-500 shadow-md  cursor-pointer"
           onClick={handleClickProduct}
         >
           <Image
-            src={productImage}
+            src="https://ajy8khmx9vtvyckn.public.blob.vercel-storage.com/product-q4zcJ9NI0xMM0EQsJJFQjiHjWOG0Mv.png"
             width={150}
             height={150}
             priority
@@ -58,12 +55,12 @@ export default function UsersPage() {
           </Link>
         </div>
         <div
-          className="flex flex-col gap-8 h-85% justify-center items-center  py-16 hover:scale-[1.02] transition-all ease-out duration-500 shadow-md  cursor-pointer"
+          className="flex flex-col gap-8 h-96 h-85% justify-center items-center  py-16 hover:scale-[1.02] transition-all ease-out duration-500 shadow-md  cursor-pointer"
           onClick={handleClickBlog}
         >
           <Image
-            src={blogImage}
-            width={270}
+            src="https://ajy8khmx9vtvyckn.public.blob.vercel-storage.com/single_blog_1.png-AyXMWcz8CnHZvQDDVygnh7LcyJIAcr.webp"
+            width={280}
             height={150}
             priority
             alt="Person-logo"

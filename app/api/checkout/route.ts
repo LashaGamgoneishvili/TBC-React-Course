@@ -15,7 +15,6 @@ const getActiveProducts = async () => {
 export async function POST(request: any) {
   const { products } = await request.json();
   const data = products;
-  console.log("product-123", products);
   let activeProducts = await getActiveProducts();
 
   try {

@@ -28,6 +28,8 @@ interface BlogObject {
 interface GetSessionUser {
   email?: string;
   email_verified?: boolean;
+  given_name?: string;
+  family_name?: string;
   name?: string;
   nickname?: string;
   picture?: string;
@@ -46,6 +48,18 @@ interface GetSessionUser {
 //   sub: string;
 //   updated_at: string;
 //   role: string[];
+// }
+
+// interface UserProfile {
+//   email: string;
+//   email_verified: boolean;
+//   name: string;
+//   nickname: string;
+//   picture: string;
+//   role: string[];
+//   sid: string;
+//   sub: string;
+//   updated_at: string;
 // }
 
 interface BlogTypes {
@@ -69,13 +83,21 @@ interface HeaderProps {
   locale?: string;
 }
 
-interface User {
-  sub: number;
-  name: string;
-  email: string;
-  age: number;
+// interface User {
+//   sub: number;
+//   name: string;
+//   email: string;
+//   age: number;
+//   picture?: string;
+// }
+
+type User = {
+  sub: string;
+  name?: string;
+  email?: string;
   picture?: string;
-}
+  role: string[];
+};
 
 interface DatabaseUser {
   user_id: string;
@@ -121,3 +143,31 @@ interface Righteous {
 interface Params {
   id: string;
 }
+
+interface result {
+  name: string;
+  lastName: string;
+  email: string;
+  id: string;
+}
+
+type StickyHeaderProps = {
+  translations: {
+    home: string;
+    shop: string;
+    about: string;
+    latest: string;
+    blog: string;
+    pages: string;
+    contact: string;
+    productList: string;
+    productDetails: string;
+    blob: string;
+    blogDetails: string;
+    login: string;
+    cart: string;
+    element: string;
+    confirmation: string;
+    productCheckout: string;
+  };
+};

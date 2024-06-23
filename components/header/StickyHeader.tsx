@@ -3,7 +3,7 @@
 import Link from "next/link";
 import ThemeSwitch from "./ThemeSwitch";
 import LanguageChanger from "../LanguageChanger";
-import { CiSearch } from "react-icons/ci";
+// import { CiSearch } from "react-icons/ci";
 import Cart from "./Cart";
 import Latest from "./Latest";
 import Blog from "./Blog";
@@ -20,35 +20,6 @@ const tillana = Tillana({
   subsets: ["latin"],
   weight: "400",
 });
-
-type StickyHeaderProps = {
-  translations: {
-    home: string;
-    shop: string;
-    about: string;
-    latest: string;
-    blog: string;
-    pages: string;
-    contact: string;
-    productList: string;
-    productDetails: string;
-    blob: string;
-    blogDetails: string;
-    login: string;
-    cart: string;
-    element: string;
-    confirmation: string;
-    productCheckout: string;
-  };
-};
-
-type User = {
-  sub: string;
-  name?: string;
-  email?: string;
-  picture?: string;
-  role: string[];
-};
 
 function StickyHeader({ translations }: StickyHeaderProps) {
   const [header, setHeader] = useState(false);
@@ -76,8 +47,8 @@ function StickyHeader({ translations }: StickyHeaderProps) {
     <header
       className={`h-28 flex items-center z-50   ${tillana.className} ${
         header
-          ? "fixed bg-white w-full shadow-md  dark:bg-[#21252b] animate-appearHeader"
-          : "h-28 flex items-center z-10"
+          ? "fixed bg-white w-full shadow-md dark:bg-[#21252b] animate-appearHeader"
+          : "h-28 flex items-center z-10 shadow-sm"
       }`}
       // key={header ? "fixed-header" : "regular-header"}
     >
@@ -88,18 +59,18 @@ function StickyHeader({ translations }: StickyHeaderProps) {
             animate={{ opacity: 0.95, y: 0 }}
             exit={{ opacity: 0, y: 15 }}
             transition={{ duration: 0.1, ease: "easeOut" }}
-            className=" flex h-fit items-center flex-wrap justify-between w-full mx-6"
+            className=" flex h-fit sm:h-fit items-center justify-between w-full  sm:justify-between px-5   sm:mx-6"
           >
-            <div className=" righteous">
+            <div className="righteous">
               <Link href="/">
-                <span className="text-[32px] text-black dark:text-blue-500">
+                <span className="sm:text-[32px] text-2xl text-black dark:text-blue-500">
                   T
                 </span>
-                <span className="text-2xl text-black dark:text-blue-500">
+                <span className="sm:text-2xl text-xl text-black dark:text-blue-500">
                   ime
                 </span>
-                <span className="text-[32px] text-red-600"> Z</span>
-                <span className="text-2xl text-red-600">one</span>
+                <span className="sm:text-[32px] text-2xl text-red-600"> Z</span>
+                <span className="sm:text-2xl text-xl text-red-600">one</span>
               </Link>
             </div>
             <nav className="hidden lg:flex ">
@@ -133,11 +104,11 @@ function StickyHeader({ translations }: StickyHeaderProps) {
               </ul>
             </nav>
 
-            <div className="flex gap-4 ">
+            <div className="flex sm:gap-4 gap-2">
               <div className="flex justify-center items-center gap-4 text-xl ">
-                <div className="hover:text-red-500">
+                {/* <div className="hover:text-red-500">
                   <CiSearch />
-                </div>
+                </div> */}
                 {typedUser && typedUser.role[0] === "admin" && (
                   <div className=" cursor-pointer p-1   [transition:all_ease_0.2s] hover:text-[#ff2020] hover:duration-300">
                     <Link href="/admin">
@@ -173,14 +144,14 @@ function StickyHeader({ translations }: StickyHeaderProps) {
           >
             <div className=" righteous">
               <Link href="/">
-                <span className="text-[32px] text-black dark:text-blue-500">
+                <span className="sm:text-[32px] text-2xl text-black dark:text-blue-500">
                   T
                 </span>
-                <span className="text-2xl text-black dark:text-blue-500">
+                <span className="sm:text-2xl text-xl text-black dark:text-blue-500">
                   ime
                 </span>
-                <span className="text-[32px] text-red-600"> Z</span>
-                <span className="text-2xl text-red-600">one</span>
+                <span className="sm:text-[32px] text-2xl text-red-600"> Z</span>
+                <span className="sm:text-2xl text-xl text-red-600">one</span>
               </Link>
             </div>
             <nav className="hidden lg:flex ">
@@ -214,11 +185,11 @@ function StickyHeader({ translations }: StickyHeaderProps) {
               </ul>
             </nav>
 
-            <div className="flex gap-4 ">
-              <div className="flex justify-center items-center gap-4 text-xl ">
-                <div className="hover:text-red-500">
+            <div className="flex sm:gap-4 gap-2  justify-center items-center">
+              <div className="flex justify-center items-center sm:gap-4 gap-2 text-xl ">
+                {/* <div className="hover:text-red-500">
                   <CiSearch />
-                </div>
+                </div> */}
                 {typedUser && typedUser.role[0] === "admin" && (
                   <div className=" cursor-pointer p-1   [transition:all_ease_0.2s] hover:text-[#ff2020] hover:duration-300">
                     <Link href="/admin">

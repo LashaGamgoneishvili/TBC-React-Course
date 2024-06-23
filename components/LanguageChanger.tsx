@@ -35,7 +35,7 @@ export default function LanguageChanger() {
   return (
     <div className="flex  items-center" onClick={handleClick}>
       {language === "ka" ? (
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center gap-2 items-center">
           <Image
             src={georgia}
             priority={true}
@@ -44,9 +44,10 @@ export default function LanguageChanger() {
             width={150}
             height={150}
           />
+          <p className="hidden sm:block">GE</p>
         </div>
       ) : (
-        <div className="flex justify-center items-center">
+        <div className="flex gap-2 justify-center items-center">
           <Image
             src={kingdom}
             priority={true}
@@ -55,6 +56,7 @@ export default function LanguageChanger() {
             width={250}
             height={250}
           />
+          <p className="hidden sm:block">EN</p>
         </div>
       )}
     </div>
