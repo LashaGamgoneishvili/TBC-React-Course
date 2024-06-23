@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaCheck } from "react-icons/fa6";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 export default function AddCartButton({
   productId,
@@ -17,6 +18,7 @@ export default function AddCartButton({
   const [isDisabled, setIsDisabled] = useState(false);
   const { state, setState } = useAppContext();
   const router = useRouter();
+  const { user } = useUser();
 
   let roleArr: string[] = [];
   if (Array.isArray(role)) {
@@ -28,15 +30,15 @@ export default function AddCartButton({
 
     console.log("productId", productId);
     // Your click handling logic here
-    if (roleArr[0] !== "admin" && productId) {
+    if (user && roleArr[0] !== "admin" && productId) {
       console.log("useAppContext-state", state);
       addCartFunction(productId);
       setState((prev: number) => Number(prev) + 1);
     }
-    if (roleArr[0] === "admin") {
+    if (user && roleArr[0] === "admin") {
       alert("Admin cann't add product in cart");
     }
-    if (roleArr[0] !== "admin" && !productId) {
+    if (!user) {
       router.push(`${BASE_URL}/api/auth/login`);
     }
     // Re-enable the button after 1 second

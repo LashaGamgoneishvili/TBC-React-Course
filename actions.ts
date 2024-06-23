@@ -14,6 +14,7 @@ import {
   updateProduct,
   updateUser,
   uploadNewBlog,
+  getBlog,
 } from "./app/api/api";
 // import { cookies } from "next/headers";
 import { addCart } from "./app/api/api";
@@ -24,7 +25,7 @@ import { getSession } from "@auth0/nextjs-auth0";
 import { getAllProduct } from "./app/api/api";
 import { getProduct } from "./app/api/api";
 import { createProductAdmin } from "./app/api/api";
-
+import { profileEdit } from "./types/types";
 export async function createUserActionAdmin(formData: FormData) {
   revalidatePath(`${BASE_URL}/user`);
 
@@ -69,20 +70,28 @@ export async function createUserAction() {
   }
 }
 
-export async function updateUserAction(formData: FormData) {
-  const name = formData.get("name");
-  const lastName = formData.get("lastName");
-  const email = formData.get("email");
-  const id = formData.get("id");
-  const image = formData.get("image");
+export async function updateUserAction(updateProfile: unknown) {
+  // server-side validation
+  const result = profileEdit.safeParse(updateProfile);
+  if (!result.success) {
+    let errorMessage = "";
 
-  updateUser(
-    name as string,
-    lastName as string,
-    email as string,
-    id as string,
-    image as string
-  );
+    result.error.issues.forEach((issue) => {
+      return (errorMessage =
+        errorMessage + issue.path[0] + ": " + issue.message + ". ");
+    });
+
+    return { error: errorMessage };
+  }
+
+  try {
+    const response = await updateUser(result.data);
+    const users = await response.json();
+    return users;
+  } catch (error) {
+    console.log(error);
+    return { message: "Error During updating user" };
+  }
 }
 
 export async function updateProductAction(formData: FormData) {
@@ -212,9 +221,12 @@ export async function cartCount() {
 
   try {
     const products = await getCart(id);
-    const count = products?.rows?.reduce((acc: number, curr: Product) => {
-      return acc + curr.quantity;
-    }, 0);
+    const count = products?.rows?.reduce(
+      (acc: number, curr: CheckoutProduct) => {
+        return acc + curr.quantity;
+      },
+      0
+    );
     return count;
   } catch (error) {
     console.error("Error fetching cart count:", error);
@@ -310,6 +322,19 @@ export async function getAllBlogAction() {
   try {
     const blogs = await getAllBlog();
     return blogs;
+  } catch (err) {
+    console.error("Error in getAllProductAction:", err);
+    throw err;
+  }
+}
+
+export async function getBlogAction(blogId: string) {
+  revalidatePath(`${BASE_URL}/blogs`);
+
+  try {
+    const blog = await getBlog(blogId);
+    console.log("getBlogAction-blog", blog);
+    return blog;
   } catch (err) {
     console.error("Error in getAllProductAction:", err);
     throw err;

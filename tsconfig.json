@@ -23,13 +23,21 @@
       {
         "name": "next"
       }
-    ]
+    ],
+
+    "paths": {
+      "@/*": ["./*"],
+      "/*": ["./node_modules/*"]
+    }
   },
   "include": [
+    "video.d.ts",
+    "video.d.ts",
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
+    "next/types/**/*.ts",
     "components/header/Header.tsx",
     "components/auth/logoutbtn.tsx",
     "app/api/auth-login/login/route.tsx",
@@ -44,5 +52,6 @@
     "app/[locale]/login/layout.tsx",
     "i18nConfig.js"
   ],
+
   "exclude": ["node_modules"]
 }

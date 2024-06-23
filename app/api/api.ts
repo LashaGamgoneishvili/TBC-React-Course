@@ -58,17 +58,11 @@ export async function createProductAdmin(
   });
 }
 
-export async function updateUser(
-  name: string,
-  lastName: string,
-  email: string,
-  id: string,
-  image: string
-) {
+export async function updateUser(user: result) {
   revalidatePath(`${BASE_URL}/admin`);
   return await fetch(`${BASE_URL}/api/user-api/update-user`, {
     method: "POST",
-    body: JSON.stringify({ name, lastName, email, id, image }),
+    body: JSON.stringify({ user }),
   });
 }
 
@@ -96,6 +90,7 @@ export async function uploadNewBlog(
   revalidatePath(`${BASE_URL}/blogs`);
 
   return await fetch(`${BASE_URL}/api/admin/upload-blogs`, {
+    cache: "no-store",
     method: "POST",
     body: JSON.stringify({
       title,
@@ -119,6 +114,7 @@ export async function updateBlog(
   revalidatePath(`${BASE_URL}/blogs`);
 
   return await fetch(`${BASE_URL}/api/admin/update-blog`, {
+    cache: "no-store",
     method: "POST",
     body: JSON.stringify({
       title,
@@ -139,6 +135,7 @@ export async function updateComment(
   revalidatePath(`${BASE_URL}/blogs`);
 
   const response = await fetch(`${BASE_URL}/api/update-comment`, {
+    cache: "no-store",
     method: "POST",
     body: JSON.stringify({
       comment,
@@ -310,9 +307,40 @@ export async function getAllBlog() {
   }
 }
 
+export async function getBlog(blogId: string) {
+  const response = await fetch(`${BASE_URL}/api/get-blog/${blogId}`, {
+    cache: "no-store",
+  });
+  const blog = await response.json();
+  return blog;
+}
+// export async function getBlog(blogId: string) {
+//   revalidatePath(`${BASE_URL}/blogs${blogId}`);
+
+//   try {
+//     const response = await fetch(`${BASE_URL}/api/getBlog/${blogId}`, {
+//       cache: "no-store",
+//     });
+
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! status: ${response.status}`);
+//     }
+
+//     const blog = await response.json();
+//     return blog;
+//   } catch (error) {
+//     console.error("Failed to fetch products:", error);
+//     return {
+//       error: true,
+//       message: error,
+//     };
+//   }
+// }
+
 export async function deleteAllBlogs() {
   return fetch(`${BASE_URL}/api/admin/delete-All-Blogs`, {
     method: "DELETE",
+    cache: "no-store",
   });
 }
 export async function deleteBlog(blogId: number) {
@@ -320,6 +348,7 @@ export async function deleteBlog(blogId: number) {
 
   try {
     return await fetch(`${BASE_URL}/api/admin/delete-blog`, {
+      cache: "no-store",
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -336,6 +365,11 @@ export async function deleteBlog(blogId: number) {
 
 export async function getProduct(id: string) {
   const response = await fetch(`${BASE_URL}/api/get-product/${id}`);
+  const product = await response.json();
+  return product;
+}
+export async function getData() {
+  const response = await fetch(`${BASE_URL}/api/search`);
   const product = await response.json();
   return product;
 }

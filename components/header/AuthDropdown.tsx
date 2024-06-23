@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { CiLogin } from "react-icons/ci";
 
-function AuthDropdown({ user }: any) {
+function AuthDropdown({ user }: { user: any }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -34,7 +34,7 @@ function AuthDropdown({ user }: any) {
 
                   <a
                     title="login"
-                    href="/api/auth/login "
+                    href="/api/auth/login"
                     className="flex gap-3 items-center  hover:text-red-500 duration-300"
                   >
                     <CiLogin /> <span>Login</span>

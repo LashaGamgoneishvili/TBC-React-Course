@@ -1,6 +1,8 @@
 import { sql } from "@vercel/postgres";
 import { NextRequest, NextResponse } from "next/server";
 
+export const revalidate = 0;
+
 export async function POST(request: NextRequest) {
   const body = await request.json();
   const { title, price, description, discount, productId } = body;

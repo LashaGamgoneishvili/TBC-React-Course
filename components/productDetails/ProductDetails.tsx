@@ -2,7 +2,13 @@
 import Image from "next/image";
 import SocialLinks from "../SocialLinks";
 
-export default function ProductDetails({ data }: { data: Product }) {
+export default function ProductDetails({
+  data,
+  id,
+}: {
+  data: Product;
+  id: string;
+}) {
   return (
     <div
       key={data?.product_id}
@@ -29,7 +35,7 @@ export default function ProductDetails({ data }: { data: Product }) {
           <p className="border-slate-600 border-b-2 text-xl">Description:</p>
           <p className="text-sm">{data.description}</p>
         </div>
-        <SocialLinks />
+        <SocialLinks id={id} />
       </div>
     </div>
   );

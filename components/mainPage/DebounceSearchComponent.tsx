@@ -15,7 +15,7 @@ export default function DebounceSearchComponent({ data, setProduct }: Types) {
   const handleSearch = useDebouncedCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const params = new URLSearchParams(searchParams);
-      if (event.target.value) {
+      if (event.target.value.length > 2) {
         params.set("query", event.target.value);
       } else {
         params.delete("query");
@@ -30,10 +30,9 @@ export default function DebounceSearchComponent({ data, setProduct }: Types) {
     <>
       <div>
         <input
-          className="w-[40rem] justify-self-center rounded-[0.7rem] bg-[#e2e2e2]  px-2 py-2 [transition:all_0.3s] focus:bg-[#fff]"
+          className="lg:w-[40rem]  justify-self-center w-72 sm:w-[30rem] rounded-[0.7rem] bg-[#e2e2e2]  px-2 py-2 [transition:all_0.3s] focus:bg-[#fff]"
           type="text "
           placeholder="Search Product..."
-          // value={inputValue}
           onChange={handleSearch}
           defaultValue={searchParams.get("query")?.toString()}
         />

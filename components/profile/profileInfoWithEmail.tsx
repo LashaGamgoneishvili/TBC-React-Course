@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { getUserAction, updateUserAction } from "../../actions";
+import toast from "react-hot-toast";
 
 // interface User {
 //   given_name: string;
@@ -16,11 +17,34 @@ import { getUserAction, updateUserAction } from "../../actions";
 //   sid: string;
 // }
 
-export default function ProfileInfo({ user }: { user: any }) {
+export default function ProfileInfo({
+  user,
+  lastFiveCharacters,
+}: {
+  user: GetSessionUser;
+  lastFiveCharacters: string;
+}) {
   const [modal, setModal] = useState(false);
   const [name, setName] = useState(user.given_name);
   const [lastname, setLastName] = useState(user.family_name);
   const [email, setEmail] = useState(user.email);
+
+  const clinetAction = async (formData: FormData) => {
+    const updateProfile = {
+      name: formData.get("name"),
+      lastName: formData.get("lastName"),
+      email: formData.get("email"),
+      id: formData.get("userId"),
+    };
+
+    const response = await updateUserAction(updateProfile);
+
+    if (response?.error) {
+      toast.error(response.error);
+    } else {
+      setModal(false);
+    }
+  };
 
   useEffect(() => {
     async function fetchUserInfo() {
@@ -54,7 +78,7 @@ export default function ProfileInfo({ user }: { user: any }) {
           className={`${
             modal ? "block" : "hidden"
           } absolute h-screen w-full opacity-70 bg-gray-200 blur-md  left-0 top-0`}
-          onClick={() => setModal(false)}
+          // onClick={() => setModal(false)}
         ></div>
         <div
           className={`${
@@ -62,14 +86,16 @@ export default function ProfileInfo({ user }: { user: any }) {
           } flex absolute  left-[20%] top-1/3 h-52 z-20 px-16 rounded-md bg-white  opacity-65 justify-center items-center`}
         >
           <form
-            action={updateUserAction}
-            className="flex items-end justify-center gap-3"
+            action={clinetAction}
+            className="flex  items-end justify-center gap-3"
           >
             <div className="flex flex-col gap-1">
               <label htmlFor="name" className="text-xs font-semibold">
                 Name
               </label>
               <input
+                required
+                minLength={2}
                 id="name"
                 type="text"
                 name="name"
@@ -83,6 +109,8 @@ export default function ProfileInfo({ user }: { user: any }) {
                 lastName
               </label>
               <input
+                required
+                minLength={2}
                 id="lastName"
                 type="text"
                 name="lastName"
@@ -96,6 +124,7 @@ export default function ProfileInfo({ user }: { user: any }) {
                 Email
               </label>
               <input
+                required
                 id="email"
                 type="text"
                 name="email"
@@ -104,12 +133,24 @@ export default function ProfileInfo({ user }: { user: any }) {
                 className="rounded-md px-4 text-black py-1  border-black border"
               />
             </div>
+            <input
+              type="text"
+              name="userId"
+              value={lastFiveCharacters}
+              className="hidden"
+            />
             <button
               type="submit"
-              onClick={() => setModal(false)}
+              // onClick={() => setModal(false)}
               className="px-4 rounded-md  text-white bg-[#3b82f6] py-1 text-base hover:bg-sky-700  duration-500"
             >
               Save
+            </button>
+            <button
+              onClick={() => setModal(false)}
+              className="absolute -top-3 right-5 mt-4 p-2 text-2xl"
+            >
+              &#10005;
             </button>
           </form>
         </div>

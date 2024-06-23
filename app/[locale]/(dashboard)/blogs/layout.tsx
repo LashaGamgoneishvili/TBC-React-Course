@@ -1,3 +1,9 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: { absolute: "Blogs" },
+  description: "Read interesting blogs about our product",
+};
 function GoogleFontLayout({ children }: { children: React.ReactNode }) {
   return (
     <div>

@@ -25,7 +25,7 @@ export default async function Main({
   const products = await getAllProductAction();
 
   return (
-    <div className="flex flex-col  dark:text-[#abb2bf]  dark:bg-[#21252b] font-righteous">
+    <div className="flex flex-col dark:text-[#abb2bf]  dark:bg-[#21252b] font-righteous">
       <Header locale={locale} />
       <Content
         data={products}

@@ -12,34 +12,26 @@ import Image from "next/image";
 import dropDown from "../../public/Assets/down-arrow-svgrepo-com.svg";
 import { AnimatePresence, motion } from "framer-motion";
 
-type StickyHeaderProps = {
-  translations: {
-    home: string;
-    shop: string;
-    about: string;
-    latest: string;
-    blog: string;
-    pages: string;
-    contact: string;
-    productList: string;
-    productDetails: string;
-    blob: string;
-    blogDetails: string;
-    login: string;
-    cart: string;
-    element: string;
-    confirmation: string;
-    productCheckout: string;
-  };
-};
-
-type User = {
-  sub: string;
-  name?: string;
-  email?: string;
-  picture?: string;
-  role: string[];
-};
+// type StickyHeaderProps = {
+//   translations: {
+//     home: string;
+//     shop: string;
+//     about: string;
+//     latest: string;
+//     blog: string;
+//     pages: string;
+//     contact: string;
+//     productList: string;
+//     productDetails: string;
+//     blob: string;
+//     blogDetails: string;
+//     login: string;
+//     cart: string;
+//     element: string;
+//     confirmation: string;
+//     productCheckout: string;
+//   };
+// };
 
 function BurgerManue({ translations }: StickyHeaderProps) {
   const [active, setActive] = useState(false);
@@ -50,7 +42,7 @@ function BurgerManue({ translations }: StickyHeaderProps) {
   const typedUser = user as User | undefined;
 
   return (
-    <div className="">
+    <div className="lg:hidden ">
       <div
         className="text-2xl lg:hidden"
         onClick={() => setActive((active) => !active)}
@@ -65,12 +57,15 @@ function BurgerManue({ translations }: StickyHeaderProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 15 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="absolute right-0 top-0 bg-white opacity-100 w-full h-screen"
+            className="absolute right-0 top-0 bg-white opacity-100 w-full h-screen dark:bg-[#282c34] dark:text-white"
           >
             <div className="flex gap-4 z-20 justify-between items-center p-8">
               <div className="flex justify-center items-center gap-4 text-xl ">
                 {typedUser && typedUser.role[0] === "admin" && (
-                  <div className=" cursor-pointer p-1   [transition:all_ease_0.2s] hover:text-[#ff2020] hover:duration-300">
+                  <div
+                    className=" cursor-pointer p-1   [transition:all_ease_0.2s] hover:text-[#ff2020] hover:duration-300"
+                    onClick={() => setActive((active) => !active)}
+                  >
                     <Link href="/admin">
                       <MdOutlineAdminPanelSettings />
                     </Link>
@@ -88,7 +83,7 @@ function BurgerManue({ translations }: StickyHeaderProps) {
               <LanguageChanger />
               <div className=" flex justify-start rounded-md gap-5  items-center">
                 <ThemeSwitch />
-                <div onClick={() => setActive((active) => !active)}>
+                <div onClick={() => setActive(false)}>
                   <IoMdClose />
                 </div>
               </div>
@@ -140,10 +135,16 @@ function BurgerManue({ translations }: StickyHeaderProps) {
                             : "hidden"
                         }
                       >
-                        <p className="hover:text-[#ff2020] duration-300 cursor-pointer border-b pb-[2px] hover:scale-[1.02]  hover:pb-1 border-[#ff2020]">
+                        <p
+                          className="hover:text-[#ff2020] duration-300 cursor-pointer border-b pb-[2px] hover:scale-[1.02]  hover:pb-1 border-[#ff2020]"
+                          onClick={() => setActive(false)}
+                        >
                           {translations.productList}
                         </p>
-                        <p className="hover:text-[#ff2020] duration-300 cursor-pointer border-b pb-[2px] hover:scale-[1.02] hover:pb-1 border-[#ff2020]">
+                        <p
+                          className="hover:text-[#ff2020] duration-300 cursor-pointer border-b pb-[2px] hover:scale-[1.02] hover:pb-1 border-[#ff2020]"
+                          onClick={() => setActive(false)}
+                        >
                           {translations.productDetails}
                         </p>
                       </motion.div>
@@ -152,7 +153,7 @@ function BurgerManue({ translations }: StickyHeaderProps) {
                 </div>
                 <div className="flex flex-col gap-3 justify-center items-center">
                   <div
-                    className="flex gap-2 cursor-pointer"
+                    className="flex gap-2 cursor-pointer justify-center"
                     onClick={() => setBlogDropDown((drop) => !drop)}
                   >
                     <p>{translations.blog}</p>
@@ -176,10 +177,16 @@ function BurgerManue({ translations }: StickyHeaderProps) {
                             : "hidden"
                         }
                       >
-                        <p className="hover:text-[#ff2020] duration-300 cursor-pointer border-b pb-[2px] hover:scale-[1.02]  hover:pb-1 border-[#ff2020]">
+                        <p
+                          className="hover:text-[#ff2020] duration-300 cursor-pointer border-b pb-[2px] hover:scale-[1.02]  hover:pb-1 border-[#ff2020]"
+                          onClick={() => setActive(false)}
+                        >
                           {translations.blob}
                         </p>
-                        <p className="hover:text-[#ff2020] duration-300 cursor-pointer border-b pb-[2px] hover:scale-[1.02] hover:pb-1 border-[#ff2020]">
+                        <p
+                          className="hover:text-[#ff2020] duration-300 cursor-pointer border-b pb-[2px] hover:scale-[1.02] hover:pb-1 border-[#ff2020]"
+                          onClick={() => setActive(false)}
+                        >
                           {translations.blogDetails}
                         </p>
                       </motion.div>
@@ -215,30 +222,35 @@ function BurgerManue({ translations }: StickyHeaderProps) {
                         <Link
                           href="/shop"
                           className="hover:text-[#ff2020] duration-300 cursor-pointer border-b pb-[2px] hover:scale-[1.02]   border-[#ff2020]"
+                          onClick={() => setActive(false)}
                         >
                           {translations.login}
                         </Link>
                         <Link
                           href="/checkout"
                           className="hover:text-[#ff2020] duration-300 cursor-pointer border-b pb-[2px] hover:scale-[1.02]  border-[#ff2020]"
+                          onClick={() => setActive(false)}
                         >
                           {translations.cart}
                         </Link>
                         <Link
                           href="/element"
                           className="hover:text-[#ff2020] duration-300 cursor-pointer border-b pb-[2px] hover:scale-[1.02]  border-[#ff2020]"
+                          onClick={() => setActive(false)}
                         >
                           {translations.element}
                         </Link>
                         <Link
                           href="/confirmation"
                           className="hover:text-[#ff2020] duration-300 cursor-pointer border-b pb-[2px] hover:scale-[1.02]  border-[#ff2020]"
+                          onClick={() => setActive(false)}
                         >
                           {translations.confirmation}
                         </Link>
                         <Link
                           href="/productCheckout"
                           className="hover:text-[#ff2020] duration-300 cursor-pointer border-b pb-[2px] hover:scale-[1.02]  border-[#ff2020]"
+                          onClick={() => setActive(false)}
                         >
                           {translations.productCheckout}
                         </Link>

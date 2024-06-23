@@ -1,11 +1,11 @@
 "use client";
-import DebounceSearchComponent from "./DebounceSearchComponent";
 import Link from "next/link";
 import Image from "next/image";
 import AddCartButton from "./AddChartButton";
 import { useEffect, useState } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import LoadMore from "./LoadeMore";
+import { useRouter } from "next/navigation";
 
 // interface UserProfile {
 //   email: string;
@@ -34,6 +34,7 @@ export default function ProductList({
   const [count, setCount] = useState(1);
   const query = searchParams?.query || "";
   const { user } = useUser();
+  const router = useRouter();
 
   const role = user?.role;
 
@@ -47,6 +48,9 @@ export default function ProductList({
   }, [query, data.result]);
 
   function handleMoreContant() {
+    if (count > 2) {
+      return router.push("/shop");
+    }
     setMoreContent(true);
     setCount((count) => count + 1);
   }
@@ -54,19 +58,19 @@ export default function ProductList({
   return (
     <>
       <div className="flex flex-col w-full gap-6 items-center">
-        <h1 className="text-[52px] -z-10">Popular Items</h1>
-        <p className="text-center leading-8">
+        <h1 className="xl:text-[52px] text-3xl -z-10">Popular Items</h1>
+        <p className="text-center leading-8 text-[#919aa0] px-4">
           Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-          labore et dolore magna aliqua. <br /> Quis ipsum suspendisse ultrices
-          gravida.
+          labore et dolore magna aliqua. <br className="hidden xl:block" /> Quis
+          ipsum suspendisse ultrices gravida.
         </p>
       </div>
-      <div className="flex w-full items-center justify-center  gap-1 p-2">
+      {/* <div className="flex w-full items-center justify-center  gap-1 p-2">
         <DebounceSearchComponent data={data} setProduct={setProduct} />
-      </div>
+      </div> */}
       {/* dark:bg-[#282c34] */}
       {/* bg-[url('https://preview.colorlib.com/theme/timezone/assets/img/hero/about_hero.png')] */}
-      <div className=" mx-[12%]  grid gap-12  grid-cols-1 px-4 mb-4  lg:grid-cols-1 xl:grid-cols-2  2xl:grid-cols-3">
+      <div className=" mx-1 md:mx-[12%]  grid gap-12  grid-cols-1 px-4 mb-4  lg:grid-cols-1 xl:grid-cols-2  2xl:grid-cols-3">
         {firstSixProduct?.map((item) => (
           <div
             key={item.product_id}
@@ -106,7 +110,7 @@ export default function ProductList({
             className="text-white  py-4  px-7 text-xl"
             onClick={handleMoreContant}
           >
-            View More Product
+            {count > 2 ? "Go shopping" : "View More Product"}
           </button>
         </div>
       </div>

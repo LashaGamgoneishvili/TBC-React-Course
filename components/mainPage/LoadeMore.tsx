@@ -21,7 +21,7 @@ function LoadMore({
   const role = user?.role;
 
   useEffect(() => {
-    setData([...data.result.slice(1, page * 3)]);
+    setData([...data.result.slice(6, page * 3 + 6)]);
   }, [data.result, page]);
   const variants = {
     hidden: { opacity: 0 },
