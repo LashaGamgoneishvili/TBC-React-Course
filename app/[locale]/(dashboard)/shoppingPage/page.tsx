@@ -2,33 +2,33 @@ import { getAllProductAction } from "../../../../actions";
 import { getSession } from "@auth0/nextjs-auth0";
 import ShopProductList from "../../../../components/shop/ShopProductList";
 
-export async function generateStaticParams() {
-  try {
-    const response = await getAllProductAction();
+// export async function generateStaticParams() {
+//   try {
+//     const response = await getAllProductAction();
 
-    if (!response || typeof response.json !== "function") {
-      throw new Error("Response is not a valid JSON response");
-    }
+//     if (!response || typeof response.json !== "function") {
+//       throw new Error("Response is not a valid JSON response");
+//     }
 
-    const products: BlogObject = await response.json();
+//     const products: BlogObject = await response.json();
 
-    const paths = products.result.map((product) => ({
-      locale: "en",
-      product_id: product.product_id.toString(),
-    }));
-    const paths2 = products.result.map((product) => ({
-      locale: "ka",
-      product_id: product.product_id.toString(),
-    }));
+//     const paths = products.result.map((product) => ({
+//       locale: "en",
+//       product_id: product.product_id.toString(),
+//     }));
+//     const paths2 = products.result.map((product) => ({
+//       locale: "ka",
+//       product_id: product.product_id.toString(),
+//     }));
 
-    return paths.concat(paths2);
-  } catch (error) {
-    console.error("Failed to generate static params:", error);
-    return [];
-  }
-}
+//     return paths.concat(paths2);
+//   } catch (error) {
+//     console.error("Failed to generate static params:", error);
+//     return [];
+//   }
+// }
 
-export default async function Shop({
+export default async function ShoppingPage({
   searchParams,
 }: {
   searchParams?: {

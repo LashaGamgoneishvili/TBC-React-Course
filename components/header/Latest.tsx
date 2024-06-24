@@ -61,10 +61,14 @@ function List() {
     <div className="inline-block ">
       <ul className="flex flex-col w-auto gap-2 border-t-2 border-[#ff2020] p-4 bg-white shadow-md dark:bg-black  rounded-md">
         <li className=" whitespace-nowrap hover:scale-[1.02] hover:text-[#ff5c4b] cursor-pointer  duration-200">
-          <Link href="/shoppingPage">{t("header:product-list")}</Link>
+          <Link href="/shoppingPage" aria-label="Go to shoppingPage page">
+            {t("header:product-list")}
+          </Link>
         </li>
         <li className="whitespace-nowrap hover:scale-[1.02] hover:text-[#ff5c4b] cursor-pointer  duration-200">
-          <Link href="/shoppingPage">{t("header:product-details")}</Link>
+          <Link href="/shoppingPage" aria-label="Go to product details page">
+            {t("header:product-details")}
+          </Link>
         </li>
       </ul>
     </div>

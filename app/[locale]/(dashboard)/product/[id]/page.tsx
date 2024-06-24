@@ -15,7 +15,7 @@ export default async function Page({
 
   const data = response.result;
   return (
-    <div className="flex items-center h-screen w-full justify-center overflow-hidden">
+    <div className="flex  h-screen w-full justify-center mt-8 items-start  ">
       {data && <ProductDetails data={data} id={id} />}
     </div>
   );

@@ -41,6 +41,16 @@ const nextConfig = {
         hostname: "preview.colorlib.com",
         pathname: "**",
       },
+      {
+        protocol: "https",
+        hostname: "media.istockphoto.com",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "letsenhance.io",
+        pathname: "**",
+      },
     ],
   },
 };

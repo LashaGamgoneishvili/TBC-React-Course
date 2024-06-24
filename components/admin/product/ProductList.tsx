@@ -1,11 +1,12 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import ProductImageUpload from "../../ProductImageUpload";
 import { updateProductAction } from "../../../actions";
 import DeleteProductButton from "./DeleteProductButton";
+import toast from "react-hot-toast";
 
 export default function AdminProductList({ product }: { product: Product }) {
   const [edit, setEdit] = useState(false);
@@ -13,18 +14,47 @@ export default function AdminProductList({ product }: { product: Product }) {
   const [price, setPrice] = useState(product.price);
   const [description, setDescription] = useState(product.description);
   const [discount, setDiscount] = useState(product.discount);
-  const [image] = useState(product.image);
+  const [image, setImage] = useState(product.image);
+  const [disabled, setDisabled] = useState(false);
 
-  console.log("product.product_id", product.product_id);
+  useEffect(() => {
+    setDisabled(false);
+  }, [title, price, description, image, discount]);
+
+  const clinetAction = async (formData: FormData) => {
+    const EditProduct = {
+      title: formData.get("title"),
+      description: formData.get("description"),
+      price: formData.get("price"),
+      discount: formData.get("discount"),
+      image: formData.get("image"),
+      id: formData.get("ProductId"),
+    };
+
+
+    const response = await updateProductAction(EditProduct);
+
+    if (response?.error) {
+      toast.error(response.error);
+      console.log("error", response?.error);
+    } else {
+      setDisabled(false);
+      setEdit(false);
+    }
+  };
+
   return (
     <>
       {!edit && (
         <div className=" px-16 w-full  gap-5 border-b md:border-none mb-8 md:mb-0 py-5 md:py-0  h-auto border-light flex flex-col justify-between md:gap-10 lg:gap-24 items-center dark:border-[#ffffff] md:flex-row ">
           <div className="flex flex-col md:flex-row md:gap-5 lg:gap-20 items-center ">
             <div className="overflow-hidden">
-              <Link href={`product/${product.product_id}`}>
+              <Link
+                href={`product/${product.product_id}`}
+                aria-label="Go to product page"
+              >
                 <Image
-                  className=" mb-[25px] cursor-pointer hover shadow-md"
+                  className=" mb-[25px] cursor-pointer hover shadow-md h-auto"
                   width={200}
                   height={200}
                   src={image}
@@ -32,7 +62,7 @@ export default function AdminProductList({ product }: { product: Product }) {
                 />
               </Link>
             </div>
-            <h2 className=" dark:text-[#ffffff] text-center w-52">
+            <h2 className=" dark:text-[#ffffff] text-center w-52 h-auto">
               {product.title}
             </h2>
           </div>
@@ -52,15 +82,15 @@ export default function AdminProductList({ product }: { product: Product }) {
       )}
 
       {edit && (
-        <div className="flex px-16 animate-appear items-center transition justify-center gap-3 ease-out translate-x-0 duration-700">
+        <div className="flex px-16 animate-appear mb-7 items-center transition justify-center gap-3 ease-out translate-x-0 duration-700">
           <div className="overflow-hidden">
             <ProductImageUpload
               productImage={product.image}
-              productId={product.product_id}
+              setImage={setImage}
             />
           </div>
           <form
-            action={updateProductAction}
+            action={clinetAction}
             className="flex items-center justify-end w-full gap-3"
           >
             <div className="flex flex-col gap-1">
@@ -120,10 +150,16 @@ export default function AdminProductList({ product }: { product: Product }) {
               name="ProductId"
               value={product.product_id}
             />
+            <input type="text" className="hidden" name="image" value={image} />
             <button
               type="submit"
-              onClick={() => setEdit(false)}
-              className="px-4 rounded-md mt-4  text-white bg-[#3b82f6] py-1  hover:bg-sky-700  duration-500"
+              disabled={disabled}
+              onClick={() =>
+                setTimeout(() => {
+                  setDisabled(true);
+                }, 200)
+              }
+              className="px-4 rounded-md mt-4 disabled:bg-gray-400  text-white bg-[#3b82f6] py-1  hover:bg-sky-700  duration-500"
             >
               Save
             </button>

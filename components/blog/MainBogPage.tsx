@@ -18,7 +18,7 @@ function MainBlogPage({
   const [blog, setBlog] = useState(data.result);
 
   return (
-    <div className="md:mx-[12%] mx-4 grid grid-cols-1 mt-28 justify-items-center xl:grid-cols-3 gap-6 ">
+    <div className="md:mx-[12%]  grid grid-cols-1 mt-28 justify-items-center xl:grid-cols-3 gap-6 ">
       <div className="flex flex-col gap-20 w-full h-auto xl:col-span-2 ">
         <>
           {blog ? (

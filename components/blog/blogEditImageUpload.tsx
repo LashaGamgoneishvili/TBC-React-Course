@@ -52,7 +52,7 @@ function BlogEditImageUpload({
       <div className="relative shadow-md ">
         {blob ? (
           <Image
-            className="rounded-md hover"
+            className="rounded-md hover h-auto"
             width={500}
             height={500}
             src={blob.url}
@@ -60,7 +60,7 @@ function BlogEditImageUpload({
           />
         ) : (
           <Image
-            className=" rounded-md hover"
+            className=" rounded-md hover h-auto"
             width={500}
             height={500}
             src={blogImage}

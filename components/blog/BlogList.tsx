@@ -12,6 +12,7 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import BlogEditImageUpload from "./blogEditImageUpload";
 import { MdDeleteForever } from "react-icons/md";
+import toast from "react-hot-toast";
 
 export default function BlogList({
   blog,
@@ -35,12 +36,34 @@ export default function BlogList({
   const [month, setMonth] = useState("");
   const [image, setImage] = useState(blog.image);
   const [readMore, setReadMore] = useState(false);
-
+  const [disable, setDisable] = useState(false);
   const userCount = Object.keys(blog.comment).length;
-  // const blogTime = blog.time;
   const stateTime = time;
-  // const [months, days] = blogTime?.split(" ");
   const [months, days] = stateTime?.split(" ");
+
+  const editClinetAction = async (formData: FormData) => {
+    const updateBlog = {
+      title: formData.get("title"),
+      description: formData.get("description"),
+      detaildDescription: formData.get("detaildDescription"),
+      time: formData.get("time"),
+      blogId: formData.get("blogId"),
+    };
+
+    const response = await updateBlogAction(updateBlog);
+
+    if (response?.error) {
+      toast.error(response.error);
+      console.log("error", response?.error);
+    } else {
+      setEdit(false);
+      setDisable(false);
+    }
+  };
+
+  useEffect(() => {
+    setDisable(false);
+  }, [title, description, detaildDescription, time, image]);
 
   /*eslint-disable*/
   useEffect(() => {
@@ -54,17 +77,15 @@ export default function BlogList({
 
   function handleSubmit() {
     setTimeout(() => {
-      setEdit(false);
+      setDisable(true);
     }, 100);
   }
   function handleCommentButton() {
-    setTimeout(() => {
-      SetCommentOpend(false);
-    }, 100);
-  }
-
-  function handleDelete() {
-    deleteBlogAction(blog.blog_id);
+    if (comment.length > 1) {
+      setTimeout(() => {
+        SetCommentOpend(false);
+      }, 100);
+    }
   }
 
   const typedUser = user as GetSessionUser | undefined;
@@ -92,7 +113,7 @@ export default function BlogList({
             <>
               <button
                 className="absolute bg-blue p-2 top-0 right-0 z-0 hover:text-[#ff2020] duration-200 text-xl"
-                onClick={handleDelete}
+                onClick={() => deleteBlogAction(blog.blog_id)}
               >
                 <MdDeleteForever />
               </button>
@@ -104,7 +125,7 @@ export default function BlogList({
               </button>
             </>
           )}
-          <div className="flex flex-col gap-6 sm:px-12 px-4">
+          <div className="flex flex-col gap-6 sm:px-12 px-4 mb-8">
             <Link
               href={`/blogs/${blog.blog_id}`}
               className="md:text-2xl sm:text-xl text-lg"
@@ -139,14 +160,14 @@ export default function BlogList({
 
             {!readMore ? (
               <button
-                className="border-b-2 mb-5 border-black w-24 text-left cursor-pointer peer-checked:border-white"
+                className="border-b-2 rx-2  py-1 border-black w-28 text-left cursor-pointer peer-checked:border-white"
                 onClick={() => setReadMore((prev) => !prev)}
               >
                 Read More
               </button>
             ) : (
               <button
-                className="border-b-2 border-black w-24 text-left cursor-pointer peer-checked:border-white"
+                className="border-b-2 rx-2 py-1 border-black w-28 text-left cursor-pointer peer-checked:border-white"
                 onClick={() => setReadMore((prev) => !prev)}
               >
                 Read Less
@@ -183,6 +204,8 @@ export default function BlogList({
                     </label>
                     <textarea
                       id="comment"
+                      required
+                      minLength={2}
                       name="comment"
                       value={comment}
                       onChange={(e) => setComment(e.target.value)}
@@ -237,10 +260,12 @@ export default function BlogList({
         </div>
 
         {edit && (
-          <>
-            <div className="absolute animate-appear overflow-hidden flex w-[90%] shadow-lg px-8  z-20 bg-white transition justify-between gap-12 ease-out -translate-x-20  duration-700 py-8">
+          <div className="absolute flex justify-center w-full bg-gray-100 h-full">
+            <div className="absolute animate-appear overflow-hidden flex xl:w-[90%] shadow-lg px-8  z-20 bg-white transition  flex-col lg:flex-row lg:-translate-x-24 xl:-translate-x-44  gap-12 ease-out  justify-center duration-700 py-8">
               <div className="overflow-hidden flex flex-col gap-5">
-                <h1 className="text-3xl font-semibold">Update Blog Post</h1>
+                <h1 className="md:text-3xl text-xl font-semibold">
+                  Update Blog Post
+                </h1>
 
                 <BlogEditImageUpload
                   blogImage={blog.image}
@@ -250,7 +275,7 @@ export default function BlogList({
               </div>
 
               <form
-                action={updateBlogAction}
+                action={editClinetAction}
                 className="flex flex-col w-full gap-5"
               >
                 <div className="flex flex-col gap-1">
@@ -320,13 +345,14 @@ export default function BlogList({
                   <button
                     type="submit"
                     onClick={handleSubmit}
-                    className="cursor-pointer  bg-[#3b82f6] text-white rounded-md gap-4 justify-center py-3 border border-[#fbf9ff] hover:border-[#ff2020] hover:bg-white hover:text-black duration-300 px-16"
+                    disabled={disable}
+                    className="cursor-pointer  disabled:bg-gray-400 bg-[#3b82f6] text-white rounded-md gap-4 justify-center py-2 sm:py-3 border border-[#fbf9ff] hover:border-[#ff2020] hover:bg-white hover:text-black duration-300 px-8 sm:px-16"
                   >
                     Save
                   </button>
                   <button
                     onClick={() => setEdit(false)}
-                    className="cursor-pointer  bg-[#3b82f6] text-white rounded-md gap-4 justify-center py-3 border border-[#fbf9ff] hover:border-[#ff2020] hover:bg-white hover:text-black duration-300 px-16"
+                    className="cursor-pointer  bg-[#3b82f6] text-white rounded-md gap-4 justify-center py-2 sm:py-3 border border-[#fbf9ff] hover:border-[#ff2020] hover:bg-white hover:text-black duration-300 px-8 sm:px-16"
                   >
                     close
                   </button>
@@ -334,12 +360,12 @@ export default function BlogList({
               </form>
               <button
                 onClick={() => setEdit(false)}
-                className="absolute top-3 right-5 hover:scale-110 text-2xl"
+                className="absolute sm:top-3 sm:right-5 top-5 right-10 hover:scale-110 text-2xl"
               >
                 &#10005;
               </button>
             </div>
-          </>
+          </div>
         )}
       </div>
     </>

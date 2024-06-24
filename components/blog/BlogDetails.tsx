@@ -12,6 +12,7 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import BlogEditImageUpload from "./blogEditImageUpload";
 import { MdDeleteForever } from "react-icons/md";
+import toast from "react-hot-toast";
 
 export default function BlogDetails({
   blog,
@@ -39,12 +40,30 @@ export default function BlogDetails({
   const [month, setMonth] = useState("");
   const [image, setImage] = useState(blog.image);
   const [readMore, setReadMore] = useState(false);
-
+  const [disable, setDisable] = useState(false);
   const userCount = Object.keys(blog.comment).length;
-  // const blogTime = blog.time;
   const stateTime = time;
-  // const [months, days] = blogTime?.split(" ");
   const [months, days] = stateTime?.split(" ");
+
+  const editClinetAction = async (formData: FormData) => {
+    const updateBlog = {
+      title: formData.get("title"),
+      description: formData.get("description"),
+      detaildDescription: formData.get("detaildDescription"),
+      time: formData.get("time"),
+      blogId: formData.get("blogId"),
+    };
+
+    const response = await updateBlogAction(updateBlog);
+
+    if (response?.error) {
+      toast.error(response.error);
+      console.log("error", response?.error);
+    } else {
+      setEdit(false);
+      setDisable(false);
+    }
+  };
 
   /*eslint-disable*/
   useEffect(() => {
@@ -62,21 +81,9 @@ export default function BlogDetails({
     console.log("users", users);
   }, []);
 
-  // useEffect(() => {
-  //   function getAllComments() {
-  //     if (id) {
-  //       const comments = [];
-  //       for (const [key, value] of Object.entries(blog.comment)) {
-  //         if (value === "comment") {
-  //           comments.push(key);
-  //         }
-  //       }
-  //       console.log("comments", comments);
-  //       // setComment(comments);
-  //     }
-  //   }
-  //   getAllComments();
-  // }, []);
+  useEffect(() => {
+    setDisable(false);
+  });
 
   useEffect(() => {
     setMonth(months);
@@ -85,13 +92,15 @@ export default function BlogDetails({
 
   function handleSubmit() {
     setTimeout(() => {
-      setEdit(false);
+      setDisable(true);
     }, 100);
   }
   function handleCommentButton() {
-    setTimeout(() => {
-      SetCommentOpend(false);
-    }, 100);
+    if (comment.length > 1) {
+      setTimeout(() => {
+        SetCommentOpend(false);
+      }, 100);
+    }
   }
 
   function handleDelete() {
@@ -113,7 +122,7 @@ export default function BlogDetails({
               width={500}
               height={500}
               alt="blog-post"
-              className="w-full"
+              className="w-full h-auto"
             />
             <div className="absolute flex flex-col items-center justify-center gap-1 text-white py-3 px-6 -bottom-8 left-16 rounded-md bg-[#ff2020] text-2xl">
               <span>{day}</span> <span>{month}</span>
@@ -136,16 +145,14 @@ export default function BlogDetails({
             </>
           )}
           <div className="flex flex-col gap-6 px-12 ">
-            <Link href={`/blogs/${blog.blog_id}`} className="text-2xl">
+            <Link
+              href={`/blogs/${blog.blog_id}`}
+              className="text-2xl"
+              aria-label="Go to blog details page"
+            >
               {title}
-              {/* Google inks pact for new 35-storey office */}
             </Link>
-            <p className="space-y-10">
-              {description}
-              {/* That dominion stars lights dominion divide years for fourth have
-              don&#39;t stars is that he earth it first without heaven in place
-              seed it second morning saying. */}
-            </p>
+            <p className="space-y-10">{description}</p>
             <div className="flex gap-4 text-[#999999]">
               <div className="flex gap-2">
                 <IoMdPerson />
@@ -167,7 +174,7 @@ export default function BlogDetails({
 
             {!readMore ? (
               <button
-                className="border-b-2 mb-5 border-black w-24 text-left cursor-pointer peer-checked:border-white"
+                className="border-b-2 px-2 py-2 border-black w-24 text-left cursor-pointer peer-checked:border-white"
                 onClick={() => setReadMore((prev) => !prev)}
               >
                 Read More
@@ -212,6 +219,8 @@ export default function BlogDetails({
                     <textarea
                       id="comment"
                       name="comment"
+                      required
+                      minLength={2}
                       value={comment}
                       onChange={(e) => setComment(e.target.value)}
                       className="rounded-md px-4 justify-center text-black py-1 w-full border-black border"
@@ -250,7 +259,7 @@ export default function BlogDetails({
                   width={25}
                   height={50}
                   alt="avatar"
-                  className="rounded-full"
+                  className="rounded-full h-auto"
                 />
                 <p>{user?.nickname || user?.name}</p>
                 <p className="absolute top-0 right-3">Your comment</p>
@@ -277,7 +286,7 @@ export default function BlogDetails({
               </div>
 
               <form
-                action={updateBlogAction}
+                action={editClinetAction}
                 className="flex flex-col w-full gap-5"
               >
                 <div className="flex flex-col gap-1">
@@ -323,19 +332,7 @@ export default function BlogDetails({
                     className="rounded-md px-4 text-black w-full py-1 h-64  border-black border"
                   />
                 </div>
-                {/* <div className="flex flex-col gap-1 w-full">
-                  <label htmlFor="comment" className="text-xs font-semibold">
-                    comment
-                  </label>
-                  <input
-                    id="comment"
-                    type="string"
-                    name="comment"
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
-                    className="rounded-md px-4 text-black py-1 w-full border-black border"
-                  />
-                </div> */}
+
                 <div className="flex flex-col gap-1 w-32">
                   <label htmlFor="time" className="text-xs font-semibold">
                     time
@@ -359,7 +356,8 @@ export default function BlogDetails({
                   <button
                     type="submit"
                     onClick={handleSubmit}
-                    className="cursor-pointer  bg-[#3b82f6] text-white rounded-md gap-4 justify-center py-3 border border-[#fbf9ff] hover:border-[#ff2020] hover:bg-white hover:text-black duration-300 px-16"
+                    disabled={disable}
+                    className="cursor-pointer  disabled:bg-gray-400 bg-[#3b82f6] text-white rounded-md gap-4 justify-center py-3 border border-[#fbf9ff] hover:border-[#ff2020] hover:bg-white hover:text-black duration-300 px-16"
                   >
                     Save
                   </button>

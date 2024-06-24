@@ -27,7 +27,7 @@ export default function CheckoutProductList({ setTotal, product }: Props) {
       >
         <div className="flex md:gap-8 mb-4 sm:mb-0 gap-3 xl:gap-20 sm:flex-row flex-col items-center justify-center ">
           <div className="overflow-hidden">
-            <Link href={`product/${product.id}`}>
+            <Link href={`product/${product.id}` } aria-label="Go to product details page">
               <Image
                 className=" rounded-md mb-[25px] cursor-pointer hover"
                 width={200}

@@ -35,8 +35,8 @@ export default function NewProductImageUpload({
             priority={true}
             alt="Person-logo"
             className="h-auto "
-            width={500}
-            height={500}
+            width={150}
+            height={150}
           />
         ) : (
           <Image
@@ -44,8 +44,8 @@ export default function NewProductImageUpload({
             priority={true}
             alt="Person-logo"
             className="h-auto"
-            width={500}
-            height={500}
+            width={150}
+            height={150}
           />
         )}
         <div className="absolute right-1 bottom-1">

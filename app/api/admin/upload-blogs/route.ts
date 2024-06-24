@@ -5,7 +5,8 @@ export const revalidate = 0;
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const { title, description, detaildDescription, image, time, userId } = body;
+  const { blog } = body;
+  const { title, description, detaildDescription, image, time, userId } = blog;
 
   try {
     if (

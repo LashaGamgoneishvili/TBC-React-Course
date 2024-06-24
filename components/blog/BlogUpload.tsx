@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import BlogImageUpload from "./BlogImageUpload";
 import { uploadNewBlogAction } from "../../actions";
 import { deleteAllBlogs } from "../../app/api/api";
+import toast from "react-hot-toast";
 
 export default function BlogUpload({
   blog,
@@ -16,20 +17,51 @@ export default function BlogUpload({
   const [description, setDescription] = useState("");
   const [detaildDescription, setDetaildDescription] = useState("");
   const [time, setTime] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(
+    "https://ajy8khmx9vtvyckn.public.blob.vercel-storage.com/White-background-QOCwkXYUFN0zOBRqpiQDE9jUSg9LTM.jpg"
+  );
   const { user } = useUser();
+  const [disabled, setDisabled] = useState(false);
+
   const typedUser = user as GetSessionUser | undefined;
+
+  useEffect(() => {
+    setDisabled(false);
+  }, [title, description, time, detaildDescription, image]);
+
+  console.log(blog);
+
+  const clinetAction = async (formData: FormData) => {
+    const CreateBlog = {
+      title: formData.get("title"),
+      description: formData.get("description"),
+      detaildDescription: formData.get("detaildDescription"),
+      time: formData.get("time"),
+      image: formData.get("image"),
+      userId: formData.get("userId"),
+    };
+
+    const response = await uploadNewBlogAction(CreateBlog);
+
+    if (response?.error) {
+      toast.error(response.error);
+      setDisabled(false);
+      console.log("error", response?.error);
+    } else {
+      setDisabled(false);
+      setUpload(false);
+    }
+  };
 
   function handleSubmit() {
     setTimeout(() => {
-      setUpload(false);
-    }, 100);
+      setDisabled(true);
+    }, 200);
   }
 
   function handleDelete() {
     deleteAllBlogs();
   }
-  console.log("blog", blog);
   return (
     <>
       {typedUser?.role?.[0] && (
@@ -50,17 +82,16 @@ export default function BlogUpload({
         </div>
       )}
 
-      {/* {blog.result.map((blog) => (
-        <h1>lasha</h1>
-      ))} */}
       {upload && (
-        <div className="absolute overflow-hidden  animate-appearFromTop flex top-0 left-0 px-16 -translate-y-[-70%]  bg-white w-full   items-start transition shadow-lg justify-between gap-8 ease-out">
+        <div className="absolute  overflow-hidden  animate-appearFromTop flex top-0 left-0 sm:px-16 px-6 py-14 sm:py-8 -translate-y-[-70%]  bg-white w-full flex-col lg:flex-row items-center  lg:items-start transition shadow-lg justify-between gap-8 ease-out">
           <div className="flex flex-col gap-5 overflow-hidden">
-            <h1 className="text-3xl font-semibold">Creating New Blog Post</h1>
-            <BlogImageUpload setImage={setImage} />
+            <h1 className="md:text-3xl text-xl font-semibold">
+              Creating New Blog Post
+            </h1>
+            <BlogImageUpload userImage={image} setImage={setImage} />
           </div>
           <form
-            action={uploadNewBlogAction}
+            action={clinetAction}
             className="flex flex-col py-5  h-full items-start justify-start w-full  gap-5"
           >
             <div className="flex flex-col gap-1 w-full">
@@ -137,13 +168,14 @@ export default function BlogUpload({
               <button
                 type="submit"
                 onClick={handleSubmit}
-                className="cursor-pointer  bg-[#3b82f6] text-white rounded-md gap-4 justify-center py-3 border border-[#fbf9ff] hover:border-[#ff2020] hover:bg-white hover:text-black duration-300 px-16"
+                disabled={disabled}
+                className="cursor-pointer disabled:bg-gray-400  bg-[#3b82f6] text-white rounded-md gap-4 justify-center py-2 sm:py-3 border border-[#fbf9ff] hover:border-[#ff2020] hover:bg-white hover:text-black duration-300 px-8 sm:px-16"
               >
                 Save
               </button>
               <button
-                onClick={handleSubmit}
-                className="cursor-pointer  bg-[#3b82f6] text-white rounded-md gap-4 justify-center py-3 border border-[#fbf9ff] hover:border-[#ff2020] hover:bg-white hover:text-black duration-300 px-16"
+                onClick={() => setUpload(false)}
+                className="cursor-pointer  bg-[#3b82f6] text-white rounded-md gap-4 justify-center py-2 sm:py-3 border border-[#fbf9ff] hover:border-[#ff2020] hover:bg-white hover:text-black duration-300 px-8 sm:px-16"
               >
                 close
               </button>

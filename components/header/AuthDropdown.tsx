@@ -44,14 +44,17 @@ function AuthDropdown({ user }: { user: any }) {
                 <div className="flex relative flex-col border-t-2 gap-1 border-[#ff2020] rounded-md shadow-md bg-white dark:text-white dark:bg-black text-base p-2">
                   <div className="absolute  left-1/4 top-0 h-2 w-2 -translate-y-1/2 rotate-45 -z-10 bg-[#ff2020]"></div>
                   <div className="flex items-center hover:scale-105 gap-2 hover:text-red-500 duration-300">
-                    <Link href="/profile">
+                    <Link href="/profile" aria-label="Go to profile page">
                       <GoPerson />
                     </Link>
-                    <Link href="/profile">Profile</Link>
+                    <Link href="/profile" aria-label="Go to profile page">
+                      Profile
+                    </Link>
                   </div>
                   <a
                     title="logout"
                     href="/api/auth/logout"
+                    aria-label="logout"
                     className="flex gap-2 items-center hover:scale-105 hover:text-red-500 duration-300"
                   >
                     <CiLogout /> <span>Logout</span>

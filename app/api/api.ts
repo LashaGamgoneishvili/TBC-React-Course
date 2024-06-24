@@ -12,7 +12,7 @@ export async function getUsers() {
   try {
     revalidatePath(`/admin`);
     const response = await fetch(`${BASE_URL}/api/user-api/get-users`, {
-      cache: "no-store",
+      cache: "no-cache",
     });
 
     if (!response.ok) {
@@ -30,99 +30,57 @@ export async function getUsers() {
 export async function createUserLogin() {
   return await fetch(`${BASE_URL}/api/user-api/create-user-login`);
 }
-export async function createUserAdmin(
-  name: string,
-  lastName: string,
-  email: string,
-  image: string,
-  id: string
-) {
+export async function createUserAdmin(user: CreateUserResult) {
   revalidatePath(`${BASE_URL}/user`);
   return await fetch(`${BASE_URL}/api/user-api/create-user-from-admin`, {
     method: "POST",
-    body: JSON.stringify({ name, lastName, email, image, id }),
+    body: JSON.stringify({ user }),
   });
 }
-export async function createProductAdmin(
-  title: string,
-  description: string,
-  price: string,
-  discount: string,
-  image: string
-  // id: string
-) {
-  revalidatePath(`${BASE_URL}/user`);
+export async function createProductAdmin(product: ProductResult) {
+  revalidatePath(`${BASE_URL}/AdminProudct`);
   return await fetch(`${BASE_URL}/api/product-api/create-new-product`, {
     method: "POST",
-    body: JSON.stringify({ title, description, price, discount, image }),
+    body: JSON.stringify({ product }),
   });
 }
 
-export async function updateUser(user: result) {
-  revalidatePath(`${BASE_URL}/admin`);
+export async function updateUser(user: Result) {
+  revalidatePath(`${BASE_URL}/user`);
   return await fetch(`${BASE_URL}/api/user-api/update-user`, {
     method: "POST",
     body: JSON.stringify({ user }),
   });
 }
 
-export async function updateProduct(
-  title: string,
-  price: string,
-  description: string,
-  discount: string,
-  productId: string
-) {
+export async function updateProduct(product: ProductResult) {
+  revalidatePath(`${BASE_URL}/Adminproduct`);
   return await fetch(`${BASE_URL}/api/admin/update-product`, {
     method: "POST",
-    body: JSON.stringify({ title, price, description, discount, productId }),
+    body: JSON.stringify({ product }),
   });
 }
 
-export async function uploadNewBlog(
-  title: string,
-  description: string,
-  detaildDescription: string,
-  image: string,
-  time: string,
-  userId: string
-) {
+export async function uploadNewBlog(blog: BlogType) {
   revalidatePath(`${BASE_URL}/blogs`);
 
   return await fetch(`${BASE_URL}/api/admin/upload-blogs`, {
     cache: "no-store",
     method: "POST",
     body: JSON.stringify({
-      title,
-      description,
-      detaildDescription,
-      image,
-      time,
-      userId,
+      blog,
     }),
   });
 }
 
-export async function updateBlog(
-  title: string,
-  detaildDescription: string,
-  description: string,
-  // comment: string,
-  time: string,
-  blogId: string
-) {
+export async function updateBlog(blog: BlogType) {
   revalidatePath(`${BASE_URL}/blogs`);
 
   return await fetch(`${BASE_URL}/api/admin/update-blog`, {
     cache: "no-store",
     method: "POST",
     body: JSON.stringify({
-      title,
-      detaildDescription,
-      description,
-      // comment,
-      time,
-      blogId,
+      blog,
     }),
   });
 }
@@ -158,7 +116,7 @@ export async function deleteUser(id: string) {
   });
 }
 export async function deleteProduct(id: number) {
-  revalidatePath(`${BASE_URL}/user`);
+  revalidatePath(`${BASE_URL}/AdminProduct`);
   return await fetch(`${BASE_URL}/api/product-api/delete-product`, {
     method: "DELETE",
     body: JSON.stringify({ id }),
@@ -285,7 +243,7 @@ export async function getUser(id: string) {
 export async function getAllProduct() {
   try {
     const response = await fetch(`${BASE_URL}/api/getAllProduct`, {
-      cache: "no-store",
+      cache: "no-cache",
     });
 
     if (!response.ok) {

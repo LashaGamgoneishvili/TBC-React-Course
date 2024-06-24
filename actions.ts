@@ -26,41 +26,64 @@ import { getSession } from "@auth0/nextjs-auth0";
 import { getAllProduct } from "./app/api/api";
 import { getProduct } from "./app/api/api";
 import { createProductAdmin } from "./app/api/api";
-import { profileEdit } from "./types/types";
-export async function createUserActionAdmin(formData: FormData) {
+import {
+  CreateBlogType,
+  CreateProductType,
+  CreateUser,
+  UpdateBlogType,
+  UpdateProductType,
+  profileEdit,
+} from "./types/types";
+
+export async function createUserActionAdmin(createUser: unknown) {
   revalidatePath(`${BASE_URL}/user`);
 
-  const name = formData.get("name");
-  const lastName = formData.get("lastName");
-  const email = formData.get("email");
-  const image = formData.get("image");
-  const id = formData.get("id");
+  const result = CreateUser.safeParse(createUser);
+  console.log("result-2", result);
 
-  createUserAdmin(
-    name as string,
-    lastName as string,
-    email as string,
-    image as string,
-    id as string
-  );
+  if (!result.success) {
+    let errorMessage = "";
+
+    result.error.issues.forEach((issue) => {
+      return (errorMessage =
+        errorMessage + issue.path[0] + ": " + issue.message + ". ");
+    });
+
+    return { error: errorMessage };
+  }
+
+  try {
+    const response = await createUserAdmin(result.data);
+    const users = await response.json();
+    return users;
+  } catch (error) {
+    console.log(error);
+    return { message: "Error During Creating user" };
+  }
 }
-export async function createProductActionAdmin(formData: FormData) {
-  revalidatePath(`${BASE_URL}/user`);
-  const title = formData.get("title");
-  const description = formData.get("description");
-  const price = formData.get("price");
-  const discount = formData.get("discount");
-  const image = formData.get("image");
-  // const id = formData.get("id");
 
-  createProductAdmin(
-    title as string,
-    description as string,
-    price as string,
-    discount as string,
-    image as string
-    // id as string
-  );
+export async function createProductActionAdmin(CreateProduct: unknown) {
+  revalidatePath(`${BASE_URL}/AdminProduct`);
+  const result = CreateProductType.safeParse(CreateProduct);
+
+  if (!result.success) {
+    let errorMessage = "";
+
+    result.error.issues.forEach((issue) => {
+      return (errorMessage =
+        errorMessage + issue.path[0] + ": " + issue.message + ". ");
+    });
+
+    return { error: errorMessage };
+  }
+
+  try {
+    const response = await createProductAdmin(result.data);
+    const users = await response.json();
+    return users;
+  } catch (error) {
+    return { message: "Error During Creating user" };
+  }
 }
 
 export async function createUserAction() {
@@ -72,8 +95,10 @@ export async function createUserAction() {
 }
 
 export async function updateUserAction(updateProfile: unknown) {
-  // server-side validation
+  revalidatePath(`${BASE_URL}/user`);
+
   const result = profileEdit.safeParse(updateProfile);
+  console.log("result-1", result);
   if (!result.success) {
     let errorMessage = "";
 
@@ -95,66 +120,97 @@ export async function updateUserAction(updateProfile: unknown) {
   }
 }
 
-export async function updateProductAction(formData: FormData) {
-  const description = formData.get("description");
-  const title = formData.get("title");
-  const price = formData.get("price");
-  const discount = formData.get("discount");
-  const productId = formData.get("ProductId");
+export async function updateProductAction(UpdateProduct: unknown) {
+  revalidatePath(`${BASE_URL}/AdminProduct`);
 
-  updateProduct(
-    title as string,
-    price as string,
-    description as string,
-    discount as string,
-    productId as string
-  );
+  const result = UpdateProductType.safeParse(UpdateProduct);
+
+  if (!result.success) {
+    let errorMessage = "";
+
+    result.error.issues.forEach((issue) => {
+      return (errorMessage =
+        errorMessage + issue.path[0] + ": " + issue.message + ". ");
+    });
+
+    return { error: errorMessage };
+  }
+
+  try {
+    const response = await updateProduct(result.data);
+    const users = await response.json();
+    return users;
+  } catch (error) {
+    return { message: "Error During update product" };
+  }
 }
 
-export async function uploadNewBlogAction(formdata: FormData) {
-  const title = formdata.get("title");
-  const description = formdata.get("description");
-  const detaildDescription = formdata.get("detaildDescription");
-  const image = formdata.get("image");
-  const time = formdata.get("time");
-  const userId = formdata.get("userId");
+export async function uploadNewBlogAction(CreateBlog: unknown) {
+  revalidatePath(`${BASE_URL}/blogs`);
+  const result = CreateBlogType.safeParse(CreateBlog);
+  if (!result.success) {
+    let errorMessage = "";
 
-  console.log(
-    "title, description, detaildDescription, lastFiveCharacters, blogId",
-    title,
-    description,
-    detaildDescription,
-    image,
-    time
-  );
+    result.error.issues.forEach((issue) => {
+      return (errorMessage =
+        errorMessage + issue.path[0] + ": " + issue.message + ". ");
+    });
 
-  uploadNewBlog(
-    title as string,
-    description as string,
-    detaildDescription as string,
-    image as string,
-    time as string,
-    userId as string
-  );
+    return { error: errorMessage };
+  }
+
+  try {
+    const response = await uploadNewBlog(result.data);
+    const users = await response.json();
+    return users;
+  } catch (error) {
+    return { message: "Error During Creating user" };
+  }
 }
 
-export async function updateBlogAction(formData: FormData) {
-  const title = formData.get("title");
-  const description = formData.get("description");
-  const detaildDescription = formData.get("detaildDescription");
-  // const comment = formData.get("comment");
-  const time = formData.get("time");
-  const blogId = formData.get("blogId");
+// export async function updateBlogActionq(formData: FormData) {
+//   const title = formData.get("title");
+//   const description = formData.get("description");
+//   const detaildDescription = formData.get("detaildDescription");
+//   // const comment = formData.get("comment");
+//   const time = formData.get("time");
+//   const blogId = formData.get("blogId");
 
-  updateBlog(
-    title as string,
-    detaildDescription as string,
-    description as string,
-    // comment as string,
-    time as string,
-    blogId as string
-  );
+//   updateBlog(
+//     title as string,
+//     detaildDescription as string,
+//     description as string,
+//     // comment as string,
+//     time as string,
+//     blogId as string
+//   );
+// }
+
+export async function updateBlogAction(BlogUpdate: unknown) {
+  revalidatePath(`${BASE_URL}/blogs`);
+
+  const result = UpdateBlogType.safeParse(BlogUpdate);
+  if (!result.success) {
+    let errorMessage = "";
+
+    result.error.issues.forEach((issue) => {
+      return (errorMessage =
+        errorMessage + issue.path[0] + ": " + issue.message + ". ");
+    });
+
+    return { error: errorMessage };
+  }
+
+  try {
+    const response = await updateBlog(result.data);
+    const users = await response.json();
+    return users;
+  } catch (error) {
+    console.log(error);
+    return { message: "Error During updating user" };
+  }
 }
+
 export async function updateBlogComment(formData: FormData) {
   const comment = formData.get("comment");
   const userId = formData.get("userId");
@@ -178,9 +234,12 @@ export async function createOrder(productId: number, quantity: number) {
 }
 
 export async function deleteUserAction(id: string) {
+  revalidatePath(`${BASE_URL}/user`);
   deleteUser(id);
 }
 export async function deleteProductAction(id: number) {
+  revalidatePath(`${BASE_URL}/AdminProduct`);
+
   deleteProduct(id);
 }
 
@@ -313,7 +372,7 @@ export async function getUserAction() {
   const session = await getSession();
   const user = session?.user;
   const userId = user?.sub;
-  const id = userId.slice(-5);
+  const id = userId?.slice(-5);
   const userData = await getUser(id);
   return userData;
 }
