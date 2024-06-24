@@ -144,11 +144,35 @@ interface Params {
   id: string;
 }
 
-interface result {
+interface Result {
+  name?: string;
+  lastName?: string;
+  email?: string;
+  id: string;
+  image?: string;
+}
+interface CreateUserResult {
   name: string;
   lastName: string;
   email: string;
   id: string;
+  image: string;
+}
+interface ProductResult {
+  title: string;
+  description: string;
+  price: string;
+  discount?: string;
+  image?: string;
+  id?: string;
+}
+interface BlogType {
+  title: string;
+  description: string;
+  detaildDescription: string;
+  image?: string;
+  time: string;
+  userId?: string;
 }
 
 type StickyHeaderProps = {

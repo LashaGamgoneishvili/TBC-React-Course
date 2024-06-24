@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { BASE_URL } from "../api";
+export const revalidate = 0;
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
 

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect } from "react";
 import { FaCamera } from "react-icons/fa";
 
-export default function NewProductImageUpload({
+export default function UploadUserImage({
   userImage,
   setImage,
 }: {
@@ -19,22 +19,36 @@ export default function NewProductImageUpload({
     const updateUser = async () => {
       if (!blob) return;
       try {
+        const updateUser = await fetch(`/api/user-api/upload-user-picture`, {
+          method: "POST",
+          body: JSON.stringify({
+            blobUrl: blob?.url,
+          }),
+        });
+
         setImage(blob.url);
+
+        if (!updateUser.ok) {
+          console.error("Failed to update user picture");
+        } else {
+          console.log("User picture updated successfully");
+        }
       } catch (error) {
         console.error("Error updating user picture:", error);
       }
     };
     updateUser();
   }, [blob, setImage]);
+  console.log("image", userImage);
   return (
-    <>
-      <div className="relative rounded-md p-7 border-gray-700 border rounde ">
+    <div className="flex flex-col gap-3">
+      <div className="relative rounded-md  flex justify-center items-center bg-white  w-auto h-auto border-gray-700 border rounde ">
         {blob ? (
           <Image
             src={blob.url}
             priority={true}
             alt="Person-logo"
-            className="h-auto "
+            className="w-72 h-auto "
             width={500}
             height={500}
           />
@@ -43,7 +57,7 @@ export default function NewProductImageUpload({
             src={userImage}
             priority={true}
             alt="Person-logo"
-            className="h-auto"
+            className=" w-72 h-auto"
             width={500}
             height={500}
           />
@@ -90,7 +104,7 @@ export default function NewProductImageUpload({
         }}
       >
         <button
-          className="cursor-pointer mt-3 bg-[#3b82f6] text-white rounded-md gap-4 justify-center py-2 border border-[#fbf9ff] hover:border-[#ff2020] hover:bg-white disabled:bg-gray-500 disabled:border-none disabled:text-black hover:text-black duration-300 px-12"
+          className="cursor-pointer  bg-[#3b82f6] text-white rounded-md gap-4 justify-center py-2 border border-[#fbf9ff] hover:border-[#ff2020] hover:bg-white disabled:bg-gray-500 disabled:border-none disabled:text-black hover:text-black duration-300 px-16"
           type="submit"
           disabled={disable}
           onClick={() => {
@@ -102,6 +116,6 @@ export default function NewProductImageUpload({
           Upload
         </button>
       </form>
-    </>
+    </div>
   );
 }

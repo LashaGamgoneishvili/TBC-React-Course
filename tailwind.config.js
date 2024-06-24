@@ -38,7 +38,7 @@ module.exports = {
         slideInX: {
           "0%": {
             // transform: "translateY(-5%)",
-            transform: "translateX(-15%)",
+            transform: "translateX(-3%)",
 
             opacity: "0",
           },

@@ -5,25 +5,28 @@ export const revalidate = 0;
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const { title, price, description, discount, productId } = body;
+  const { product } = body;
+  const { title, description, price, discount, image, id } = product;
 
   try {
-    if (!title || !price || !description || !discount || !productId) {
+    if (!title || !price || !description || !id) {
       throw new Error(
-        "title, price, description, discount, and productId are required"
+        "title, price, description, discount, image, and id are required"
       );
     }
 
-    await sql`UPDATE products SET title=${title}, price=${price}, description=${description}, discount=${discount} Where product_id=${productId} `;
+    await sql`UPDATE products SET title = ${title}, price = ${price}, description = ${description}, discount = ${discount}, image = ${image} Where product_id = ${Number(
+      id
+    )} `;
   } catch (error) {
     console.log("Error update product", error);
     return NextResponse.json({ error: error }, { status: 500 });
   }
 
-  let product;
+  let products;
 
   try {
-    product = await sql`SELECT * FROM products WHERE product_id=${productId}`;
+    products = await sql`SELECT * FROM products WHERE product_id=${id}`;
   } catch (error) {
     console.log("Error fatching products");
     return NextResponse.json(
@@ -32,5 +35,5 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  return NextResponse.json({ product }, { status: 200 });
+  return NextResponse.json({ products }, { status: 200 });
 }

@@ -1,5 +1,5 @@
 "use client";
-import { deleteUserAction } from "../../actions";
+import { deleteUserAction } from "../../../actions";
 
 export default function DeleteUserButton({ id }: { id: string }) {
   console.log("DeleteUserButton", id);

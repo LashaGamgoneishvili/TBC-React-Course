@@ -6,8 +6,6 @@ export async function POST(request: NextRequest) {
   const { blobUrl, userSub } = await request.json();
   const lastFiveCharacters = userSub.slice(-5);
 
-  console.log("blobUrl, userSub", blobUrl, userSub);
-
   try {
     if (!blobUrl || !userSub) {
       throw new Error("Name, email, and age are required");

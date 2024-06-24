@@ -5,10 +5,11 @@ export const revalidate = 0;
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const { name, lastName, email, image, id } = body;
+  const { user } = body;
+  const { name, lastName, email, id, image } = user;
 
   try {
-    if (!name || !email || !lastName || !id) {
+    if (!name || !email || !lastName || !id || !image) {
       throw new Error("id, name, lastName, and email are required");
     }
     const user = await sql`SELECT * FROM users WHERE user_id = ${id}`;
@@ -18,7 +19,7 @@ export async function POST(request: NextRequest) {
     }
   } catch (error) {
     console.error("Error creating user:", error);
-    return NextResponse.json({ error: error }, { status: 500 });
+    return NextResponse.json({ error }, { status: 500 });
   }
 
   let users;
