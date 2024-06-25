@@ -34,7 +34,7 @@ function SearchForm({
   }
 
   return (
-    <form className="p-8 bg-[#fbf9ff] ">
+    <form className="p-8 bg-[#fbf9ff] dark:bg-[#3c3c3c]">
       <div className="flex items-center bg-white border border-gray-300 ">
         <input
           type="text"

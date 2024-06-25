@@ -9,7 +9,8 @@ function SecondProductPresentation() {
           src="https://preview.colorlib.com/theme/timezone/assets/img/gallery/choce_watch1.png.webp"
           width={500}
           height={500}
-          priority
+          // priority
+          loading="lazy"
           alt="watch-image"
         />
       </div>

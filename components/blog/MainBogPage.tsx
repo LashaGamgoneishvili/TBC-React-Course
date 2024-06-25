@@ -51,7 +51,7 @@ function MainBlogPage({
         )}
         <SearchForm data={data} setBlog={setBlog} />
 
-        <div className="p-8 bg-[#fbf9ff] ">
+        <div className="p-8 bg-[#fbf9ff] dark:bg-[#3c3c3c] ">
           <div className="mb-8">
             <h2 className="text-xl mb-4">Recent Post</h2>
             <hr />
@@ -82,7 +82,7 @@ function MainBlogPage({
             </p>
           </div>
         </div>
-        <div className="p-8 bg-[#fbf9ff] ">
+        <div className="p-8 bg-[#fbf9ff] dark:bg-[#3c3c3c]">
           <div className="mb-8">
             <h2 className="text-xl mb-4">Category</h2>
             <hr />
@@ -118,39 +118,39 @@ function MainBlogPage({
             <p className="">Health Care (21) 09</p>
           </div>
         </div>
-        <div className="p-8 bg-[#fbf9ff] ">
+        <div className="p-8 bg-[#fbf9ff] dark:bg-[#3c3c3c]">
           <div className="mb-8">
             <h2 className="text-xl mb-4">Tag Clouds</h2>
             <hr />
           </div>
           <div className="flex flex-wrap gap-2">
-            <span className="bg-white text-[#999999] text-sm px-3 py-1 border border-gray-200 hover:text-white hover:bg-[#ff2020] duration-300 hover:border-[#ff2020] cursor-pointer">
+            <span className="bg-white dark:bg-[#3c3c3c] text-[#999999] text-sm px-3 py-1 border border-gray-200 hover:text-white hover:bg-[#ff2020] duration-300 hover:border-[#ff2020] cursor-pointer">
               project
             </span>
-            <span className="bg-white text-[#999999] text-sm px-3 py-1 border border-gray-200 hover:text-white hover:bg-[#ff2020] duration-300 hover:border-[#ff2020] cursor-pointer">
+            <span className="bg-white dark:bg-[#3c3c3c] text-[#999999] text-sm px-3 py-1 border border-gray-200 hover:text-white hover:bg-[#ff2020] duration-300 hover:border-[#ff2020] cursor-pointer">
               love
             </span>
-            <span className="bg-white text-[#999999] text-sm px-3 py-1 border border-gray-200 hover:text-white hover:bg-[#ff2020] duration-300 hover:border-[#ff2020] cursor-pointer">
+            <span className="bg-white dark:bg-[#3c3c3c] text-[#999999] text-sm px-3 py-1 border border-gray-200 hover:text-white hover:bg-[#ff2020] duration-300 hover:border-[#ff2020] cursor-pointer">
               technology
             </span>
-            <span className="bg-white text-[#999999] text-sm px-3 py-1 border border-gray-200 hover:text-white hover:bg-[#ff2020] duration-300 hover:border-[#ff2020] cursor-pointer">
+            <span className="bg-white dark:bg-[#3c3c3c] text-[#999999] text-sm px-3 py-1 border border-gray-200 hover:text-white hover:bg-[#ff2020] duration-300 hover:border-[#ff2020] cursor-pointer">
               travel
             </span>
-            <span className="bg-white text-[#999999] text-sm px-3 py-1 border border-gray-200 hover:text-white hover:bg-[#ff2020] duration-300 hover:border-[#ff2020] cursor-pointer">
+            <span className="bg-white dark:bg-[#3c3c3c] text-[#999999] text-sm px-3 py-1 border border-gray-200 hover:text-white hover:bg-[#ff2020] duration-300 hover:border-[#ff2020] cursor-pointer">
               restaurant
             </span>
-            <span className="bg-white text-[#999999] text-sm px-3 py-1 border border-gray-200 hover:text-white hover:bg-[#ff2020] duration-300 hover:border-[#ff2020] cursor-pointer">
+            <span className="bg-white dark:bg-[#3c3c3c] text-[#999999] text-sm px-3 py-1 border border-gray-200 hover:text-white hover:bg-[#ff2020] duration-300 hover:border-[#ff2020] cursor-pointer">
               life style
             </span>
-            <span className="bg-white text-[#999999] text-sm px-3 py-1 border border-gray-200 hover:text-white hover:bg-[#ff2020] duration-300 hover:border-[#ff2020] cursor-pointer">
+            <span className="bg-white dark:bg-[#3c3c3c] text-[#999999] text-sm px-3 py-1 border border-gray-200 hover:text-white hover:bg-[#ff2020] duration-300 hover:border-[#ff2020] cursor-pointer">
               design
             </span>
-            <span className="bg-white text-[#999999] text-sm px-3 py-1 border border-gray-200 hover:text-white hover:bg-[#ff2020] duration-300 hover:border-[#ff2020] cursor-pointer">
+            <span className="bg-white dark:bg-[#3c3c3c] text-[#999999] text-sm px-3 py-1 border border-gray-200 hover:text-white hover:bg-[#ff2020] duration-300 hover:border-[#ff2020] cursor-pointer">
               illustration
             </span>
           </div>
         </div>
-        <div className="flex flex-col p-8 bg-[#fbf9ff] ">
+        <div className="flex flex-col p-8 bg-[#fbf9ff] dark:bg-[#3c3c3c]">
           <div className="mb-8">
             <h2 className="text-xl mb-4">Instagram Feeds</h2>
             <hr />
@@ -159,7 +159,7 @@ function MainBlogPage({
             <Image src={image} width={100} height={100} alt="Insta-galery" />
           </div>
         </div>
-        <div className="flex flex-col p-8 bg-[#fbf9ff] ">
+        <div className="flex flex-col p-8 bg-[#fbf9ff] dark:bg-[#3c3c3c]">
           <div className="mb-8">
             <h2 className="text-xl mb-4">Newsletter</h2>
             <hr />

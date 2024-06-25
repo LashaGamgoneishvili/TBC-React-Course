@@ -31,8 +31,7 @@ export async function GET(_: NextRequest) {
       const lastName = "There is no lastName";
       const email = sessionUser?.email;
       const image = sessionUser?.picture;
-
-      const lastFiveCharacters = id.slice(-5);
+      const lastFiveCharacters = id?.slice(-5);
       const user =
         await sql`SELECT * FROM users WHERE user_id = ${lastFiveCharacters}`;
 
