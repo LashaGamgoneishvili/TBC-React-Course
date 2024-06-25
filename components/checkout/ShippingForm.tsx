@@ -1,4 +1,3 @@
-"use client";
 import { useState } from "react";
 
 const ShippingForm = ({ products }: { products: CheckoutProduct[] }) => {
@@ -25,7 +24,7 @@ const ShippingForm = ({ products }: { products: CheckoutProduct[] }) => {
 
   return (
     <>
-      <div className="flex w-auto gap-12 my-12 flex-col justify-end">
+      <div className="flex w-auto gap-4 my-12 flex-col pr-4 justify-end">
         <div className="mb-4 flex gap-20">
           <span className="font-bold">Shipping</span>
           <div className="ml-4 flex flex-col gap-6">
@@ -73,7 +72,6 @@ const ShippingForm = ({ products }: { products: CheckoutProduct[] }) => {
                 className="mr-2"
               />
             </div>
-            {/* Add more shipping options here */}
           </div>
         </div>
 
@@ -92,13 +90,12 @@ const ShippingForm = ({ products }: { products: CheckoutProduct[] }) => {
             <option value="Bangladesh">France</option>
             <option value="Bangladesh">Spain</option>
             <option value="Bangladesh">ITaly</option>
-            {/* Add more country options here */}
           </select>
         </div>
 
         <div className="mb-4 flex flex-col gap-4 items-end">
           <label htmlFor="state" className="font-bold">
-            Select a State
+            Region/city
           </label>
           <input
             type="text"
@@ -121,13 +118,6 @@ const ShippingForm = ({ products }: { products: CheckoutProduct[] }) => {
             className="block w-full border  border-gray-300 rounded py-2"
           />
         </div>
-
-        {/* <button
-        type="button"
-        className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-      >
-        Update Details
-      </button> */}
         <button className="  bg-[#3b82f6] text-white px-10 md:px-14 py-2 md:py-4 hover:bg-white hover:text-[#ff2020] border duration-500 border-white hover:border-[#3b82f6] rounded-md ">
           Update Details
         </button>

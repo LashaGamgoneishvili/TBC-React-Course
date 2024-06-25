@@ -2,16 +2,8 @@ import { getAllCartProduct } from "../../../../actions";
 import ProductListContainer from "../../../../components/checkout/ProductListContainer";
 
 export default async function CheckOut() {
-  // let products: CheckoutProduct[] = [];
-
   const product = await getAllCartProduct();
-  console.log("product-checkout", product);
   const products = product.rows;
-
-  // const totalPrice = products.reduce(
-  //   (acc: number, curr: CheckoutProduct) => acc + Number(curr.price),
-  //   0
-  // );
 
   return (
     <div

@@ -24,6 +24,7 @@ export default async function Header({ locale }: HeaderProps) {
     cart: t("header:cart"),
     element: t("header:element"),
     confirmation: t("header:confirmation"),
+    shipping: t("header:shipping"),
     productCheckout: t("header:product-checkout"),
   };
 

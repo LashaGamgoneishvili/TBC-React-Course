@@ -51,10 +51,11 @@ export default function AddCartButton({
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 15 }}
+        className="cursor-pointer "
       >
         {!isDisabled ? (
           <button
-            className="text-xl   dark:text-black text-white "
+            className="text-xl  dark:text-black text-white "
             onClick={handleClick}
             disabled={isDisabled}
           >

@@ -49,17 +49,21 @@ export default function ShopProductList({
                   src={`${item.image}`}
                   priority={true}
                   width={400}
-                  height={100}
+                  height={400}
                 />
               </Link>
               <div className="bg-[#f81f1f] h-[2px] w-full absolute bottom-0"></div>
 
-              <div className="absolute  flex items-center  justify-center h-[60px] group-hover:bg-[#f81f1f] -bottom-[58px] bg-transparent group-hover:bottom-0  w-full duration-500">
+              <div className="absolute cursor-pointer  flex items-center  justify-center h-[60px] group-hover:bg-[#f81f1f] -bottom-[58px] bg-transparent group-hover:bottom-0  w-full duration-500">
                 <AddCartButton productId={item.product_id} role={role} />
               </div>
             </div>
-            <p className=" text-xl w-full text-center ">{item.description}</p>
-            <p className="text-center ">Price - {item.price}$</p>
+            <p className="text-base sm:text-lg  w-full text-center">
+              {item.description}
+            </p>
+            <p className="text-center text-sm md:text-base ">
+              Price - {item.price}$
+            </p>
           </div>
         ))}
       </div>

@@ -1,16 +1,22 @@
-import { Metadata } from "next";
+import { getAllProductAction } from "../../../../actions";
+import { getSession } from "@auth0/nextjs-auth0";
+import ShopProductList from "../../../../components/shop/ShopProductList";
 
-export const metadata: Metadata = {
-  title: { absolute: "Go Shopping" },
-  description: "See All information about User",
-};
-
-function Shop() {
+export default async function Shop({
+  searchParams,
+}: {
+  searchParams?: {
+    query: string;
+    page: string;
+  };
+}) {
+  const product: BlogObject = await getAllProductAction();
+  const session = await getSession();
+  const user = session?.user;
+  const role = user?.role;
   return (
-    <div className="flex justify-center items-center w-full h-screen">
-      <h1>Shop Page</h1>
-    </div>
+    <>
+      <ShopProductList data={product} searchParams={searchParams} role={role} />
+    </>
   );
 }
-
-export default Shop;

@@ -38,7 +38,7 @@ export default function ProductList({
 
   const role = user?.role;
 
-  const firstSixProduct = product.slice(0, 5);
+  const firstSixProduct = product.slice(0, 3);
 
   useEffect(() => {
     const searchedProduct = data.result.filter((product) =>
@@ -49,7 +49,7 @@ export default function ProductList({
 
   function handleMoreContant() {
     if (count > 2) {
-      return router.push("/shoppingPage");
+      return router.push("/shop");
     }
     setMoreContent(true);
     setCount((count) => count + 1);
@@ -95,8 +95,12 @@ export default function ProductList({
                 <AddCartButton productId={item.product_id} role={role} />
               </div>
             </div>
-            <p className=" text-xl w-full text-center ">{item.description}</p>
-            <p className="text-center ">Price - {item.price}$</p>
+            <p className="text-base sm:text-lg 2xl:text-xl w-full text-center ">
+              {item.description}
+            </p>
+            <p className="text-center text-sm md:text-base ">
+              Price - {item.price}$
+            </p>
           </div>
         ))}
 

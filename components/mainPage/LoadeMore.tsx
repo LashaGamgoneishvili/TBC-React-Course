@@ -21,7 +21,7 @@ function LoadMore({
   const role = user?.role;
 
   useEffect(() => {
-    setData([...data.result.slice(6, page * 3 + 6)]);
+    setData([...data.result.slice(3, page * 3 + 3)]);
   }, [data.result, page]);
   const variants = {
     hidden: { opacity: 0 },
@@ -65,8 +65,12 @@ function LoadMore({
                   <AddCartButton productId={item.product_id} role={role} />
                 </div>
               </div>
-              <p className=" text-xl w-full text-center ">{item.description}</p>
-              <p className="text-center ">Price - {item.price}$</p>
+              <p className="text-base sm:text-lg 2xl:text-xl w-full text-center">
+                {item.description}
+              </p>
+              <p className="text-center text-sm md:text-base">
+                Price - {item.price}$
+              </p>
             </motion.div>
           ))}
       </AnimatePresence>
