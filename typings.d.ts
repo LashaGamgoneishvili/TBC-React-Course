@@ -39,28 +39,8 @@ interface GetSessionUser {
   updated_at?: string;
   role: string[];
 }
-// interface GetSessionUser {
-//   email: string;
-//   email_verified: boolean;
-//   name: string;
-//   nickname: string;
-//   picture: string;
-//   sub: string;
-//   updated_at: string;
-//   role: string[];
-// }
 
-// interface UserProfile {
-//   email: string;
-//   email_verified: boolean;
-//   name: string;
-//   nickname: string;
-//   picture: string;
-//   role: string[];
-//   sid: string;
-//   sub: string;
-//   updated_at: string;
-// }
+
 
 interface BlogTypes {
   blog_id: number;
@@ -139,6 +119,22 @@ interface Props {
 interface Righteous {
   className: string;
 }
+
+interface ShippingTypes {
+  user_id: string;
+  product_id: string;
+  quantity: number;
+  id: number;
+  title: string;
+  description: string;
+  price: string;
+  discount: string;
+  image: string;
+}
+
+type Data = {
+  rows: ShippingTypes;
+};
 
 interface Params {
   id: string;

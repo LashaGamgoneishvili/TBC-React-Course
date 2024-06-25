@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function Blog({ children }: { children: string }) {
   return (
     <div className="flex justify-center items-center  px-3 py-12">
-      <FlyoutLink href={`/shoppingPage`} FlyoutContent={List}>
+      <FlyoutLink href={`/shop`} FlyoutContent={List}>
         {children}
       </FlyoutLink>
     </div>
@@ -62,7 +62,9 @@ function List() {
     <div className="inline-block">
       <ul className="flex flex-col w-auto gap-2 border-t-2 border-[#ff2020] z-10 p-4 bg-white shadow-md dark:bg-black rounded-md">
         <li className="whitespace-nowrap hover:scale-[1.02] hover:text-[#ff5c4b] cursor-pointer duration-200">
-          <Link href="/blogs" aria-label="Go to blog page">{t("header:blog")}</Link>
+          <Link href="/blogs" aria-label="Go to blog page">
+            {t("header:blog")}
+          </Link>
         </li>
         <li className="whitespace-nowrap hover:scale-[1.02] hover:text-[#ff5c4b] cursor-pointer duration-200">
           {t("header:blog-details")}

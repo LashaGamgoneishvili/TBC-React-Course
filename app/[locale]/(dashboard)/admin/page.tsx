@@ -25,6 +25,9 @@ export default function UsersPage() {
   function handleClickProduct() {
     router.push("/AdminProduct");
   }
+  function handleClickShipping() {
+    router.push("/shipping");
+  }
   function handleClickBlog() {
     router.push("/blogs");
   }
@@ -54,7 +57,7 @@ export default function UsersPage() {
           onClick={handleClickProduct}
         >
           <Image
-            src="https://ajy8khmx9vtvyckn.public.blob.vercel-storage.com/product-q4zcJ9NI0xMM0EQsJJFQjiHjWOG0Mv.png"
+            src="https://ajy8khmx9vtvyckn.public.blob.vercel-storage.com/popular4.png-Lz6l8B682uqHWbtNXJCMCFDFz2yK86.webp"
             width={150}
             height={150}
             priority
@@ -65,6 +68,24 @@ export default function UsersPage() {
             className=" rounded-md bg-[#0ea5e9] p-2 text-[#fff] transition-all duration-300 hover:bg-[#0369a1] focus:ring"
           >
             Products Page
+          </Link>
+        </div>
+        <div
+          className="flex flex-col gap-8 h-96 justify-center items-center p-16 hover:scale-[1.02] transition-all ease-out duration-500 shadow-md  cursor-pointer"
+          onClick={handleClickShipping}
+        >
+          <Image
+            src="https://ajy8khmx9vtvyckn.public.blob.vercel-storage.com/Ordered%20Products%20-7HeWB0XFtThelmPHZNYs6aCQK1rUKh.jpg"
+            width={150}
+            height={150}
+            priority
+            alt="Person-logo"
+          />
+          <Link
+            href="/shipping"
+            className=" rounded-md bg-[#0ea5e9] p-2 text-[#fff] transition-all duration-300 hover:bg-[#0369a1] focus:ring"
+          >
+            Ordered Products
           </Link>
         </div>
         <div

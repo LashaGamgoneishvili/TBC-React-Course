@@ -229,8 +229,8 @@ export async function createOrder(productId: number, quantity: number) {
   const userId = user?.sub;
   const response = await addShipping(productId, quantity, userId);
   const shippingProduct = await response.json();
-  console.log("shippingProduct", shippingProduct);
-  return shippingProduct;
+  console.log("shippingProduct", shippingProduct.result);
+  return shippingProduct.result;
 }
 
 export async function deleteUserAction(id: string) {

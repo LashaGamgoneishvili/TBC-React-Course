@@ -4,7 +4,7 @@ import Link from "next/link";
 import CheckoutProductList from "./CheckoutProductList";
 import ShippingForm from "./ShippingForm";
 import RemoveAllCheckout from "./RemoveAllCeckout";
-import { createOrder, deleteAllItem } from "../../actions";
+import { createOrder } from "../../actions";
 import { useAppContext } from "../../app/context/index";
 
 export default function ProductListContainer({
@@ -22,21 +22,17 @@ export default function ProductListContainer({
       if (!url) return;
       for (const product of products) {
         const promise = await createOrder(product.id, product.quantity);
-        const result = await Promise.all(promise);
-        // Assuming createOrder is an async function
-        if (result) {
-          deleteAllItem();
-          setState(0);
-          console.log(url);
+        const result = promise.rows;
+
+        console.log("result-data", result);
+        if (result.length > 0) {
           window.location.href = url;
         }
       }
     }
-
     shipping();
   }, [url, setState]);
 
-  console.log("products, products", products);
   const checkout = async () => {
     await fetch(`/api/checkout`, {
       method: "POST",
@@ -53,14 +49,8 @@ export default function ProductListContainer({
 
         if (response.url) {
           console.log("response.url", response.url);
-          // Make sure to delete all items and set the state before redirecting
           setUrl(response.url);
-          // Create orders for all products
-          // Redirect to the new URL after all orders are created
-          // setTimeout(() => {
-          //   window.location.href = response.url;
-          //   // console.log("response.url", response.url);
-          // }, 1000);
+          // window.location.href = response.url;
         }
       });
   };
@@ -90,7 +80,7 @@ export default function ProductListContainer({
         <hr className="w-full mb-8" />
         <div className="flex justify-end w-full gap-4 ">
           <Link
-            href={"/shoppingPage"}
+            href={"/shop"}
             className="  bg-[#3b82f6] text-white px-8 md:px-14 py-2 md:py-4 hover:bg-white hover:text-[#ff2020] border duration-500 border-white hover:border-[#3b82f6] rounded-md "
           >
             continue shopping

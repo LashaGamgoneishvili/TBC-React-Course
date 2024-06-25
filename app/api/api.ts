@@ -1,4 +1,4 @@
-import { revalidatePath } from "next/cache";
+// import { revalidatePath } from "next/cache";
 import { getSession } from "@auth0/nextjs-auth0";
 
 const VERCEL_ENV = process.env.VERCEL_ENV;
@@ -10,7 +10,7 @@ export const BASE_URL =
 
 export async function getUsers() {
   try {
-    revalidatePath(`/admin`);
+    // revalidatePath(`/admin`);
     const response = await fetch(`${BASE_URL}/api/user-api/get-users`, {
       cache: "no-cache",
     });
@@ -31,14 +31,14 @@ export async function createUserLogin() {
   return await fetch(`${BASE_URL}/api/user-api/create-user-login`);
 }
 export async function createUserAdmin(user: CreateUserResult) {
-  revalidatePath(`${BASE_URL}/user`);
+  // revalidatePath(`${BASE_URL}/user`);
   return await fetch(`${BASE_URL}/api/user-api/create-user-from-admin`, {
     method: "POST",
     body: JSON.stringify({ user }),
   });
 }
 export async function createProductAdmin(product: ProductResult) {
-  revalidatePath(`${BASE_URL}/AdminProudct`);
+  // revalidatePath(`${BASE_URL}/AdminProudct`);
   return await fetch(`${BASE_URL}/api/product-api/create-new-product`, {
     method: "POST",
     body: JSON.stringify({ product }),
@@ -46,7 +46,7 @@ export async function createProductAdmin(product: ProductResult) {
 }
 
 export async function updateUser(user: Result) {
-  revalidatePath(`${BASE_URL}/user`);
+  // revalidatePath(`${BASE_URL}/user`);
   return await fetch(`${BASE_URL}/api/user-api/update-user`, {
     method: "POST",
     body: JSON.stringify({ user }),
@@ -54,7 +54,7 @@ export async function updateUser(user: Result) {
 }
 
 export async function updateProduct(product: ProductResult) {
-  revalidatePath(`${BASE_URL}/Adminproduct`);
+  // revalidatePath(`${BASE_URL}/Adminproduct`);
   return await fetch(`${BASE_URL}/api/admin/update-product`, {
     method: "POST",
     body: JSON.stringify({ product }),
@@ -62,7 +62,7 @@ export async function updateProduct(product: ProductResult) {
 }
 
 export async function uploadNewBlog(blog: BlogType) {
-  revalidatePath(`${BASE_URL}/blogs`);
+  // revalidatePath(`${BASE_URL}/blogs`);
 
   return await fetch(`${BASE_URL}/api/admin/upload-blogs`, {
     cache: "no-store",
@@ -74,7 +74,7 @@ export async function uploadNewBlog(blog: BlogType) {
 }
 
 export async function updateBlog(blog: BlogType) {
-  revalidatePath(`${BASE_URL}/blogs`);
+  // revalidatePath(`${BASE_URL}/blogs`);
 
   return await fetch(`${BASE_URL}/api/admin/update-blog`, {
     cache: "no-store",
@@ -90,7 +90,7 @@ export async function updateComment(
   userId: string,
   blogId: string
 ) {
-  revalidatePath(`${BASE_URL}/blogs`);
+  // revalidatePath(`${BASE_URL}/blogs`);
 
   const response = await fetch(`${BASE_URL}/api/update-comment`, {
     cache: "no-store",
@@ -108,7 +108,7 @@ export async function updateComment(
 }
 
 export async function deleteUser(id: string) {
-  revalidatePath(`${BASE_URL}/user`);
+  // revalidatePath(`${BASE_URL}/user`);
   return await fetch(`${BASE_URL}/api/user-api/delete-user`, {
     cache: "no-store",
     method: "DELETE",
@@ -116,7 +116,7 @@ export async function deleteUser(id: string) {
   });
 }
 export async function deleteProduct(id: number) {
-  revalidatePath(`${BASE_URL}/AdminProduct`);
+  // revalidatePath(`${BASE_URL}/AdminProduct`);
   return await fetch(`${BASE_URL}/api/product-api/delete-product`, {
     method: "DELETE",
     body: JSON.stringify({ id }),
@@ -139,7 +139,7 @@ export async function addShipping(
   quantity: number,
   userId: string
 ) {
-  const response = await fetch(`${BASE_URL}/api/shipping/add`, {
+  return await fetch(`${BASE_URL}/api/shipping/add`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -148,11 +148,20 @@ export async function addShipping(
       userId: userId,
     }),
   });
-  return await response.json();
+}
+export async function getShippingProduct() {
+  const session = await getSession();
+  const user = session?.user;
+  const id = user?.sub;
+  const lastFiveCharacters = id.slice(-5);
+  return await fetch(`${BASE_URL}/api/shipping/get/${lastFiveCharacters}`, {
+    method: "GET",
+    cache: "no-cache",
+  });
 }
 
 export async function emptyCart(userId: number) {
-  revalidatePath(`${BASE_URL}/checkout`);
+  // revalidatePath(`${BASE_URL}/checkout`);
   try {
     const response = await fetch(`${BASE_URL}/api/cart/empty/${userId}`, {
       cache: "no-store",
@@ -178,7 +187,7 @@ export async function decrementCart(userId: number, productId: number) {
 }
 
 export async function getCart(userId: string) {
-  revalidatePath(`${BASE_URL}/`);
+  // revalidatePath(`${BASE_URL}/`);
   const response = await fetch(`${BASE_URL}/api/cart/getAllcart/${userId}`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
@@ -221,7 +230,7 @@ export async function getUserId() {
 }
 
 export async function getUser(id: string) {
-  revalidatePath(`${BASE_URL}/profile`);
+  // revalidatePath(`${BASE_URL}/profile`);
   const response = await fetch(`${BASE_URL}/api/user-api/get-user/${id}`, {
     cache: "no-store",
   });
@@ -241,6 +250,8 @@ export async function getUser(id: string) {
 }
 
 export async function getAllProduct() {
+  // revalidatePath(`${BASE_URL}/shop`);
+
   try {
     const response = await fetch(`${BASE_URL}/api/getAllProduct`, {
       cache: "no-cache",
@@ -261,8 +272,31 @@ export async function getAllProduct() {
   }
 }
 export async function getAllBlog() {
+  // revalidatePath(`${BASE_URL}/blogs`);
+
   try {
     const response = await fetch(`${BASE_URL}/api/blog`, {
+      cache: "no-store",
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const blogs = await response.json();
+    return blogs;
+  } catch (error) {
+    console.error("Failed to fetch products:", error);
+    return {
+      error: true,
+      message: error,
+    };
+  }
+}
+export async function getAllshippingProduct() {
+  // revalidatePath(`${BASE_URL}/shipping`);
+  try {
+    const response = await fetch(`${BASE_URL}/api/shipping/get-all`, {
       cache: "no-store",
     });
 
@@ -289,7 +323,7 @@ export async function getBlog(blogId: string) {
   return blog;
 }
 // export async function getBlog(blogId: string) {
-//   revalidatePath(`${BASE_URL}/blogs${blogId}`);
+// revalidatePath(`${BASE_URL}/blogs${blogId}`);
 
 //   try {
 //     const response = await fetch(`${BASE_URL}/api/getBlog/${blogId}`, {
@@ -318,7 +352,7 @@ export async function deleteAllBlogs() {
   });
 }
 export async function deleteBlog(blogId: number) {
-  revalidatePath(`${BASE_URL}/blogs`);
+  // revalidatePath(`${BASE_URL}/blogs`);
 
   try {
     return await fetch(`${BASE_URL}/api/admin/delete-blog`, {
@@ -346,4 +380,29 @@ export async function getData() {
   const response = await fetch(`${BASE_URL}/api/search`);
   const product = await response.json();
   return product;
+}
+
+export async function shippingProductDelete(userId: string, productId: string) {
+  try {
+    const response = await fetch(`${BASE_URL}/api/shipping/delete`, {
+      cache: "no-cache",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: userId,
+        productId: productId,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Failed to fetch shipping delete API:", error);
+    throw new Error("Failed to fetch shipping delete API");
+  }
 }

@@ -3,8 +3,10 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import georgia from "../public/Assets/Flag_of_Georgia.svg.png";
-import kingdom from "../public/Assets/Flag-United-Kingdom.webp";
+const georgia =
+  "https://ajy8khmx9vtvyckn.public.blob.vercel-storage.com/Flag_of_Georgia.svg-6OR8I1uIZq2Z6PcmbvQsSfAbvgFjiA.png";
+const kingdom =
+  "https://ajy8khmx9vtvyckn.public.blob.vercel-storage.com/Flag-United-Kingdom-f0cmSt2B2YdfdMUrH3D8nhPoCaoidb.webp";
 
 export default function LanguageChanger() {
   const { i18n } = useTranslation();

@@ -61,7 +61,7 @@ function StickyHeader({ translations }: StickyHeaderProps) {
             transition={{ duration: 0.1, ease: "easeOut" }}
             className=" flex h-fit sm:h-fit items-center justify-between w-full  sm:justify-between px-5   sm:mx-6"
           >
-            <div className="righteous">
+            <div>
               <Link href="/" aria-label="Back to main page">
                 <span className="sm:text-[32px] text-2xl text-black dark:text-blue-500">
                   T
@@ -81,7 +81,7 @@ function StickyHeader({ translations }: StickyHeaderProps) {
                   </Link>
                 </li>
                 <li className=" cursor-pointer p-1    hover:text-[#ff2020] hover:duration-300">
-                  <Link href="/shoppingPage" aria-label="Go to shopping page">
+                  <Link href="/shop" aria-label="Go to shopping page">
                     {translations.shop}
                   </Link>
                 </li>
@@ -170,7 +170,7 @@ function StickyHeader({ translations }: StickyHeaderProps) {
                   </Link>
                 </li>
                 <li className=" cursor-pointer p-1    hover:text-[#ff2020] hover:duration-300">
-                  <Link href="/shoppingPage" aria-label="Go to shopping page">
+                  <Link href="/shop" aria-label="Go to shopping page">
                     {translations.shop}
                   </Link>
                 </li>

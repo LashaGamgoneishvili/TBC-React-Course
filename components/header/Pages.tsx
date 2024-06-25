@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import Link from "next/link";
 
 const Latest = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -22,15 +23,8 @@ const FlyoutLink = ({ children, FlyoutContent }: any) => {
     >
       <div className="relative hover:text-[#ff5c4b] duration-300">
         {children}
-        {/* TODO RENDER underline animation thingy */}
-        {/* <span
-          style={{
-            transform: showFlyout ? "scaleX(1)" : "scaleX(0)",
-          }}
-          className=" absolute -bottom-2 -left-2 -right-2 h-[1px] origin-left  rounded-full bg-[#ff2020] transition-transform duration-300 ease-out"
-        /> */}
       </div>
-      {/* TODO RENDER layout content */}
+
       <AnimatePresence>
         {showFlyout && (
           <motion.div
@@ -69,6 +63,9 @@ function List() {
         </li>
         <li className="whitespace-nowrap  hover:scale-[1.02] hover:text-[#ff5c4b] cursor-pointer  duration-200">
           {t("header:confirmation")}
+        </li>
+        <li className="whitespace-nowrap  hover:scale-[1.02] hover:text-[#ff5c4b] cursor-pointer  duration-200">
+          <Link href="shipping">{t("header:shipping")}</Link>
         </li>
         <li className="whitespace-nowrap  hover:scale-[1.02] hover:text-[#ff5c4b] cursor-pointer  duration-200">
           {t("header:product-checkout")}

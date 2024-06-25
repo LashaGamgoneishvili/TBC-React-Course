@@ -9,29 +9,10 @@ import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import Cart from "./Cart";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import Image from "next/image";
-import dropDown from "../../public/Assets/down-arrow-svgrepo-com.svg";
 import { AnimatePresence, motion } from "framer-motion";
 
-// type StickyHeaderProps = {
-//   translations: {
-//     home: string;
-//     shop: string;
-//     about: string;
-//     latest: string;
-//     blog: string;
-//     pages: string;
-//     contact: string;
-//     productList: string;
-//     productDetails: string;
-//     blob: string;
-//     blogDetails: string;
-//     login: string;
-//     cart: string;
-//     element: string;
-//     confirmation: string;
-//     productCheckout: string;
-//   };
-// };
+const dropDown =
+  "https://ajy8khmx9vtvyckn.public.blob.vercel-storage.com/down-arrow-svgrepo-com-rZeACjVrxCgyso6ZhLLDS9rWTNjp6x.svg";
 
 function BurgerManue({ translations }: StickyHeaderProps) {
   const [active, setActive] = useState(false);
@@ -94,13 +75,20 @@ function BurgerManue({ translations }: StickyHeaderProps) {
                   className=" cursor-pointer p-1   hover:text-[#ff2020] hover:duration-300"
                   onClick={() => setActive(false)}
                 >
-                  <Link href="/" aria-label="Go to home page">{translations.home}</Link>
+                  <Link href="/" aria-label="Go to home page">
+                    {translations.home}
+                  </Link>
                 </div>
                 <div
                   className=" cursor-pointer p-1    hover:text-[#ff2020] hover:duration-300"
                   onClick={() => setActive(false)}
                 >
-                  <Link href="/shoppingPage" aria-label="Go to shoppingPage page">{translations.shop}</Link>
+                  <Link
+                    href="/shop"
+                    aria-label="Go to shopping page"
+                  >
+                    {translations.shop}
+                  </Link>
                 </div>
 
                 <div
@@ -220,7 +208,7 @@ function BurgerManue({ translations }: StickyHeaderProps) {
                         }
                       >
                         <Link
-                          href="/shoppingPage"
+                          href="/shop"
                           className="hover:text-[#ff2020] duration-300 cursor-pointer border-b pb-[2px] hover:scale-[1.02]   border-[#ff2020]"
                           onClick={() => setActive(false)}
                         >
@@ -269,7 +257,9 @@ function BurgerManue({ translations }: StickyHeaderProps) {
                   className=" cursor-pointer p-1   [transition:all_ease_0.2s] hover:text-[#ff2020] hover:duration-300"
                   onClick={() => setActive(false)}
                 >
-                  <Link href="/contact" aria-label="Go to contact page">{translations.contact}</Link>
+                  <Link href="/contact" aria-label="Go to contact page">
+                    {translations.contact}
+                  </Link>
                 </div>
               </div>
             </nav>

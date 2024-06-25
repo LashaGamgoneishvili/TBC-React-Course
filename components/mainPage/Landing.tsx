@@ -16,7 +16,7 @@ function Landing() {
         <div className="flex relative">
           <div className="translate-x-0 bg-[#4a4a4b] w-auto before:duration-300 before:w-0 before:left-0 before:absolute before:h-[100%] before:bg-[#ff2020] before:transition-all before:ease-in hover:before:w-full  before:-z-10">
             <button className="text-white  py-3  px-8 lg:text-2xl text-xl">
-              <Link href="/shoppingPage" aria-label="Go to shoppingPage page">
+              <Link href="/shop" aria-label="Go to shop page">
                 Shop Now
               </Link>
             </button>

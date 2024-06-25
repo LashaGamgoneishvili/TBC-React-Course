@@ -2,9 +2,11 @@
 import Image from "next/image";
 import BlogUpload from "./BlogUpload";
 import SearchForm from "./SearchForm";
-import image from "../../public/Assets/blog/111-tRWJKdFbEksGhmgQCY43vJjiFYN3D5.jpg";
 import { useState } from "react";
 import BlogDetails from "./BlogDetails";
+
+const image =
+  "https://ajy8khmx9vtvyckn.public.blob.vercel-storage.com/346857997_927928671820342_8714695182936544650_n-X3cQMZ9wUeqSiRTFvXxdIWMC2s3kYs.jpg";
 
 export default function MainBlogDetails({
   data,
