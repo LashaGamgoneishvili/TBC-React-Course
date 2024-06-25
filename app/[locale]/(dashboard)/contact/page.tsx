@@ -1,17 +1,27 @@
 "use client";
 
+import { useState } from "react";
+
 export default function Contact() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
+
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
     const name = (form.elements.namedItem("name") as HTMLInputElement).value;
-    const email = (form.elements.namedItem("user_email") as HTMLInputElement)
-      .value;
+    const email = (form.elements.namedItem("email") as HTMLInputElement).value;
     const phone = (form.elements.namedItem("phone") as HTMLInputElement).value;
     const message = (form.elements.namedItem("message") as HTMLTextAreaElement)
       .value;
 
-    const mailtoLink = `mailto:someone@example.com?subject=Contact Form Submission&body=Name: ${name}%0D%0AEmail: ${email}%0D%0APhone: ${phone}%0D%0AMessage: ${message}`;
+    const mailtoLink = `mailto:gamgoneishvili8@gmail.com?subject=${encodeURIComponent(
+      "Contact Form Submission"
+    )}&body=${encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${message}`
+    )}`;
     window.location.href = mailtoLink;
   }
 
@@ -20,46 +30,71 @@ export default function Contact() {
       <div className="flex h-auto  w-full flex-col items-center justify-center gap-12 pt-4">
         <h1>SEND US A MESSAGE</h1>
         <form
-          onSubmit={(event) => handleSubmit(event)}
+          onSubmit={handleSubmit}
           className="flex h-auto flex-col items-center justify-center gap-4 text-[#333]"
         >
           <div className="flex gap-16">
             <div className="flex flex-col gap-1">
-              <label className="text-black dark:text-white">Name</label>
+              <label htmlFor="name" className="text-black dark:text-white">
+                Name
+              </label>
               <input
+                id="name"
                 className="justify-self-center rounded-[0.7rem] border-[2px] border-[#dedede] bg-[#ffffff] p-3.5 transition-all duration-300"
                 type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 placeholder="Your Name..."
+                name="name"
               />
             </div>
             <div className="flex flex-col gap-1">
-              <label className="text-black dark:text-white">Email</label>
+              <label htmlFor="email" className="text-black dark:text-white">
+                Email
+              </label>
               <input
+                id="email"
                 type="email"
-                name="user_email"
+                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="justify-self-center rounded-[0.7rem] border-[2px] border-[#dedede] bg-[#ffffff] p-3.5 transition-all duration-300"
                 placeholder="Your Email..."
               />
             </div>
             <div className="flex flex-col gap-1">
-              <label className="text-black dark:text-white">Phone</label>
+              <label htmlFor="phone" className="text-black dark:text-white">
+                Phone
+              </label>
               <input
+                id="phone"
                 type="tel"
                 placeholder="Your Phone Number..."
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
                 className="justify-self-center rounded-[0.7rem] border-[2px] border-[#dedede] bg-[#ffffff] p-3.5 transition-all duration-300"
+                name="phone"
               />
             </div>
           </div>
           <div className="flex w-full flex-col items-center gap-4">
-            <label className="text-black dark:text-white">Message</label>
+            <label htmlFor="message" className="text-black dark:text-white">
+              Message
+            </label>
             <textarea
+              id="message"
               name="message"
               placeholder="Message"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
               className="h-[180px] w-full justify-self-center rounded-[0.7rem] border-[2px] border-[#dedede] bg-[#ffffff] p-4"
             />
-            <p className="w-28 rounded-lg bg-[#111111] p-2 text-white transition-all duration-300 hover:bg-[#ec1d25]">
-              <a href="mailto:someone@example.com">Send email</a>
-            </p>
+            <button
+              type="submit"
+              className="w-28 rounded-lg bg-[#111111] p-2 text-white transition-all duration-300 hover:bg-[#ec1d25]"
+            >
+              Send email
+            </button>
           </div>
         </form>
       </div>

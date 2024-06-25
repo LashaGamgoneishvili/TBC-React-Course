@@ -52,7 +52,7 @@ export default function ProfileInfo({
 
   return (
     <>
-      <div className=" flex relative  flex-col  sm:gap-2 text-gray-700">
+      <div className=" flex relative justify-center rounded-md flex-col rounded-md dark:text-[#fff] shadow-md px-12 h-full  sm:gap-2 text-gray-700">
         <p className="sm:text-lg leading-6 sm:h-8">
           {name ? name : "...Loading"}
         </p>

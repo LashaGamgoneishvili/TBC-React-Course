@@ -67,7 +67,7 @@ export default function BlogUpload({
       {typedUser?.role?.[0] && (
         <div className="flex flex-col gap-3">
           <button
-            className="cursor-pointer mx-6 bg-[#3b82f6] text-white flex gap-4 justify-center py-3 border border-[#fbf9ff] hover:border-[#ff2020] hover:bg-white hover:text-black duration-300 "
+            className="cursor-pointer  mx-6 bg-[#3b82f6] text-white flex gap-4 justify-center py-3 border border-[#fbf9ff] hover:border-[#ff2020] hover:bg-white hover:text-black duration-300 "
             onClick={() => setUpload(true)}
           >
             <span>&#10009; </span>
@@ -83,7 +83,7 @@ export default function BlogUpload({
       )}
 
       {upload && (
-        <div className="absolute  overflow-hidden  animate-appearFromTop flex top-0 left-0 sm:px-16 px-6 py-14 sm:py-8 -translate-y-[-70%]  bg-white w-full flex-col lg:flex-row items-center  lg:items-start transition shadow-lg justify-between gap-8 ease-out">
+        <div className="absolute  overflow-hidden  animate-appearFromTop flex top-0 left-0 sm:px-16 px-6 py-14 sm:py-8 -translate-y-[-70%]  bg-white w-full  dark:bg-[#3c3c3c] flex-col lg:flex-row items-center  lg:items-start transition shadow-lg justify-between gap-8 ease-out">
           <div className="flex flex-col gap-5 overflow-hidden">
             <h1 className="md:text-3xl text-xl font-semibold">
               Creating New Blog Post
@@ -94,7 +94,7 @@ export default function BlogUpload({
             action={clinetAction}
             className="flex flex-col py-5  h-full items-start justify-start w-full  gap-5"
           >
-            <div className="flex flex-col gap-1 w-full">
+            <div className="flex  flex-col gap-1 w-full">
               <label htmlFor="title" className="text-xs font-semibold">
                 Title
               </label>
@@ -104,7 +104,7 @@ export default function BlogUpload({
                 name="title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="rounded-md px-4 text-black py-1 border-black border"
+                className="rounded-md px-4 text-black py-1 dark:text-[#fff]  border-black border"
               />
             </div>
 
@@ -117,7 +117,7 @@ export default function BlogUpload({
                 name="description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="rounded-md px-4  h-52 text-black py-1  w-full min-h-10 border-black border"
+                className="rounded-md px-4  h-52 text-black py-1 dark:text-[#fff]   w-full min-h-10 border-black border"
               />
             </div>
 
@@ -133,7 +133,7 @@ export default function BlogUpload({
                 name="detaildDescription"
                 value={detaildDescription}
                 onChange={(e) => setDetaildDescription(e.target.value)}
-                className="rounded-md px-4 text-black py-1  h-64 border-black border"
+                className="rounded-md px-4 text-black py-1 dark:text-[#fff]   h-64 border-black border"
               />
             </div>
             <div className="flex flex-col gap-1  w-32">
@@ -146,7 +146,7 @@ export default function BlogUpload({
                 name="time"
                 value={time}
                 onChange={(e) => setTime(e.target.value)}
-                className="rounded-md px-4 text-black py-1  border-black border"
+                className="rounded-md px-4 text-black py-1 dark:text-[#fff]   border-black border"
               />
 
               <input
@@ -154,7 +154,7 @@ export default function BlogUpload({
                 type="text"
                 name="image"
                 value={image}
-                className="rounded-md px-4 hidden text-black py-1  border-black border"
+                className="rounded-md px-4 hidden text-black py-1 dark:text-[#fff]   border-black border"
               />
               <input
                 id="userId"

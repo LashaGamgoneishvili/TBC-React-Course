@@ -84,9 +84,10 @@ export default function ProductList({
                 <Image
                   alt="watch-images"
                   src={`${item.image}`}
-                  priority={true}
+                  // priority={true}
                   width={350}
                   height={100}
+                  loading="lazy"
                 />
               </Link>
               <div className="bg-[#f81f1f] h-[2px] w-full absolute bottom-0"></div>

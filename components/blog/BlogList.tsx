@@ -209,7 +209,7 @@ export default function BlogList({
                       name="comment"
                       value={comment}
                       onChange={(e) => setComment(e.target.value)}
-                      className="rounded-md px-4 justify-center text-black py-1 w-full border-black border"
+                      className="rounded-md px-4 justify-center dark:text-[#fff] dark:bg-[#3c3c3c] text-black py-1 w-full border-black border"
                     />
                   </div>
 
@@ -260,8 +260,8 @@ export default function BlogList({
         </div>
 
         {edit && (
-          <div className="absolute flex justify-center w-full bg-gray-100 h-full">
-            <div className="absolute animate-appear overflow-hidden flex xl:w-[90%] shadow-lg px-8  z-20 bg-white transition  flex-col lg:flex-row lg:-translate-x-24 xl:-translate-x-44  gap-12 ease-out  justify-center duration-700 py-8">
+          <div className="absolute flex justify-center w-full bg-gray-100 h-full ">
+            <div className="absolute animate-appear dark:bg-[#3c3c3c]  overflow-hidden flex xl:w-[90%] shadow-lg px-8  z-20 bg-white transition  flex-col lg:flex-row lg:-translate-x-24 xl:-translate-x-44  gap-12 ease-out  justify-center duration-700 py-8">
               <div className="overflow-hidden flex flex-col gap-5">
                 <h1 className="md:text-3xl text-xl font-semibold">
                   Update Blog Post
@@ -276,7 +276,7 @@ export default function BlogList({
 
               <form
                 action={editClinetAction}
-                className="flex flex-col w-full gap-5"
+                className="flex flex-col dark:text-[#fff] w-full gap-5"
               >
                 <div className="flex flex-col gap-1">
                   <label htmlFor="title" className="text-xs font-semibold">
@@ -288,7 +288,7 @@ export default function BlogList({
                     name="title"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    className="rounded-md px-4 text-black py-1   border-black border"
+                    className="rounded-md px-4 text-black py-1  dark:text-[#fff]  border-black border"
                   />
                 </div>
                 <div className="flex flex-col gap-1 h-auto ">
@@ -303,7 +303,7 @@ export default function BlogList({
                     name="description"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    className="rounded-md px-4 h-64 w-full text-black py-1  min-h-10 border-black border"
+                    className="rounded-md px-4 h-64 w-full text-black py-1 dark:text-[#fff]   min-h-10 border-black border"
                   />
                 </div>
                 <div className="flex flex-col gap-1 w-full">
@@ -318,7 +318,7 @@ export default function BlogList({
                     name="detaildDescription"
                     value={detaildDescription}
                     onChange={(e) => setDetaildDescription(e.target.value)}
-                    className="rounded-md px-4 text-black w-full py-1 h-64  border-black border"
+                    className="rounded-md px-4 text-black w-full py-1 dark:text-[#fff]  h-64  border-black border"
                   />
                 </div>
 
@@ -332,7 +332,7 @@ export default function BlogList({
                     name="time"
                     value={time}
                     onChange={(e) => setTime(e.target.value)}
-                    className="rounded-md px-4 text-black py-1  border-black border"
+                    className="rounded-md px-4 text-black py-1 dark:text-[#fff]   border-black border"
                   />
                 </div>
                 <input
