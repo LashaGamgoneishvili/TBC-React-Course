@@ -23,8 +23,9 @@ const GridContainer = () => {
           }}
           width={500}
           height={500}
-          aria-label="First image"
-          loading="lazy"
+          // aria-label="First image"
+          // loading="lazy"
+          priority
           className="hover:scale-105 duration-500 h-auto"
         />
       </div>
@@ -40,8 +41,9 @@ const GridContainer = () => {
           }}
           width={400}
           height={400}
-          loading="lazy"
-          aria-label="second image"
+          // loading="lazy"
+          priority
+          // aria-label="second image"
           className="hover:scale-105 duration-500 h-auto"
         />
       </div>
@@ -57,8 +59,9 @@ const GridContainer = () => {
           }}
           width={300}
           height={300}
-          aria-label="third image"
-          loading="lazy"
+          // aria-label="third image"
+          // loading="lazy"
+          priority
           className="hover:scale-105 duration-500 h-auto"
         />
       </div>
@@ -74,8 +77,9 @@ const GridContainer = () => {
           }}
           width={200}
           height={200}
-          aria-label="fourth image"
-          loading="lazy"
+          // aria-label="fourth image"
+          // loading="lazy"
+          priority
           className="hover:scale-105 duration-500 h-auto"
         />
       </div>

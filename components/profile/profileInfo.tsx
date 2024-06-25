@@ -52,7 +52,7 @@ export default function ProfileInfo({
 
   return (
     <>
-      <div className=" flex relative justify-center rounded-md flex-col rounded-md dark:text-[#fff] shadow-md px-12 h-full  sm:gap-2 text-gray-700">
+      <div className=" flex relative justify-center rounded-md flex-col dark:text-[#fff] shadow-md px-12 h-full  sm:gap-2 text-gray-700">
         <p className="sm:text-lg leading-6 sm:h-8">
           {name ? name : "...Loading"}
         </p>
@@ -65,7 +65,7 @@ export default function ProfileInfo({
             onClick={() => {
               setModal(true);
             }}
-            className="absolute top-2 right-3 cursor-pointer"
+            className="absolute top-2 right-4 cursor-pointer"
           >
             <CiEdit />
           </div>
@@ -83,72 +83,74 @@ export default function ProfileInfo({
         <div
           className={`${
             modal ? "flex" : "hidden"
-          } flex absolute sm:left-[20%] w-auto left-[7%] top-1/3  h-auto sm:p-16 p-2 text-sm xl:left-[40%] 2xl:left-[15%] lg:left-[30%]  z-20  rounded-md bg-white justify-center items-center`}
+          } absolute  w-full h-full bg-white opacity-75 justify-center items-center  -top-7 `}
         >
-          <form
-            action={clinetAction}
-            className="flex flex-col 2xl:flex-row py-3 items-end justify-center gap-3"
-          >
-            <div className="flex flex-col gap-1">
-              <label htmlFor="name" className="text-xs font-semibold">
-                Name
-              </label>
-              <input
-                id="name"
-                type="text"
-                name="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="rounded-md px-4 text-black py-1  border-black border"
-              />
-            </div>
-            <div className="flex flex-col gap-1">
-              <label htmlFor="name" className="text-xs font-semibold">
-                lastName
-              </label>
-              <input
-                id="lastName"
-                type="text"
-                name="lastName"
-                value={lastname}
-                onChange={(e) => setLastName(e.target.value)}
-                className="rounded-md px-4 text-black py-1  border-black border"
-              />
-            </div>
-            <div className="flex flex-col gap-1">
-              <label htmlFor="email" className="text-xs font-semibold">
-                Email
-              </label>
-              <input
-                id="email"
-                type="text"
-                name="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="rounded-md px-4 text-black py-1  border-black border"
-              />
-            </div>
+          <div className="py-12 shadow-md px-16">
+            <form
+              action={clinetAction}
+              className="flex flex-col 2xl:flex-row py-3 items-end justify-center gap-3"
+            >
+              <div className="flex flex-col gap-1">
+                <label htmlFor="name" className="text-xs font-semibold">
+                  Name
+                </label>
+                <input
+                  id="name"
+                  type="text"
+                  name="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="rounded-md px-4 text-black py-1  border-black border"
+                />
+              </div>
+              <div className="flex flex-col gap-1">
+                <label htmlFor="name" className="text-xs font-semibold">
+                  lastName
+                </label>
+                <input
+                  id="lastName"
+                  type="text"
+                  name="lastName"
+                  value={lastname}
+                  onChange={(e) => setLastName(e.target.value)}
+                  className="rounded-md px-4 text-black py-1  border-black border"
+                />
+              </div>
+              <div className="flex flex-col gap-1">
+                <label htmlFor="email" className="text-xs font-semibold">
+                  Email
+                </label>
+                <input
+                  id="email"
+                  type="text"
+                  name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="rounded-md px-4 text-black py-1  border-black border"
+                />
+              </div>
 
-            <input
-              type="text"
-              name="userId"
-              value={lastFiveCharacters}
-              className="hidden"
-            />
-            <button
-              type="submit"
-              onClick={() => setModal(false)}
-              className="px-4 rounded-md  text-white bg-[#3b82f6] py-1 text-base hover:bg-sky-700  duration-500"
-            >
-              Save
-            </button>
-            <button
-              onClick={() => setModal(false)}
-              className="absolute sm:-top-3 sm:right-5 -top-4 right-3 mt-4 p-2 text-lg sm:text-2xl"
-            >
-              &#10005;
-            </button>
-          </form>
+              <input
+                type="text"
+                name="userId"
+                value={lastFiveCharacters}
+                className="hidden"
+              />
+              <button
+                type="submit"
+                onClick={() => setModal(false)}
+                className="px-4 rounded-md  text-white bg-[#3b82f6] py-1 text-base hover:bg-sky-700  duration-500"
+              >
+                Save
+              </button>
+              <button
+                onClick={() => setModal(false)}
+                className="absolute sm:-top-3 sm:right-5 -top-4 right-3 mt-4 p-2 text-lg sm:text-2xl"
+              >
+                &#10005;
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </>

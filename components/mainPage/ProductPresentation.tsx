@@ -22,9 +22,9 @@ function ProductPresentation() {
             src="https://preview.colorlib.com/theme/timezone/assets/img/gallery/choce_watch1.png.webp"
             width={500}
             height={500}
-            // priority
+            priority
             alt="watch-image"
-            loading="lazy"
+            // loading="lazy"
           />
         </div>
       </div>
@@ -47,9 +47,9 @@ function ProductPresentation() {
             src="https://preview.colorlib.com/theme/timezone/assets/img/gallery/choce_watch2.png.webp"
             width={500}
             height={500}
-            // priority
+            priority
             alt="watch-image"
-            loading="lazy"
+            // loading="lazy"
           />
         </div>
       </div>

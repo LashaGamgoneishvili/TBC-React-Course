@@ -12,8 +12,8 @@ function NewArrivals() {
               width={150}
               height={150}
               className="h-[500px] w-96 hover:scale-105 duration-500"
-              // priority
-              loading="lazy"
+              priority
+              // loading="lazy"
               alt="Product-picture"
             />
           </div>
@@ -27,8 +27,8 @@ function NewArrivals() {
               width={150}
               height={150}
               className=" h-[500px] w-96 hover:scale-105 duration-500"
-              // priority
-              loading="lazy"
+              priority
+              // loading="lazy"
               alt="Product-picture"
             />
           </div>
@@ -42,8 +42,8 @@ function NewArrivals() {
               width={150}
               height={150}
               className=" h-[500px] w-96 hover:scale-105 duration-500"
-              // priority
-              loading="lazy"
+              priority
+              // loading="lazy"
               alt="Product-picture"
             />
           </div>

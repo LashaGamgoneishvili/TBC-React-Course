@@ -31,7 +31,6 @@ export default function AdminProductList({ product }: { product: Product }) {
       id: formData.get("ProductId"),
     };
 
-
     const response = await updateProductAction(EditProduct);
 
     if (response?.error) {
@@ -51,7 +50,7 @@ export default function AdminProductList({ product }: { product: Product }) {
             <div className="overflow-hidden">
               <Link
                 href={`product/${product.product_id}`}
-                aria-label="Go to product page"
+                // aria-label="Go to product page"
               >
                 <Image
                   className=" mb-[25px] cursor-pointer hover shadow-md h-auto"
