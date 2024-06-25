@@ -10,7 +10,7 @@ const Footer = () => {
     <footer className=" px-6 md:h-[600px]  lg:mx-[7.5%] 2xl:mx-[12.5%]  flex flex-col md:justify-center gap-24 md:gap-32">
       <div className=" flex flex-col md:flex-row justify-between items-start">
         <div className="md:w-1/4 flex flex-col gap-6">
-          <Link href="/" aria-label="Go back to main page">
+          <Link href="/">
             <span className="text-[32px] text-black dark:text-blue-500">T</span>
             <span className="text-2xl text-black dark:text-blue-500">ime</span>
             <span className="text-[32px] text-red-600"> Z</span>
@@ -82,7 +82,7 @@ const Footer = () => {
         <div className="flex gap-2 ">
           <Link
             href="/"
-            aria-label="Go to Twitter page"
+            // aria-label="Go to Twitter page"
             className="hover:text-[#ff2020] duration-500 cursor-pointer "
           >
             <FaTwitter />
@@ -90,21 +90,21 @@ const Footer = () => {
 
           <Link
             href="/"
-            aria-label="Go to facebook page"
+            // aria-label="Go to facebook page"
             className="hover:text-[#ff2020] duration-500 cursor-pointer "
           >
             <FaFacebookF />
           </Link>
           <Link
             href="/"
-            aria-label="Go to Instagram page"
+            // aria-label="Go to Instagram page"
             className="hover:text-[#ff2020] duration-500 cursor-pointer "
           >
             <FaInstagram />
           </Link>
           <Link
             href="/"
-            aria-label="Go to Globe page"
+            // aria-label="Go to Globe page"
             className="hover:text-[#ff2020] duration-500 cursor-pointer "
           >
             <CiGlobe />

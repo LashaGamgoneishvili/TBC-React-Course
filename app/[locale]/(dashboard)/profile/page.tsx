@@ -18,7 +18,7 @@ export default async function Profile() {
 
   if (user) {
     return (
-      <main className="mb-16 mt-8 ">
+      <main className="mb-16 mt-8 relative">
         <div className="flex items-center justify-center py-5">
           <h1 className="inline-block border-b-2 pb-2  text-blue-500 font-bold dark:text-white text-3xl ">
             Profile
@@ -28,7 +28,7 @@ export default async function Profile() {
           <div className="flex flex-col  gap-3 justify-center items-center">
             <AvatarUploadPage userImage={userImage} />
           </div>
-          <div className="flex border lg:border-none lg:shadow-none lg:h-64 lg:items-center  border-blue-500 p-2 sm:p-4 xs:p-2 rounded-lg  xs:gap-3 shadow-md bg-white dark:bg-[#121212] ">
+          <div className="flex border justify-center lg:border-none lg:shadow-none lg:h-64 lg:items-center  border-blue-500 p-2 sm:p-4 xs:p-2 rounded-lg  xs:gap-3 shadow-md bg-white dark:bg-[#121212] ">
             {user && user.email_verified ? (
               <ProfileInfoWithEmail
                 user={user}

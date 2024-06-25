@@ -26,7 +26,7 @@ export default function Chart() {
 
   return (
     <div className="text-xl relative">
-      <Link href="/checkout" aria-label="Go to checkout page">
+      <Link href="/checkout" >
         <span className="absolute text-xs -top-4 right-[5px] text-red-700 dark:text-blue-500">
           {state ? state : 0}
         </span>

@@ -121,6 +121,7 @@ export default function BlogDetails({
               src={image}
               width={500}
               height={500}
+              priority
               alt="blog-post"
               className="w-full h-auto"
             />
@@ -148,7 +149,7 @@ export default function BlogDetails({
             <Link
               href={`/blogs/${blog.blog_id}`}
               className="text-2xl"
-              aria-label="Go to blog details page"
+              // aria-label="Go to blog details page"
             >
               {title}
             </Link>

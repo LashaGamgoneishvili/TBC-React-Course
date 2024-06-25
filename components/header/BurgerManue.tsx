@@ -47,7 +47,7 @@ function BurgerManue({ translations }: StickyHeaderProps) {
                     className=" cursor-pointer p-1   [transition:all_ease_0.2s] hover:text-[#ff2020] hover:duration-300"
                     onClick={() => setActive((active) => !active)}
                   >
-                    <Link href="/admin" aria-label="Go to admin page">
+                    <Link href="/admin">
                       <MdOutlineAdminPanelSettings />
                     </Link>
                   </div>
@@ -75,18 +75,13 @@ function BurgerManue({ translations }: StickyHeaderProps) {
                   className=" cursor-pointer p-1   hover:text-[#ff2020] hover:duration-300"
                   onClick={() => setActive(false)}
                 >
-                  <Link href="/" aria-label="Go to home page">
-                    {translations.home}
-                  </Link>
+                  <Link href="/">{translations.home}</Link>
                 </div>
                 <div
                   className=" cursor-pointer p-1    hover:text-[#ff2020] hover:duration-300"
                   onClick={() => setActive(false)}
                 >
-                  <Link
-                    href="/shop"
-                    aria-label="Go to shopping page"
-                  >
+                  <Link href="/shop" >
                     {translations.shop}
                   </Link>
                 </div>
@@ -257,9 +252,7 @@ function BurgerManue({ translations }: StickyHeaderProps) {
                   className=" cursor-pointer p-1   [transition:all_ease_0.2s] hover:text-[#ff2020] hover:duration-300"
                   onClick={() => setActive(false)}
                 >
-                  <Link href="/contact" aria-label="Go to contact page">
-                    {translations.contact}
-                  </Link>
+                  <Link href="/contact">{translations.contact}</Link>
                 </div>
               </div>
             </nav>

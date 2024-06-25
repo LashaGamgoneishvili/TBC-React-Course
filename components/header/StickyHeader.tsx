@@ -62,7 +62,7 @@ function StickyHeader({ translations }: StickyHeaderProps) {
             className=" flex h-fit sm:h-fit items-center justify-between w-full  sm:justify-between px-5   sm:mx-6"
           >
             <div>
-              <Link href="/" aria-label="Back to main page">
+              <Link href="/">
                 <span className="sm:text-[32px] text-2xl text-black dark:text-blue-500">
                   T
                 </span>
@@ -76,19 +76,13 @@ function StickyHeader({ translations }: StickyHeaderProps) {
             <nav className="hidden lg:flex ">
               <ul className="flex  items-center justify-center 2xl:gap-6 xl:gap-6 lg:gap-6">
                 <li className=" cursor-pointer p-1   [transition:all_ease_0.2s] hover:text-[#ff2020] hover:duration-300">
-                  <Link href="/" aria-label="Back to main page">
-                    {translations.home}
-                  </Link>
+                  <Link href="/">{translations.home}</Link>
                 </li>
                 <li className=" cursor-pointer p-1    hover:text-[#ff2020] hover:duration-300">
-                  <Link href="/shop" aria-label="Go to shopping page">
-                    {translations.shop}
-                  </Link>
+                  <Link href="/shop">{translations.shop}</Link>
                 </li>
                 <li className="hover:text-[#ff2020] hover:duration-300 cursor-pointer">
-                  <Link href="/about" aria-label="Go to about page">
-                    {translations.about}
-                  </Link>
+                  <Link href="/about">{translations.about}</Link>
                 </li>
                 <li className=" hover:duration-300 cursor-pointer relative">
                   <span className="absolute bg-[#ff003c] top-6 left-14 rounded-lg  shadow-gray-400 dark:shadow-gray-600 shadow-md py-1 px-3 text-[10px] text-white">
@@ -105,9 +99,7 @@ function StickyHeader({ translations }: StickyHeaderProps) {
                 </li>
 
                 <li className=" cursor-pointer p-1   [transition:all_ease_0.2s] hover:text-[#ff2020] hover:duration-300">
-                  <Link href="/contact" aria-label="Go to contact page">
-                    {translations.contact}
-                  </Link>
+                  <Link href="/contact">{translations.contact}</Link>
                 </li>
               </ul>
             </nav>
@@ -119,7 +111,7 @@ function StickyHeader({ translations }: StickyHeaderProps) {
                 </div> */}
                 {typedUser && typedUser.role[0] === "admin" && (
                   <div className=" cursor-pointer p-1   [transition:all_ease_0.2s] hover:text-[#ff2020] hover:duration-300">
-                    <Link href="/admin" aria-label="Go to admin page">
+                    <Link href="/admin">
                       <MdOutlineAdminPanelSettings />
                     </Link>
                   </div>
@@ -151,7 +143,7 @@ function StickyHeader({ translations }: StickyHeaderProps) {
             className=" flex h-fit items-center flex-wrap justify-between w-full mx-6 z-20 "
           >
             <div className=" righteous">
-              <Link href="/" aria-label="Go back to main page">
+              <Link href="/">
                 <span className="sm:text-[32px] text-2xl text-black dark:text-blue-500">
                   T
                 </span>
@@ -165,19 +157,13 @@ function StickyHeader({ translations }: StickyHeaderProps) {
             <nav className="hidden lg:flex ">
               <ul className="flex  items-center justify-center  2xl:gap-8   lg:gap-5">
                 <li className=" cursor-pointer p-1   [transition:all_ease_0.2s] hover:text-[#ff2020] hover:duration-300">
-                  <Link href="/" aria-label="Go back to main page">
-                    {translations.home}
-                  </Link>
+                  <Link href="/">{translations.home}</Link>
                 </li>
                 <li className=" cursor-pointer p-1    hover:text-[#ff2020] hover:duration-300">
-                  <Link href="/shop" aria-label="Go to shopping page">
-                    {translations.shop}
-                  </Link>
+                  <Link href="/shop">{translations.shop}</Link>
                 </li>
                 <li className="hover:text-[#ff2020] hover:duration-300 cursor-pointer">
-                  <Link href="/about" aria-label="Go to about page">
-                    {translations.about}
-                  </Link>
+                  <Link href="/about">{translations.about}</Link>
                 </li>
                 <li className=" hover:duration-300 cursor-pointer relative">
                   <span className="absolute bg-[#ff003c] top-6 left-14 rounded-lg  shadow-gray-400 dark:shadow-gray-600 shadow-md py-1 px-3 text-[10px] text-white">
@@ -194,9 +180,7 @@ function StickyHeader({ translations }: StickyHeaderProps) {
                 </li>
 
                 <li className=" cursor-pointer p-1   [transition:all_ease_0.2s] hover:text-[#ff2020] hover:duration-300">
-                  <Link href="/contact" aria-label="Go to contact page">
-                    {translations.contact}
-                  </Link>
+                  <Link href="/contact">{translations.contact}</Link>
                 </li>
               </ul>
             </nav>
@@ -208,7 +192,7 @@ function StickyHeader({ translations }: StickyHeaderProps) {
                 </div> */}
                 {typedUser && typedUser.role[0] === "admin" && (
                   <div className=" cursor-pointer p-1   [transition:all_ease_0.2s] hover:text-[#ff2020] hover:duration-300">
-                    <Link href="/admin" aria-label="Go to admin page">
+                    <Link href="/admin">
                       <MdOutlineAdminPanelSettings />
                     </Link>
                   </div>
