@@ -1,31 +1,4 @@
-
-
 @tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  input[type="number"]::-webkit-outer-spin-button,
-  input[type="number"]::-webkit-inner-spin-button,
-  input[type="number"] {
-    -webkit-appearance: none;
-    margin: 0;
-    -moz-appearance: textfield !important;
-  }
-  :root {
-    --background: 102 65 169;
-    --foreground: 255 255 255;
-
-    --primary: 102 65 169;
-    --primary-foreground: 255 255 255;
-
-    --secondary: 196 26 105;
-    --primary-foreground: 255 255 255;
-
-    --muted: 59 7 100;
-    --mute-foreground: 255 255 255;
-
-    --accent: 88 202 155;
-    --accent-foreground: 255 255 255;
-  }
-}
+  @tailwind components;
+  @tailwind utilities;
+  

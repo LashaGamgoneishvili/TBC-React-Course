@@ -2,6 +2,7 @@
 import TranslationsProvider from "../TranslationsProvider";
 import initTranslations from "../../app/i18n";
 import StickyHeader from "./StickyHeader";
+import { HeaderProps } from "@/typings";
 
 const i18nNamespace = ["header", "contact", "login", "profile"];
 

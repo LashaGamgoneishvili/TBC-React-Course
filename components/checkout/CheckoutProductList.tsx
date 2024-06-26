@@ -4,6 +4,7 @@ import DecrementProductButton from "./DecrementButton";
 import RemoveItemButton from "./RemoveItemButton";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { Props } from "@/typings";
 
 export default function CheckoutProductList({ setTotal, product }: Props) {
   const [quantity, setQuantity] = useState(Number(product.quantity));

@@ -1,3 +1,4 @@
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Image from "next/image";
 import { IoMdPerson } from "react-icons/io";
 import { FaComment } from "react-icons/fa";
@@ -13,15 +14,18 @@ import { AnimatePresence, motion } from "framer-motion";
 import BlogEditImageUpload from "./blogEditImageUpload";
 import { MdDeleteForever } from "react-icons/md";
 import toast from "react-hot-toast";
+import { BlogTypes, GetSessionUser } from "@/typings";
 
 export default function BlogList({
   blog,
   user,
   lastFiveCharacters,
+  userImage,
 }: {
   blog: BlogTypes;
   user: GetSessionUser | undefined;
   lastFiveCharacters: string;
+  userImage: string;
 }) {
   const [edit, setEdit] = useState(false);
   const [title, setTitle] = useState(blog.title);
@@ -89,7 +93,7 @@ export default function BlogList({
   }
 
   const typedUser = user as GetSessionUser | undefined;
-
+  console.log("userImage", userImage);
   return (
     <>
       <div
@@ -131,13 +135,9 @@ export default function BlogList({
               className="md:text-2xl sm:text-xl text-lg"
             >
               {title}
-              {/* Google inks pact for new 35-storey office */}
             </Link>
             <p className="space-y-10 md:text-lg sm:text-base text-xs">
               {description}
-              {/* That dominion stars lights dominion divide years for fourth have
-              don&#39;t stars is that he earth it first without heaven in place
-              seed it second morning saying. */}
             </p>
             <div className="flex gap-4 md:text-lg sm:text-base text-xs text-[#999999]">
               <div className="flex gap-2">
@@ -240,14 +240,13 @@ export default function BlogList({
           {!commentOpened && comment && (
             <div className="flex flex-col gap-2 border-t border-black w-full   mb-5 px-5">
               <div className="flex text-xs  mt-5 relative gap-1  sm:gap-4">
-                <Image
-                  src={image}
-                  width={25}
-                  height={50}
-                  alt="avatar"
-                  className="rounded-full"
-                />
-                <p>{user?.nickname || user?.name}</p>
+                <div className="flex justify-center items-center gap-2">
+                  <Avatar>
+                    <AvatarImage src={userImage} alt="@shadcn" />
+                    <AvatarFallback>user</AvatarFallback>
+                  </Avatar>
+                  <p>{user?.nickname || user?.name}</p>
+                </div>
                 <p className="absolute top-0 sm:right-3 right-0 sm:text-sm text-xs ">
                   Your comment
                 </p>

@@ -4,6 +4,7 @@ import BlogImageUpload from "./BlogImageUpload";
 import { uploadNewBlogAction } from "../../actions";
 import { deleteAllBlogs } from "../../app/api/api";
 import toast from "react-hot-toast";
+import { BlogTypes, GetSessionUser } from "@/typings";
 
 export default function BlogUpload({
   blog,

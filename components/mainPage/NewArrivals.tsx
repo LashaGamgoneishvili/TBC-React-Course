@@ -1,9 +1,13 @@
+"use client";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 
 function NewArrivals() {
+  const { t } = useTranslation();
+
   return (
     <div className="w-full flex flex-col gap-16">
-      <h1 className="text-[52px] ml-[9%]">New Arrivals</h1>
+      <h1 className="text-[52px] ml-[9%]"> {t("MainPage:newArrivals")}</h1>
       <div className="flex flex-wrap justify-center items-center  px-8 text-xl gap-6 xl:gap-12 w-full ">
         <div className="flex flex-col gap-2 items-center  overflow-hidden ">
           <div className="overflow-hidden">
@@ -32,7 +36,7 @@ function NewArrivals() {
               alt="Product-picture"
             />
           </div>
-          <p>Thermo Ball Etip Gloves</p>
+          <p> {t("MainPage:newArrivalsDesc")}</p>
           <p className="text-center text-[#ff2020]">$ 45,743</p>
         </div>
         <div className="flex flex-col gap-2 items-center overflow-hidden ">
@@ -47,7 +51,7 @@ function NewArrivals() {
               alt="Product-picture"
             />
           </div>
-          <p>Thermo Ball Etip Gloves</p>
+          <p>{t("MainPage:newArrivalsDesc")}</p>
           <p className="text-center text-[#ff2020]">$ 45,743</p>
         </div>
       </div>

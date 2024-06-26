@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { getUserAction, updateUserAction } from "../../actions";
 import toast from "react-hot-toast";
+import { GetSessionUser } from "@/typings";
 
 export default function ProfileInfo({
   user,
@@ -32,6 +33,7 @@ export default function ProfileInfo({
       console.log("error", response?.error);
     } else {
       setModal(false);
+      toast.success("Profile updated successfully");
     }
   };
 

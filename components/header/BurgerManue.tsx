@@ -10,6 +10,7 @@ import Cart from "./Cart";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
+import { StickyHeaderProps, User } from "@/typings";
 
 const dropDown =
   "https://ajy8khmx9vtvyckn.public.blob.vercel-storage.com/down-arrow-svgrepo-com-rZeACjVrxCgyso6ZhLLDS9rWTNjp6x.svg";
@@ -81,9 +82,7 @@ function BurgerManue({ translations }: StickyHeaderProps) {
                   className=" cursor-pointer p-1    hover:text-[#ff2020] hover:duration-300"
                   onClick={() => setActive(false)}
                 >
-                  <Link href="/shop" >
-                    {translations.shop}
-                  </Link>
+                  <Link href="/shop">{translations.shop}</Link>
                 </div>
 
                 <div

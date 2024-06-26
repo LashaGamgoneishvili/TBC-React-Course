@@ -41,25 +41,25 @@ export default function UploadUserImage({
   }, [blob, setImage]);
   console.log("image", userImage);
   return (
-    <div className="flex flex-col gap-3">
-      <div className="relative rounded-md  flex justify-center items-center bg-white  w-auto h-auto border-gray-700 border rounde ">
+    <div className="flex flex-col gap-3 px-6 ">
+      <div className="border flex justify-center relative">
         {blob ? (
           <Image
             src={blob.url}
-            priority={true}
+            priority
             alt="Person-logo"
-            className="w-72 h-auto "
-            width={500}
-            height={500}
+            className="h-full w-full text-center overflow-hidden"
+            width={150}
+            height={150}
           />
         ) : (
           <Image
             src={userImage}
-            priority={true}
+            priority
             alt="Person-logo"
-            className=" w-72 h-auto"
-            width={500}
-            height={500}
+            className="h-full w-full text-center overflow-hidden"
+            width={150}
+            height={150}
           />
         )}
         <div className="absolute right-1 bottom-1">
@@ -83,7 +83,7 @@ export default function UploadUserImage({
         </label>
       </div>
       <form
-        className="flex flex-col justify-center items-center gap-3"
+        className="flex"
         onSubmit={async (event) => {
           event.preventDefault();
 

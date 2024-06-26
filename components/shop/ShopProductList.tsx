@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import AddCartButton from "../mainPage/AddChartButton";
 import ExtraDetails from "../mainPage/ExtraDetails";
+import { BlogObject } from "@/typings";
 
 export default function ShopProductList({
   data,

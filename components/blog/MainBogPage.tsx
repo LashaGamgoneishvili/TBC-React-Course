@@ -4,6 +4,7 @@ import BlogList from "./BlogList";
 import BlogUpload from "./BlogUpload";
 import SearchForm from "./SearchForm";
 import { useState } from "react";
+import { BlogPageObject, GetSessionUser } from "@/typings";
 
 const image =
   "https://ajy8khmx9vtvyckn.public.blob.vercel-storage.com/346857997_927928671820342_8714695182936544650_n-X3cQMZ9wUeqSiRTFvXxdIWMC2s3kYs.jpg";
@@ -12,10 +13,12 @@ function MainBlogPage({
   data,
   lastFiveCharacters,
   user,
+  userImage,
 }: {
   data: BlogPageObject;
   lastFiveCharacters: string;
   user: GetSessionUser | undefined;
+  userImage: string;
 }) {
   const [blog, setBlog] = useState(data.result);
 
@@ -30,6 +33,7 @@ function MainBlogPage({
                 user={user}
                 key={blog.blog_id}
                 lastFiveCharacters={lastFiveCharacters}
+                userImage={userImage}
               />
             ))
           ) : (

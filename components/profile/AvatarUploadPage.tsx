@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { useEffect } from "react";
 import { FaCamera } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 export default function AvatarUploadPage({ userImage }: { userImage: string }) {
   const inputFileRef = useRef<HTMLInputElement>(null);
@@ -15,27 +16,15 @@ export default function AvatarUploadPage({ userImage }: { userImage: string }) {
   useEffect(() => {
     const updateUser = async () => {
       if (!blob || !user) return;
+      toast.success("Profile picture updated successfully");
       try {
-        // const response = await fetch(`/api/user-api/upload-user-picture`, {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        //   body: JSON.stringify({
-        //     blobUrl: blob.url,
-        //     userSub: user.sub,
-        //   }),
-        // });
         if (!inputFileRef.current?.files) {
           throw new Error("No file selected");
         }
 
         const file = inputFileRef.current.files[0];
         console.log(file);
-        // const response = await fetch(`/api/upload?filename=${file.name}`, {
-        //   method: "POST",
-        //   body: file,
-        // });
+
         const updateUser = await fetch(`/api/user-api/upload-user-picture`, {
           method: "POST",
           body: JSON.stringify({
@@ -114,26 +103,7 @@ export default function AvatarUploadPage({ userImage }: { userImage: string }) {
             method: "POST",
             body: file,
           });
-
-          // try {
-          //   const updateUser = await fetch(
-          //     `/api/user-api/upload-user-picture`,
-          //     {
-          //       method: "POST",
-          //       body: JSON.stringify({
-          //         blobUrl: blob?.url,
-          //         userSub: user?.sub,
-          //       }),
-          //     }
-          //   );
-          //   if (!response.ok && !updateUser.ok) {
-          //     console.error("Failed to update user picture");
-          //   } else {
-          //     console.log("User picture updated successfully");
-          //   }
-          // } catch (error) {
-          //   console.error("Error updating user picture:", error);
-          // }
+          setDisable(false);
 
           const newBlob = (await response.json()) as PutBlobResult;
 
@@ -141,8 +111,6 @@ export default function AvatarUploadPage({ userImage }: { userImage: string }) {
         }}
       >
         <button
-          // className="bg-blue-500 w-32 disabled:bg-gray-500  text-white text-[12px] py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
-
           className="cursor-pointer  bg-[#3b82f6] text-white rounded-md gap-4 justify-center py-3 border border-[#fbf9ff] hover:border-[#ff2020] hover:bg-white disabled:bg-gray-500 disabled:border-none disabled:text-black hover:text-black duration-300 px-16"
           type="submit"
           disabled={disable}

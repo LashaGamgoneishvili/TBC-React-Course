@@ -4,6 +4,7 @@ import AdminProductList from "../../../../components/admin/product/ProductList";
 import AddProduct from "../../../../components/admin/product/addProduct";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
+import { Product } from "@/typings";
 
 export const metadata: Metadata = {
   title: { absolute: "Edit Products" },

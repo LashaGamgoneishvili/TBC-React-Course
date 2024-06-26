@@ -13,6 +13,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import BlogEditImageUpload from "./blogEditImageUpload";
 import { MdDeleteForever } from "react-icons/md";
 import toast from "react-hot-toast";
+import { BlogTypes, DatabaseUser, GetSessionUser } from "@/typings";
 
 export default function BlogDetails({
   blog,

@@ -7,6 +7,7 @@ import ProductImageUpload from "../../ProductImageUpload";
 import { updateProductAction } from "../../../actions";
 import DeleteProductButton from "./DeleteProductButton";
 import toast from "react-hot-toast";
+import { Product } from "@/typings";
 
 export default function AdminProductList({ product }: { product: Product }) {
   const [edit, setEdit] = useState(false);

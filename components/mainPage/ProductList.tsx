@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import LoadMore from "./LoadeMore";
 import { useRouter } from "next/navigation";
+import { BlogObject } from "@/typings";
 
 // interface UserProfile {
 //   email: string;
