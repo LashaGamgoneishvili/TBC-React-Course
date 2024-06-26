@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { useEffect } from "react";
+import { User } from "@/typings";
 
 export default function UsersPage() {
   const { user } = useUser();

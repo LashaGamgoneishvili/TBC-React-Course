@@ -1,3 +1,4 @@
+import { CheckoutProduct } from "@/typings";
 import { useState } from "react";
 
 const ShippingForm = ({ products }: { products: CheckoutProduct[] }) => {
