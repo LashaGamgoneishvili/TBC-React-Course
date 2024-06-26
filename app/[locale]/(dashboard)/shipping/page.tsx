@@ -1,9 +1,9 @@
-import { getAllshippingProduct, getShippingProduct } from "@/app/api/api";
+import { getAllshippingProduct } from "@/app/api/api";
 import { getSession } from "@auth0/nextjs-auth0";
-import { shippingProductDelete } from "@/app/api/api";
 
 import { Metadata } from "next";
-import ShippingList from "@/components/shipping/shippingList";
+import { ShippingTypes } from "@/typings";
+import { DataTableDemo } from "@/components/ordersTable/DataTable";
 
 export const metadata: Metadata = {
   title: { absolute: "Go Shopping" },
@@ -22,7 +22,7 @@ interface User {
   sid: string;
 }
 
-export default async function shippingData() {
+export default async function DemoPage() {
   const session = await getSession();
   const user: User | undefined = session?.user as User | undefined;
   let adminData: Array<ShippingTypes> = [];
@@ -33,15 +33,15 @@ export default async function shippingData() {
       adminData = shippingResponse.rows;
     }
   }
-  const response = await getShippingProduct();
-  const datas = await response.json();
-  const product: ShippingTypes | { message: string } = datas?.rows;
+  const datas = await getAllshippingProduct();
+  const data = datas?.rows;
+  console.log("datac", data);
 
-  async function handleDelete(userid: string, productId: string) {
-    "use server";
+  // async function handleDelete(userid: string, productId: string) {
+  //   "use server";
 
-    await shippingProductDelete(userid, productId);
-  }
+  //   await shippingProductDelete(userid, productId);
+  // }
 
   return (
     <div className="container mx-auto pt-12 ">
@@ -50,12 +50,16 @@ export default async function shippingData() {
           <h1 className="text-3xl font-bold mb-6 ">
             Information About Your order
           </h1>
-          <ShippingList
+          {/* <DataTableDemo data={product} /> */}
+          {/* <TableDemo /> */}
+          <DataTableDemo data={data} />
+
+          {/* <ShippingList
             handleDelete={handleDelete}
             datas={product}
             adminData={adminData}
             user={user}
-          />
+          /> */}
         </>
       ) : (
         <div className="flex justify-center items-start mt-36  h-screen w-full">

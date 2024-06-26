@@ -1,6 +1,7 @@
 import { getAllProductAction } from "../../../../actions";
 import { getSession } from "@auth0/nextjs-auth0";
 import ShopProductList from "../../../../components/shop/ShopProductList";
+import { BlogObject } from "@/typings";
 
 export default async function Shop({
   searchParams,

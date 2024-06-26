@@ -44,6 +44,7 @@ function AddUser() {
     } else {
       setModal(false);
       setDisable(false);
+      toast.success("User successfully Added");
     }
   };
 

@@ -1,3 +1,4 @@
+import { BlogPageObject } from "@/typings";
 import { useEffect, useState } from "react";
 import { GoSearch } from "react-icons/go";
 

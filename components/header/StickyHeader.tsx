@@ -15,6 +15,7 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import BurgerManue from "./BurgerManue";
+import { StickyHeaderProps, User } from "@/typings";
 
 const tillana = Tillana({
   subsets: ["latin"],

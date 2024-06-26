@@ -1,3 +1,5 @@
+import { string } from "zod";
+
 interface CheckoutProduct {
   quantity: number;
   id: number;
@@ -39,8 +41,6 @@ interface GetSessionUser {
   updated_at?: string;
   role: string[];
 }
-
-
 
 interface BlogTypes {
   blog_id: number;
@@ -120,6 +120,17 @@ interface Righteous {
   className: string;
 }
 
+// interface ShippingTypes {
+//   user_id: string;
+//   product_id: string;
+//   quantity: number;
+//   id: number;
+//   title: string;
+//   description: string;
+//   price: string;
+//   discount: string;
+//   image: string;
+// }
 interface ShippingTypes {
   user_id: string;
   product_id: string;
@@ -130,6 +141,11 @@ interface ShippingTypes {
   price: string;
   discount: string;
   image: string;
+  product_image: string;
+  user_name: string;
+  user_lastname: string;
+  user_email: string;
+  user_image: string;
 }
 
 type Data = {
@@ -140,13 +156,6 @@ interface Params {
   id: string;
 }
 
-interface Result {
-  name?: string;
-  lastName?: string;
-  email?: string;
-  id: string;
-  image?: string;
-}
 interface CreateUserResult {
   name: string;
   lastName: string;
@@ -191,3 +200,13 @@ type StickyHeaderProps = {
     productCheckout: string;
   };
 };
+
+interface AllCommentType {
+  comment_id: number;
+  comment_text: string;
+  created_at: string;
+  user_id: string;
+  name: string;
+  lastname: string;
+  image: string;
+}

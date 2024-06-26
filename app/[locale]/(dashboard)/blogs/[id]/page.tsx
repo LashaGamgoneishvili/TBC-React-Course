@@ -4,6 +4,7 @@ import MainBlogDetails from "../../../../../components/blog/MainBlogDetails";
 import { getUsers } from "../../../../api/api";
 
 import { Metadata } from "next";
+import { BlogPageObject, GetSessionUser } from "@/typings";
 
 export const metadata: Metadata = {
   title: { absolute: "Blog Details" },

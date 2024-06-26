@@ -16,6 +16,7 @@ import {
   uploadNewBlog,
   getBlog,
   addShipping,
+  updateCommentProductDetails,
 } from "./app/api/api";
 // import { cookies } from "next/headers";
 import { addCart } from "./app/api/api";
@@ -34,6 +35,7 @@ import {
   UpdateProductType,
   profileEdit,
 } from "./types/types";
+import { CheckoutProduct } from "./typings";
 
 export async function createUserActionAdmin(createUser: unknown) {
   revalidatePath(`${BASE_URL}/user`);
@@ -222,6 +224,17 @@ export async function updateBlogComment(formData: FormData) {
     blogId as string
   );
 }
+export async function updateProductComment(formData: FormData) {
+  const comment = formData.get("comment");
+  const userId = formData.get("userId");
+  const productId = formData.get("productId");
+
+  return await updateCommentProductDetails(
+    comment as string,
+    userId as string,
+    productId as string
+  );
+}
 
 export async function createOrder(productId: number, quantity: number) {
   const session = await getSession();
@@ -235,7 +248,8 @@ export async function createOrder(productId: number, quantity: number) {
 
 export async function deleteUserAction(id: string) {
   revalidatePath(`${BASE_URL}/user`);
-  deleteUser(id);
+  const response = await deleteUser(id);
+  return response;
 }
 export async function deleteProductAction(id: number) {
   revalidatePath(`${BASE_URL}/AdminProduct`);

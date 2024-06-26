@@ -6,6 +6,7 @@ import ShippingForm from "./ShippingForm";
 import RemoveAllCheckout from "./RemoveAllCeckout";
 import { createOrder } from "../../actions";
 import { useAppContext } from "../../app/context/index";
+import { CheckoutProduct } from "@/typings";
 
 export default function ProductListContainer({
   products,

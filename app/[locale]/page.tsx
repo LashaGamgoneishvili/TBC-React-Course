@@ -31,6 +31,7 @@ export default async function Main({
         data={products}
         righteous={righteous}
         searchParams={searchParams}
+        locale={locale}
       />
       <Footer />
     </div>

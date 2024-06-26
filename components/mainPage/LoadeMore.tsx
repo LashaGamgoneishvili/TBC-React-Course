@@ -4,6 +4,7 @@ import Link from "next/link";
 import AddCartButton from "./AddChartButton";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { motion, AnimatePresence } from "framer-motion";
+import { BlogObject, Product } from "@/typings";
 
 export type AnimeCard = JSX.Element;
 

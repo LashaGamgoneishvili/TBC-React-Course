@@ -1,6 +1,7 @@
 // import { revalidatePath } from "next/cache";
+import { BlogType, CreateUserResult, ProductResult } from "@/typings";
 import { getSession } from "@auth0/nextjs-auth0";
-
+import { Result } from "../../types/types";
 const VERCEL_ENV = process.env.VERCEL_ENV;
 
 export const BASE_URL =
@@ -106,11 +107,103 @@ export async function updateComment(
 
   return updatedBlog;
 }
+export async function updateCommentProductDetails(
+  comment: string,
+  userId: string,
+  productId: string
+) {
+  // revalidatePath(`${BASE_URL}/blogs`);
+
+  const response = await fetch(`${BASE_URL}/api/product-api/update-comment`, {
+    cache: "no-store",
+    method: "POST",
+    body: JSON.stringify({
+      comment,
+      userId,
+      productId,
+    }),
+  });
+
+  const updatedBlog = await response.json();
+
+  return updatedBlog;
+}
+export async function getProductComment(userId: string, productId: string) {
+  console.log("userId- productId ", userId, productId);
+  try {
+    const response = await fetch(`${BASE_URL}/api/product-api/get-comments`, {
+      cache: "no-store",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userId, productId }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching product comment:", error);
+    throw error;
+  }
+}
+
+export async function getAllComments() {
+  try {
+    const response = await fetch(
+      `${BASE_URL}/api/product-api/get-all-comment`,
+      {
+        cache: "no-store",
+        method: "GET",
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.comments;
+  } catch (error) {
+    console.error("Error fetching all comments:", error);
+    throw error;
+  }
+}
+
+export async function getCommentsByProduct(productId: string) {
+  try {
+    const response = await fetch(
+      `${BASE_URL}/api/product-api/get-comments-by-product`,
+      {
+        cache: "no-store",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ productId }),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.comments;
+  } catch (error) {
+    console.error("Error fetching comments by product:", error);
+    throw error;
+  }
+}
 
 export async function deleteUser(id: string) {
   // revalidatePath(`${BASE_URL}/user`);
   return await fetch(`${BASE_URL}/api/user-api/delete-user`, {
-    cache: "no-store",
+    cache: "no-cache",
     method: "DELETE",
     body: JSON.stringify({ id }),
   });
@@ -230,6 +323,7 @@ export async function getUserId() {
 }
 
 export async function getUser(id: string) {
+  console.log("userID-1", id);
   // revalidatePath(`${BASE_URL}/profile`);
   const response = await fetch(`${BASE_URL}/api/user-api/get-user/${id}`, {
     cache: "no-store",
@@ -351,6 +445,13 @@ export async function deleteAllBlogs() {
     cache: "no-store",
   });
 }
+export async function deleteAllusers() {
+  return fetch(`${BASE_URL}/api/user-api/delete-all`, {
+    method: "DELETE",
+    cache: "no-store",
+  });
+}
+
 export async function deleteBlog(blogId: number) {
   // revalidatePath(`${BASE_URL}/blogs`);
 

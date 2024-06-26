@@ -1,3 +1,4 @@
+import { BlogObject, Product } from "@/typings";
 import { useState } from "react";
 
 export default function SortButton({

@@ -9,9 +9,11 @@ export async function GET(
 ) {
   try {
     const lastFiveCharacters = subId.slice(-5);
-
+    console.log("lastFiveCharacters-2", lastFiveCharacters);
     const userImage =
       await sql`SELECT image FROM users WHERE user_id = ${lastFiveCharacters}`;
+    console.log("userImage-2", userImage);
+
     return NextResponse.json({ userImage }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });

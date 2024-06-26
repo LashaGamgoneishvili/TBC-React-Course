@@ -1,6 +1,7 @@
-import { getAllBlogAction } from "../../../../actions";
+import { getAllBlogAction, getUserAction } from "../../../../actions";
 import { getSession } from "@auth0/nextjs-auth0";
 import MainBlogPage from "../../../../components/blog/MainBogPage";
+import { BlogPageObject, GetSessionUser } from "@/typings";
 
 // export async function generateStaticParams() {
 //   try {
@@ -34,12 +35,15 @@ export default async function Blog() {
   const session = await getSession();
   const user = session?.user as GetSessionUser | undefined;
   const lastFiveCharacters = user?.sub.slice(-5) || "";
-
+  const userData = await getUserAction();
+  const userImage = userData?.image
+  console.log("userData", userData);
   return (
     <MainBlogPage
       data={data}
       lastFiveCharacters={lastFiveCharacters}
       user={user}
+      userImage={userImage}
     />
   );
 }

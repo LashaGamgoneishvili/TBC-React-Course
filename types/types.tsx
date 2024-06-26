@@ -23,7 +23,7 @@ export const profileEdit = z.object({
   id: z
     .string()
     .min(1, { message: "email must be at least 1 characters long" }),
-  image: z.string(),
+  image: z.string().optional(),
 });
 export const CreateUser = z.object({
   name: z
@@ -147,3 +147,11 @@ export const UpdateBlogType = z.object({
 });
 
 export type Input = z.infer<typeof profileEdit>;
+
+export interface Result {
+  name?: string;
+  lastName?: string;
+  email?: string;
+  id: string;
+  image?: string;
+}

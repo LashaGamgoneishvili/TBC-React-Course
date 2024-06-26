@@ -31,13 +31,21 @@ export async function GET(_: NextRequest) {
     products.description,
     products.price,
     products.discount,
-    products.image
+    products.image AS product_image,
+    users.name AS user_name,
+    users.lastname AS user_lastname,
+    users.email AS user_email,
+    users.image AS user_image
   FROM 
     shipping
   JOIN 
     products 
   ON 
     shipping.product_id = products.product_id
+  JOIN
+    users
+  ON
+    shipping.user_id = users.user_id
   ORDER BY 
     products.product_id ASC;
 `;
